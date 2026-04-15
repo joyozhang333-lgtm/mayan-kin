@@ -140,6 +140,145 @@ In short, `mayan-kin` is built to be both accessible and rigorous:
 - 形成既适合普通用户，也适合专业使用者的多层输出体系
 - 让这个项目从“一个会算 Kin 的 skill”，升级成“一个可解释、可验证、可集成的玛雅天赋开源基础设施”
 
+## Quick Start
+
+### 1. 克隆仓库
+
+```bash
+git clone https://github.com/joyozhang333-lgtm/mayan-kin.git
+cd mayan-kin
+```
+
+### 2. 直接运行命令行工具
+
+```bash
+python3 scripts/mayan_calc.py 1990-03-15
+```
+
+### 3. 输出 JSON 结果
+
+```bash
+python3 scripts/mayan_calc.py 1990-03-15 --json
+```
+
+### 4. 查看流年或合盘
+
+```bash
+python3 scripts/mayan_calc.py 1990-03-15 --yearly 2026
+python3 scripts/mayan_calc.py 1990-03-15 --compatibility 1992-07-20
+```
+
+### 5. 跑测试
+
+```bash
+python3 -m unittest discover -s tests -p 'test_*.py'
+```
+
+如果你是要接进 AI 助手，而不是只在命令行里用：
+- Codex / Claude 风格：看 `SKILL.md`
+- OpenClaw：看 `runtimes/openclaw/AGENTS.md` 和 `runtimes/openclaw/DEMO.md`
+- Hermes：看 `runtimes/hermes/SYSTEM_PROMPT.md` 和 `runtimes/hermes/DEMO.md`
+
+## Examples
+
+### 示例一：基础排盘
+
+输入：
+
+```bash
+python3 scripts/mayan_calc.py 1990-03-15
+```
+
+你会得到：
+- Kin、图腾、调性
+- 五大天赋盘
+- 波符位置
+
+适合第一次认识自己的核心天赋结构。
+
+### 示例二：流年运势
+
+输入：
+
+```bash
+python3 scripts/mayan_calc.py 1988-06-20 --yearly 2026
+```
+
+适合回答：
+- 这一年被点亮的主题是什么？
+- 这一年更适合处理哪些课题？
+- 流年和本命之间是支持、挑战还是放大？
+
+### 示例三：双人合盘
+
+输入：
+
+```bash
+python3 scripts/mayan_calc.py 1990-03-15 --compatibility 1992-07-20
+```
+
+适合观察：
+- 两人的颜色关系
+- 调性关系
+- 对方的图腾落在自己五大盘的什么位置
+
+### 示例四：结构化输出给程序使用
+
+输入：
+
+```bash
+python3 scripts/mayan_calc.py 1990-03-15 --json
+```
+
+适合：
+- 接前端页面
+- 存数据库
+- 做 AI agent 二次解释
+- 做批量报告生成
+
+## FAQ
+
+### 1. 这是算命吗？
+
+不是传统意义上的“宿命论算命”。
+这个项目的定位是自我认知与天赋探索工具，强调的是看见自己的倾向、资源、卡点和成长方向，而不是替你决定命运。
+
+### 2. 需要出生时辰吗？
+
+当前不需要。
+`mayan-kin` 目前使用的是阳历生日作为计算输入。
+
+### 3. 需要用农历吗？
+
+不需要。
+请直接输入阳历（公历）日期，例如 `1990-03-15`。
+
+### 4. 适合完全不懂玛雅天赋的人吗？
+
+适合。
+这个项目就是按“小白也能读懂”的方向在写解释层的，同时也保留了专业用户可复用的结构化输出。
+
+### 5. 可以拿来做咨询或内容产品吗？
+
+可以，但建议明确把它定位为辅助性的自我探索工具，而不是绝对判断系统。
+如果用于咨询、课程、内容产品，也建议同时保留 `ETHICS.md` 中的非宿命化边界。
+
+### 6. 这个项目的算法可验证吗？
+
+可以。
+仓库里已经有测试基线和公开样本校验文件：
+- `tests/test_mayan_calc.py`
+- `references/validation-samples.md`
+
+### 7. 现在最适合哪些运行时？
+
+当前已经整理好的版本包括：
+- Codex / Claude 风格 skill
+- OpenClaw
+- Hermes
+
+后续还可以继续扩展到更多 agent 或自动化工作流环境。
+
 ## 功能特性
 
 ### 核心功能
@@ -285,11 +424,31 @@ MIT License — 自由使用、修改、分发。
 
 ## 贡献
 
-欢迎提 Issue 和 PR！特别欢迎：
-- 图腾和调性的更深度解读
-- 更多语言的翻译
-- 计算算法的验证和优化
-- 新的解读维度（如地球家族、色彩城堡等）
+欢迎提 Issue 和 PR。
+
+特别欢迎以下方向的贡献：
+- 图腾、调性、五大天赋盘的解释深化
+- 流年、合盘、波符等进阶维度的扩展
+- 更多语言版本的 README、提示词和解释模板
+- 计算算法的验证、测试样本补充与稳定性优化
+- 新的运行时适配，例如更多 agent / bot / workflow 环境
+- 更适合咨询、内容产品、课程产品的输出格式
+
+建议贡献流程：
+
+1. 先提 Issue，说明你想解决的问题或补充的方向
+2. 如果涉及算法调整，请同时补测试或样本依据
+3. 如果涉及解释层修改，请尽量保持非宿命论、非恐吓式表达
+4. 提 PR 时简要说明：
+   - 改了什么
+   - 为什么改
+   - 如何验证
+
+在贡献前，建议先阅读：
+- `SKILL.md`
+- `ETHICS.md`
+- `references/validation-samples.md`
+- `tests/test_mayan_calc.py`
 
 ---
 
