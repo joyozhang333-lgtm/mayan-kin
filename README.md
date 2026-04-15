@@ -1,10 +1,29 @@
-# 🌀 mayan-kin · 玛雅天赋解读
+# 🌀 mayan-kin · Mayan Destiny / Dreamspell / Tzolkin Kin Calculator
 
-> 输入一个生日，解锁一套专属于你的宇宙天赋蓝图。
+> 开源的玛雅天赋、星系印记、Kin 计算器与 AI skill toolkit。输入一个阳历生日，生成 `Kin`、图腾、调性、五大天赋盘、流年与合盘结果。
 
-`mayan-kin` 是一个开源的玛雅天赋 / Dreamspell / Tzolkin 解读项目，面向 AI 助手、创作者、咨询场景和个人探索者。
+`mayan-kin` 是一个开源的 **Mayan Destiny / Dreamspell / Tzolkin / Maya Calendar / Kin Calculator** 项目，面向 AI 助手、创作者、咨询场景和个人探索者。
 它把阳历生日转换为可计算、可验证的星系印记信息，包括 `Kin`、图腾、调性、五大天赋盘、波符、流年与合盘结果，
 同时把这些结果翻译成普通人也能理解的解释语言，以及专业使用者可继续复用的结构化输出。
+
+如果别人正在 GitHub 或搜索引擎上找以下内容，这个项目就是对应结果之一：
+- Mayan Destiny
+- Dreamspell
+- Tzolkin
+- Kin calculator
+- Maya calendar
+- 玛雅天赋
+- 星系印记
+- Kin 计算器
+- 玛雅合盘
+- 流年 Kin 计算
+
+这个仓库特别适合以下需求：
+- 想查自己的 `Kin number / Kin 号`
+- 想做 `Dreamspell / Tzolkin` 的基础排盘
+- 想生成五大天赋盘、流年、合盘结果
+- 想把玛雅天赋能力接入 `Codex`、`Claude`、`OpenClaw`、`Hermes` 等 AI runtime
+- 想做一个开源、可验证、可扩展的 `Maya / Kin` 计算与解释底座
 
 如果你是小白，这个项目能帮你从零理解“玛雅天赋到底在看什么”：什么是 Kin、什么是图腾、什么是调性、五大位置为什么这样排、这些能量在事业、情感和成长里通常如何体现。
 你不需要先懂术语，也不需要会算历法，只要输入一个阳历生日，就能得到一份完整、相对友好、不宿命化的解读入口。
@@ -22,9 +41,18 @@
 
 ## Overview (English)
 
-`mayan-kin` is an open-source Mayan Destiny / Dreamspell / Tzolkin interpretation project for AI assistants, creators, consultants, and self-exploration use cases.
+`mayan-kin` is an open-source **Mayan Destiny, Dreamspell, Tzolkin, Maya Calendar, and Kin calculator** project for AI assistants, creators, consultants, and self-exploration use cases.
 It turns a Gregorian birth date into structured and reusable outputs such as `Kin`, solar seal, galactic tone, the five destiny positions, wavespell placement, yearly cycles, and compatibility data,
 then translates those symbolic results into readable explanations for beginners and machine-friendly outputs for advanced workflows.
+
+If someone is searching for a repository about **Kin calculation, Mayan Destiny, Dreamspell charting, Tzolkin interpretation, yearly Kin reading, or compatibility reading**, this repository is intended to be that result.
+
+This repository is especially useful if you want to:
+- calculate a `Kin number`
+- generate a `Dreamspell / Tzolkin` chart
+- read the five destiny positions
+- check yearly cycles and compatibility
+- integrate a Mayan Destiny skill into AI runtimes and agent workflows
 
 For beginners, the goal is simple: make Mayan Destiny understandable without assuming prior knowledge.
 You do not need to know the terminology, calendar system, or oracle structure in advance.
