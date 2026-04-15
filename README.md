@@ -1,6 +1,12 @@
-# 🌀 Mayan Destiny — 玛雅天赋 Claude Code Skill
+# 🌀 mayan-kin · 玛雅天赋解读
 
-基于卓尔金历 (Tzolkin) / Dreamspell 体系的专业玛雅天赋解读技能，为 [Claude Code](https://claude.ai/claude-code) 打造。
+> 输入一个生日，解锁一套专属于你的宇宙天赋蓝图。
+
+基于古玛雅卓尔金历 (Tzolkin) / Dreamspell 体系构建的 [Claude Code](https://claude.ai/claude-code) Skill。
+通过阳历出生日期，计算你的星系印记 (Kin)，解读五大天赋位的深层含义，
+并给出在事业、情感、人生成长中如何运用这些天赋的具体指引。
+
+对完全不了解玛雅天赋的小白也能讲清楚——每一个位置是什么、为什么是它、怎么用。
 
 ## 功能特性
 
@@ -27,18 +33,18 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/joyozhang333-lgtm/mayan-destiny.git
+git clone https://github.com/joyozhang333-lgtm/mayan-kin.git
 
 # 创建符号链接到 Claude Code skills 目录
 mkdir -p ~/.claude/skills
-ln -s $(pwd)/mayan-destiny ~/.claude/skills/mayan-destiny
+ln -s $(pwd)/mayan-kin ~/.claude/skills/mayan-kin
 ```
 
 ### 方法二：直接复制
 
 ```bash
-git clone https://github.com/joyozhang333-lgtm/mayan-destiny.git
-cp -r mayan-destiny ~/.claude/skills/mayan-destiny
+git clone https://github.com/joyozhang333-lgtm/mayan-kin.git
+cp -r mayan-kin ~/.claude/skills/mayan-kin
 ```
 
 ## 使用方法
