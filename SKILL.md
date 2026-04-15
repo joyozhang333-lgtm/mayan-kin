@@ -1,9 +1,9 @@
 ---
-name: mayan-destiny
+name: mayan-kin
 description: "玛雅天赋 (Mayan Destiny / Dreamspell) 星系印记解读技能。根据阳历生日计算Kin号、五大天赋盘、流年运势、双人合盘。触发词: 玛雅天赋, 玛雅历, 星系印记, Kin, 图腾, 调性, 卓尔金历, Dreamspell, Tzolkin, 玛雅合盘, galactic signature, solar seal, galactic tone."
 ---
 
-# 玛雅天赋解读技能 (Mayan Destiny Skill)
+# 玛雅天赋解读技能 (Mayan Kin Skill)
 
 基于卓尔金历 (Tzolkin) / Dreamspell 体系的专业星系印记解读系统。通过阳历出生日期推算个人天赋图腾与调性，解读五大天赋力量，提供流年运势分析与双人合盘。
 
@@ -31,7 +31,7 @@ description: "玛雅天赋 (Mayan Destiny / Dreamspell) 星系印记解读技能
 ## 技能结构
 
 ```
-/mayan-destiny/
+/mayan-kin/
 ├── SKILL.md                  ← 本文件（核心指南）
 ├── ETHICS.md                 ← 伦理准则
 ├── README.md                 ← 项目说明

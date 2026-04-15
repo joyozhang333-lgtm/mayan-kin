@@ -2,7 +2,7 @@
 
 > 输入一个生日，解锁一套专属于你的宇宙天赋蓝图。
 
-基于古玛雅卓尔金历 (Tzolkin) / Dreamspell 体系构建的 [Claude Code](https://claude.ai/claude-code) Skill。
+基于古玛雅卓尔金历 (Tzolkin) / Dreamspell 体系构建的 AI 助手 Skill。
 通过阳历出生日期，计算你的星系印记 (Kin)，解读五大天赋位的深层含义，
 并给出在事业、情感、人生成长中如何运用这些天赋的具体指引。
 
@@ -35,21 +35,26 @@
 # 克隆仓库
 git clone https://github.com/joyozhang333-lgtm/mayan-kin.git
 
-# 创建符号链接到 Claude Code skills 目录
+# Codex
+mkdir -p ~/.codex/skills
+ln -s "$(pwd)/mayan-kin" ~/.codex/skills/mayan-kin
+
+# Claude Code
 mkdir -p ~/.claude/skills
-ln -s $(pwd)/mayan-kin ~/.claude/skills/mayan-kin
+ln -s "$(pwd)/mayan-kin" ~/.claude/skills/mayan-kin
 ```
 
 ### 方法二：直接复制
 
 ```bash
 git clone https://github.com/joyozhang333-lgtm/mayan-kin.git
+cp -r mayan-kin ~/.codex/skills/mayan-kin
 cp -r mayan-kin ~/.claude/skills/mayan-kin
 ```
 
 ## 使用方法
 
-安装后，在 Claude Code 中直接输入触发词即可：
+安装后，在 Codex / Claude Code 中直接输入触发词即可：
 
 ```
 > 帮我看看玛雅天赋，我是1990年3月15日出生的
@@ -83,12 +88,21 @@ python3 scripts/mayan_calc.py 1990-03-15 --json
 
 ## 目录结构
 
-```
-mayan-destiny/
-├── SKILL.md                  ← 核心技能定义
-├── ETHICS.md                 ← 伦理准则
-├── README.md                 ← 本文件
-├── LICENSE                   ← MIT 开源协议
+```text
+mayan-kin/
+├── mayan_kin/
+│   ├── __init__.py               ← 可复用 Python API
+│   └── core.py                   ← 计算核心与格式化逻辑
+├── SKILL.md                      ← 核心技能定义
+├── ETHICS.md                     ← 伦理准则
+├── README.md                     ← 本文件
+├── LICENSE                       ← MIT 开源协议
+├── runtimes/
+│   ├── README.md                 ← 多运行时适配说明
+│   ├── openclaw/AGENTS.md        ← OpenClaw 版本
+│   ├── openclaw/DEMO.md          ← OpenClaw 示例对话
+│   ├── hermes/SYSTEM_PROMPT.md   ← Hermes 版本
+│   └── hermes/DEMO.md            ← Hermes 示例对话
 ├── references/
 │   ├── 20-seals.md               ← 20图腾详解
 │   ├── 13-tones.md               ← 13调性详解
@@ -96,11 +110,28 @@ mayan-destiny/
 │   ├── yearly-fortune.md         ← 流年运势分析方法
 │   ├── compatibility.md          ← 双人合盘方法
 │   ├── guidance.md               ← 天赋运用指导
+│   ├── validation-samples.md     ← 权威样本校验基线
 │   ├── colors-wavespell.md       ← 颜色与波符
 │   └── career-emotion.md         ← 事业与情感应用
 └── scripts/
-    └── mayan_calc.py             ← 玛雅历计算工具
+    └── mayan_calc.py             ← CLI 入口
 ```
+
+## 开发验证
+
+```bash
+python3 -m unittest discover -s tests -p 'test_*.py'
+```
+
+## 多运行时版本
+
+- `SKILL.md`：Codex / Claude 风格的 skill 定义
+- `runtimes/openclaw/AGENTS.md`：OpenClaw 对应版本
+- `runtimes/openclaw/DEMO.md`：OpenClaw 示例对话
+- `runtimes/hermes/SYSTEM_PROMPT.md`：Hermes 对应版本
+- `runtimes/hermes/DEMO.md`：Hermes 示例对话
+
+三者共用同一套 `mayan_kin/core.py` 计算逻辑与 `references/` 知识库，后续升级时只需要维护一套核心。
 
 ## 知识体系
 
