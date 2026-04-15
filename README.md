@@ -2,11 +2,60 @@
 
 > 输入一个生日，解锁一套专属于你的宇宙天赋蓝图。
 
-基于古玛雅卓尔金历 (Tzolkin) / Dreamspell 体系构建的 AI 助手 Skill。
-通过阳历出生日期，计算你的星系印记 (Kin)，解读五大天赋位的深层含义，
-并给出在事业、情感、人生成长中如何运用这些天赋的具体指引。
+`mayan-kin` 是一个开源的玛雅天赋 / Dreamspell / Tzolkin 解读项目，面向 AI 助手、创作者、咨询场景和个人探索者。
+它把阳历生日转换为可计算、可验证的星系印记信息，包括 `Kin`、图腾、调性、五大天赋盘、波符、流年与合盘结果，
+同时把这些结果翻译成普通人也能理解的解释语言，以及专业使用者可继续复用的结构化输出。
 
-对完全不了解玛雅天赋的小白也能讲清楚——每一个位置是什么、为什么是它、怎么用。
+如果你是小白，这个项目能帮你从零理解“玛雅天赋到底在看什么”：什么是 Kin、什么是图腾、什么是调性、五大位置为什么这样排、这些能量在事业、情感和成长里通常如何体现。
+你不需要先懂术语，也不需要会算历法，只要输入一个阳历生日，就能得到一份完整、相对友好、不宿命化的解读入口。
+
+如果你是专业使用者，这个项目也适合作为一个可扩展的基础设施层：
+- 可以作为 AI agent / skill / prompt runtime 的底层计算模块
+- 可以输出适合二次处理的 JSON 结果
+- 可以接入 Codex、Claude、OpenClaw、Hermes 等不同运行时
+- 可以作为咨询、内容创作、课程产品或研究型项目的计算与解释底座
+
+项目当前同时强调三件事：
+- **可用性**：让第一次接触玛雅天赋的人也能看懂、继续问下去、真的用起来
+- **可复用性**：让开发者、研究者、咨询师可以把计算核心和解释框架接进自己的系统
+- **可验证性**：核心计算支持脚本调用、测试基线和公开样本校验，而不是只停留在“神秘描述”
+
+## Overview (English)
+
+`mayan-kin` is an open-source Mayan Destiny / Dreamspell / Tzolkin interpretation project for AI assistants, creators, consultants, and self-exploration use cases.
+It turns a Gregorian birth date into structured and reusable outputs such as `Kin`, solar seal, galactic tone, the five destiny positions, wavespell placement, yearly cycles, and compatibility data,
+then translates those symbolic results into readable explanations for beginners and machine-friendly outputs for advanced workflows.
+
+For beginners, the goal is simple: make Mayan Destiny understandable without assuming prior knowledge.
+You do not need to know the terminology, calendar system, or oracle structure in advance.
+You can start with one birth date and immediately get an explanation of what each position means, why it appears in the chart, and how it may show up in work, relationships, and personal growth.
+
+For advanced users, this project is designed as a reusable foundation:
+- a calculation core that can be imported into other tools
+- JSON output for downstream processing
+- runtime adapters for Codex, Claude-style skills, OpenClaw, and Hermes
+- a practical base for consulting workflows, educational products, content generation, or research-oriented experimentation
+
+In short, `mayan-kin` is built to be both accessible and rigorous:
+- accessible enough for first-time users
+- structured enough for builders
+- explicit enough to test, validate, and improve over time
+
+## 适用人群
+
+### 对小白用户
+
+- 想第一次看懂自己的玛雅天赋，不想被术语劝退
+- 希望知道“这个系统到底在讲什么”，而不只是拿到一个编号
+- 想从事业、关系、自我成长角度理解自己的天赋倾向
+- 希望获得有启发但不过度宿命化的解释
+
+### 对专业人士
+
+- 咨询师、内容创作者、课程设计者，希望把玛雅天赋做成标准化输出
+- AI 产品开发者，希望把该体系接进 agent、skill、bot 或内容工作流
+- 研究者或重度爱好者，希望有一个可读、可测、可扩展的基础实现
+- 需要多运行时版本，而不是只绑定单一平台
 
 ## 功能特性
 
