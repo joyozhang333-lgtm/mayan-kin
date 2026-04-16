@@ -30,6 +30,7 @@
 - `query`
 - `index_version`
 - `recommended_style`
+- `recommended_report_mode`
 - `recommended_cards`
 - `card_ids`
 - `reason`
@@ -95,5 +96,5 @@
 - 顶层键是该版本最重要的稳定边界。
 - 如果未来要破坏性改动 JSON 结构，应在新版本里显式说明。
 - `--contract` 会优先于其他输出模式，因此适合作为接口验收入口。
-- `--auto-answer` 的规划部分以 `recommended_style / recommended_cards / card_ids / reason` 为稳定边界。
+- `--auto-answer` 的规划部分以 `recommended_style / recommended_report_mode / recommended_cards / card_ids / reason` 为稳定边界。
 - `--route-query` 的返回体以 `query / index_version / recommended_cards` 为核心稳定边界。

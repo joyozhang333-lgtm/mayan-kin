@@ -25,6 +25,7 @@ from .knowledge import (
     build_auto_plan,
     load_knowledge_index,
     recommend_knowledge_cards,
+    recommend_report_mode,
     recommend_report_style,
     route_query,
 )
@@ -52,6 +53,7 @@ __all__ = [
     "build_auto_plan",
     "load_knowledge_index",
     "recommend_knowledge_cards",
+    "recommend_report_mode",
     "recommend_report_style",
     "route_query",
 ]

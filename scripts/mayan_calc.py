@@ -74,7 +74,7 @@ def build_cli_contract():
             "auto_answer": {
                 "optional": True,
                 "type": "string",
-                "purpose": "根据自然语言问题自动选择知识卡和报告风格；配合 birthday 时可直接生成报告",
+                "purpose": "根据自然语言问题自动选择知识卡、报告风格和报告模式；配合 birthday 时可直接生成报告",
             },
         },
         "output_modes": {
@@ -136,7 +136,7 @@ def main():
             Notes:
               - `birthday` is required for normal modes.
               - `--contract` does not require `birthday`.
-              - `--auto-answer` does not require `birthday`, but with `birthday` it can also generate a report.
+              - `--auto-answer` does not require `birthday`, but with `birthday` it can also generate the recommended report mode.
               - `--route-query` does not require `birthday`.
               - `--report` is intended for human reading; use `--json` for downstream systems.
               - `--style` only affects report output.
@@ -220,14 +220,20 @@ def main():
     if args.auto_answer:
         auto_plan = build_auto_plan(args.auto_answer)
         selected_style = auto_plan["recommended_style"]
+        report_mode = auto_plan["recommended_report_mode"]
         print(json.dumps(auto_plan, ensure_ascii=False, indent=2))
         sys.stdout.write("\n")
-        report = build_personal_report(destiny, birth_date=birth_date, style=selected_style)
-        sys.stdout.write(format_personal_report(report))
-        if args.yearly:
+        should_render_personal = report_mode in ("personal", "combined")
+        should_render_yearly = report_mode in ("yearly", "combined")
+        should_render_compatibility = report_mode in ("compatibility", "combined")
+
+        if should_render_personal:
+            report = build_personal_report(destiny, birth_date=birth_date, style=selected_style)
+            sys.stdout.write(format_personal_report(report))
+        if should_render_yearly and args.yearly:
             yearly_report = build_yearly_report(birth_date, args.yearly, style=selected_style)
             sys.stdout.write(format_yearly_report(yearly_report))
-        if other_date:
+        if should_render_compatibility and other_date:
             other_kin = date_to_kin(other_date)
             compatibility_report = build_compatibility_report(kin, other_kin, style=selected_style)
             sys.stdout.write(format_compatibility_report(compatibility_report))

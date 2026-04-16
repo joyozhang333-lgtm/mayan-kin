@@ -19,6 +19,7 @@ python3 scripts/mayan_calc.py [birthday] [options]
 - `--report / -r` - 输出个人说明书
 - `--style` - 选择报告风格：`beginner / consulting / professional`
 - `--auto-answer` - 自动推荐知识卡和报告风格；提供生日时直接出报告
+- `--auto-answer` 也会自动推荐 `personal / yearly / compatibility / combined` 报告模式
 - `--route-query` - 根据自然语言问题推荐知识卡
 - `--contract` - 输出 CLI / JSON 契约说明
 
@@ -59,7 +60,7 @@ python3 scripts/mayan_calc.py --contract
 
 - 默认文本输出适合人工阅读。
 - `--json` 适合前端、数据库、自动化脚本和 AI 二次处理。
-- `--auto-answer` 会先输出自动规划结果，再按推荐风格渲染报告。
+- `--auto-answer` 会先输出自动规划结果，再按推荐的风格和报告模式渲染报告。
 - `--route-query` 适合 runtime 先决定要加载哪几张知识卡。
 - `--report` 适合直接给用户看的说明书。
 - `--style` 只影响报告模式，不影响默认文本和 JSON 结构。

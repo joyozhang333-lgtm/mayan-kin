@@ -190,7 +190,16 @@ class MayanCalcTests(unittest.TestCase):
     def test_auto_plan_recommends_consulting_for_yearly_direction_query(self):
         plan = mayan_calc.build_auto_plan("我想看2026流年和事业方向")
         self.assertEqual(plan["recommended_style"], "consulting")
+        self.assertEqual(plan["recommended_report_mode"], "yearly")
         self.assertIn("yearly", plan["card_ids"])
+
+    def test_auto_plan_recommends_compatibility_mode_for_relationship_query(self):
+        plan = mayan_calc.build_auto_plan("我想看合盘和关系边界")
+        self.assertEqual(plan["recommended_report_mode"], "compatibility")
+
+    def test_auto_plan_recommends_combined_mode_for_yearly_and_relationship_query(self):
+        plan = mayan_calc.build_auto_plan("我想看2026流年、关系和边界")
+        self.assertEqual(plan["recommended_report_mode"], "combined")
 
     def test_cli_auto_answer_without_birthday_is_parseable(self):
         result = subprocess.run(
@@ -201,6 +210,7 @@ class MayanCalcTests(unittest.TestCase):
         )
         payload = json.loads(result.stdout)
         self.assertEqual(payload["recommended_style"], "beginner")
+        self.assertEqual(payload["recommended_report_mode"], "personal")
         self.assertIn("five_destiny", payload["card_ids"])
 
     def test_cli_auto_answer_with_birthday_renders_plan_and_report(self):
@@ -219,7 +229,8 @@ class MayanCalcTests(unittest.TestCase):
             check=True,
         )
         self.assertIn("\"recommended_style\": \"consulting\"", result.stdout)
-        self.assertIn("玛雅天赋个人说明书", result.stdout)
+        self.assertIn("\"recommended_report_mode\": \"yearly\"", result.stdout)
+        self.assertNotIn("玛雅天赋个人说明书", result.stdout)
         self.assertIn("2026 年流年说明书", result.stdout)
         self.assertIn("输出风格: 咨询版", result.stdout)
 

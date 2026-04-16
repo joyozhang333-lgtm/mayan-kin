@@ -104,10 +104,42 @@ def recommend_report_style(query, cards=None):
     return "beginner"
 
 
+def recommend_report_mode(query, cards=None):
+    query_text = (query or "").strip().casefold()
+    card_ids = {card["id"] for card in (cards or [])}
+
+    has_yearly_signal = (
+        "流年" in query_text
+        or "年度" in query_text
+        or "yearly" in query_text
+        or "今年" in query_text
+        or "明年" in query_text
+        or "202" in query_text
+        or "yearly" in card_ids
+    )
+    has_compatibility_signal = (
+        "合盘" in query_text
+        or "关系" in query_text
+        or "compatibility" in query_text
+        or "另一人" in query_text
+        or "边界" in query_text
+        or "compatibility" in card_ids
+    )
+
+    if has_yearly_signal and has_compatibility_signal:
+        return "combined"
+    if has_yearly_signal:
+        return "yearly"
+    if has_compatibility_signal:
+        return "compatibility"
+    return "personal"
+
+
 def build_auto_plan(query, limit=4):
     routed = route_query(query, limit=limit)
     recommended_cards = routed["recommended_cards"]
     style = recommend_report_style(query, recommended_cards)
+    report_mode = recommend_report_mode(query, recommended_cards)
     card_ids = [card["id"] for card in recommended_cards]
 
     if style == "professional":
@@ -121,6 +153,7 @@ def build_auto_plan(query, limit=4):
         "query": query,
         "index_version": routed["index_version"],
         "recommended_style": style,
+        "recommended_report_mode": report_mode,
         "recommended_cards": recommended_cards,
         "card_ids": card_ids,
         "reason": reason,
