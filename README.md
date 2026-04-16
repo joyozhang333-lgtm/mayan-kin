@@ -1,6 +1,6 @@
 # 🌀 mayan-kin · Mayan Destiny / Dreamspell / Tzolkin Kin Calculator
 
-> Open-source `Kin calculator` for **Mayan Destiny / Dreamspell / Tzolkin**. 输入一个阳历生日，生成 `Kin`、图腾、调性、五大天赋盘、流年与合盘结果。
+> Open-source `Kin calculator` and `AI-ready interpretation toolkit` for **Mayan Destiny / Dreamspell / Tzolkin**. 输入一个阳历生日，自动生成 `Kin`、图腾、调性、五大天赋盘、流年、合盘，以及会自动选卡、自动选风格、自动选报告模式的指导型解读。
 
 **Search terms:** `mayan destiny`, `dreamspell`, `tzolkin`, `kin calculator`, `maya calendar`, `玛雅天赋`, `星系印记`, `玛雅合盘`
 
@@ -15,7 +15,8 @@
 - generate a `Mayan Destiny / Dreamspell / Tzolkin` chart
 - read the `solar seal`, `galactic tone`, and `five destiny positions`
 - check `yearly readings` and `compatibility readings`
-- generate a guided personal report with growth path and action advice
+- generate guided `personal`, `yearly`, and `compatibility` reports with growth path and action advice
+- auto-route user questions to the right knowledge cards, report style, and report mode
 - reuse the calculator in `AI agents`, `skills`, and `runtime toolkits`
 
 如果你是中文用户，这个仓库主要解决的是：
@@ -23,6 +24,7 @@
 - Kin 号、图腾、调性怎么查
 - 五大天赋盘怎么排
 - 流年和合盘怎么做
+- 怎么让系统自动判断该读哪些知识卡、该用什么解释风格、该出哪种报告
 - 怎么把这套能力接进 AI 助手或内容系统
 
 ## Popular Search Queries
