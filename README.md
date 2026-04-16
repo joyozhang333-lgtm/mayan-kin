@@ -266,7 +266,13 @@ python3 scripts/mayan_calc.py 1990-03-15 --report
 python3 scripts/mayan_calc.py --contract
 ```
 
-### 5. 切换报告风格
+### 5. 路由用户问题到知识卡
+
+```bash
+python3 scripts/mayan_calc.py --route-query "我想看2026流年和事业方向"
+```
+
+### 6. 切换报告风格
 
 ```bash
 python3 scripts/mayan_calc.py 1995-03-03 --report --style beginner
@@ -274,14 +280,14 @@ python3 scripts/mayan_calc.py 1995-03-03 --report --style consulting
 python3 scripts/mayan_calc.py 1995-03-03 --report --style professional
 ```
 
-### 6. 查看流年或合盘
+### 7. 查看流年或合盘
 
 ```bash
 python3 scripts/mayan_calc.py 1990-03-15 --yearly 2026
 python3 scripts/mayan_calc.py 1990-03-15 --compatibility 1992-07-20
 ```
 
-### 7. 跑测试
+### 8. 跑测试
 
 ```bash
 python3 -m unittest discover -s tests -p 'test_*.py'
@@ -304,8 +310,9 @@ python3 scripts/mayan_calc.py [birthday] [options]
 - `--json` 输出机器可读结果，适合前端、数据库和二次处理
 - `--report` 输出指导型个人说明书，适合人阅读
 - `--style` 控制报告风格，可选 `beginner / consulting / professional`
+- `--route-query` 根据自然语言问题推荐知识卡，适合 agent / runtime 做最小加载
 - `--contract` 输出 CLI / JSON 契约说明，不需要 `birthday`
-- 输出优先级固定为 `--contract > --report > --json > 默认文本`
+- 输出优先级固定为 `--contract > --route-query > --report > --json > 默认文本`
 
 ### Documentation Entry Points
 
@@ -388,7 +395,20 @@ python3 scripts/mayan_calc.py 1995-03-03 --report
 - 输出成长路径、位置解释和行动建议
 - 作为咨询、内容产品或 AI 对话的中间层材料
 
-### 示例六：咨询版报告
+### 示例六：知识卡自动路由
+
+输入：
+
+```bash
+python3 scripts/mayan_calc.py --route-query "我想看合盘和关系边界"
+```
+
+适合：
+- agent 在加载解释知识前先做问题路由
+- 调试 `knowledge-index.json` 的匹配效果
+- 判断当前问题最应该读哪几张卡
+
+### 示例七：咨询版报告
 
 输入：
 
@@ -401,7 +421,7 @@ python3 scripts/mayan_calc.py 1995-03-03 --report --style consulting
 - 更快看见卡点、判断点和下一步动作
 - 把同一份盘切换成更偏对话与行动的输出
 
-### 示例七：接口契约
+### 示例八：接口契约
 
 输入：
 

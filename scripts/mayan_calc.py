@@ -28,12 +28,13 @@ from mayan_kin.core import (  # noqa: E402
     parse_iso_date,
     serialize_destiny,
 )
+from mayan_kin.knowledge import route_query  # noqa: E402
 
 
 CLI_NAME = "mayan_calc.py"
 CLI_VERSION = "v1.0"
 CLI_USAGE = "python3 scripts/mayan_calc.py [birthday] [options]"
-CLI_OUTPUT_PRECEDENCE = ["--contract", "--report", "--json", "text"]
+CLI_OUTPUT_PRECEDENCE = ["--contract", "--route-query", "--report", "--json", "text"]
 CLI_STYLE_CHOICES = ["beginner", "consulting", "professional"]
 
 
@@ -64,6 +65,11 @@ def build_cli_contract():
                 "choices": CLI_STYLE_CHOICES,
                 "default": "beginner",
                 "purpose": "控制报告输出风格：小白版 / 咨询版 / 专业版",
+            },
+            "route_query": {
+                "optional": True,
+                "type": "string",
+                "purpose": "根据自然语言问题推荐最小知识卡集合，不需要 birthday",
             },
         },
         "output_modes": {
@@ -112,16 +118,18 @@ def main():
               python3 scripts/mayan_calc.py 1995-03-03 --json
               python3 scripts/mayan_calc.py 1995-03-03 --report
               python3 scripts/mayan_calc.py 1995-03-03 --report --style consulting
+              python3 scripts/mayan_calc.py --route-query "我想看2026流年和事业方向"
               python3 scripts/mayan_calc.py 1995-03-03 --yearly 2026
               python3 scripts/mayan_calc.py 1995-03-03 --compatibility 1992-07-20
               python3 scripts/mayan_calc.py --contract
 
             Output precedence:
-              --contract > --report > --json > default text
+              --contract > --route-query > --report > --json > default text
 
             Notes:
               - `birthday` is required for normal modes.
               - `--contract` does not require `birthday`.
+              - `--route-query` does not require `birthday`.
               - `--report` is intended for human reading; use `--json` for downstream systems.
               - `--style` only affects report output.
             """
@@ -162,11 +170,19 @@ def main():
         action="store_true",
         help="输出 CLI / JSON 契约说明，不需要 birthday"
     )
+    parser.add_argument(
+        "--route-query",
+        help="按自然语言问题推荐知识卡，不需要 birthday"
+    )
 
     args = parser.parse_args()
 
     if args.contract:
         print(json.dumps(build_cli_contract(), ensure_ascii=False, indent=2))
+        return
+
+    if args.route_query:
+        print(json.dumps(route_query(args.route_query), ensure_ascii=False, indent=2))
         return
 
     if not args.birthday:

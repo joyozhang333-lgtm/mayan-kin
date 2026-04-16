@@ -3,6 +3,8 @@
 
 from datetime import date
 
+from .knowledge import load_knowledge_index, recommend_knowledge_cards, route_query
+
 
 SEALS = [
     "",

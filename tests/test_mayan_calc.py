@@ -169,6 +169,24 @@ class MayanCalcTests(unittest.TestCase):
         self.assertGreaterEqual(len(payload["cards"]), 10)
         self.assertTrue(any(card["id"] == "yearly" for card in payload["cards"]))
 
+    def test_knowledge_router_matches_yearly_query(self):
+        routed = mayan_calc.route_query("我想看2026流年和事业方向", limit=3)
+        ids = [card["id"] for card in routed["recommended_cards"]]
+        self.assertIn("yearly", ids)
+        self.assertIn("guidance", ids)
+
+    def test_cli_route_query_output_is_parseable(self):
+        result = subprocess.run(
+            [sys.executable, str(SCRIPT), "--route-query", "我想看合盘和关系边界"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        payload = json.loads(result.stdout)
+        self.assertEqual(payload["index_version"], "v1")
+        ids = [card["id"] for card in payload["recommended_cards"]]
+        self.assertIn("compatibility", ids)
+
     def test_build_yearly_report_contains_multi_scene_layers(self):
         report = mayan_calc.build_yearly_report("1995-03-03", 2026, style="professional")
         self.assertEqual(report["scene"], "yearly")

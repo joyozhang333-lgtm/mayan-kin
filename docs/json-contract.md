@@ -19,6 +19,10 @@
 
 `--contract` 不计算生日结果，只输出 CLI 与 JSON 契约说明，方便对接前先看边界。
 
+### `--route-query`
+
+`--route-query` 返回知识路由结果，帮助 agent / runtime 根据自然语言问题先选知识卡，再决定读取哪些正文。
+
 ## `--json` Top-Level Shape
 
 ```json
@@ -78,3 +82,4 @@
 - 顶层键是该版本最重要的稳定边界。
 - 如果未来要破坏性改动 JSON 结构，应在新版本里显式说明。
 - `--contract` 会优先于其他输出模式，因此适合作为接口验收入口。
+- `--route-query` 的返回体以 `query / index_version / recommended_cards` 为核心稳定边界。

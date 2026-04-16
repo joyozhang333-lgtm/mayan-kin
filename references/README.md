@@ -40,7 +40,8 @@
 
 1. 先读取 `knowledge-index.json`
 2. 根据 `keywords`、`use_cases` 和 `when_to_load` 选最小知识集合
-3. 避免一次性加载全部文档，优先按问题场景组合卡片
+3. 或者直接调用 `python3 scripts/mayan_calc.py --route-query "<用户问题>"`
+4. 避免一次性加载全部文档，优先按问题场景组合卡片
 
 ## Card Design Rules
 

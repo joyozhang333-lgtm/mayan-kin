@@ -20,6 +20,12 @@ from .core import (
     parse_iso_date,
     serialize_destiny,
 )
+from .knowledge import (
+    KNOWLEDGE_INDEX_PATH,
+    load_knowledge_index,
+    recommend_knowledge_cards,
+    route_query,
+)
 
 __all__ = [
     "REFERENCE_DATE",
@@ -40,4 +46,8 @@ __all__ = [
     "format_yearly_report",
     "parse_iso_date",
     "serialize_destiny",
+    "KNOWLEDGE_INDEX_PATH",
+    "load_knowledge_index",
+    "recommend_knowledge_cards",
+    "route_query",
 ]
