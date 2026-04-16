@@ -42,6 +42,32 @@ People may discover this repository through queries such as:
 - `玛雅合盘`
 - `玛雅流年`
 
+## English Use Cases
+
+This repository is a good fit if you want to:
+
+- find a `Kin calculator` repository on GitHub
+- calculate a `Kin number` from a birth date
+- generate a `Dreamspell` or `Tzolkin` chart
+- read `Mayan Destiny` in a beginner-friendly way
+- build an AI tool around `Kin`, `solar seals`, `galactic tones`, yearly readings, or compatibility readings
+- reuse an open-source `Maya calendar` / `Kin calculator` codebase in your own workflow
+
+## Related Keywords
+
+Related keywords that describe this repository:
+
+- `Mayan Destiny tool`
+- `Dreamspell tool`
+- `Tzolkin chart`
+- `Kin number lookup`
+- `Maya calendar reading`
+- `Mayan astrology tool`
+- `compatibility reading`
+- `yearly cycle reading`
+- `AI skill toolkit`
+- `agent runtime integration`
+
 `mayan-kin` 是一个开源的 **Mayan Destiny / Dreamspell / Tzolkin / Maya Calendar / Kin Calculator** 项目，面向 AI 助手、创作者、咨询场景和个人探索者。
 它把阳历生日转换为可计算、可验证的星系印记信息，包括 `Kin`、图腾、调性、五大天赋盘、波符、流年与合盘结果，
 同时把这些结果翻译成普通人也能理解的解释语言，以及专业使用者可继续复用的结构化输出。
