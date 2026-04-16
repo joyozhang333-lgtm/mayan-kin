@@ -12,6 +12,8 @@
 
 - [Kin Calculator Landing Page](kin-calculator.md) - 面向英文搜索的落地页
 - [v2 Roadmap](v2-roadmap.md) - v2 / v1.0 的开发路线图
+- [References Index](../references/README.md) - 知识卡导航页
+- [Knowledge Index JSON](../references/knowledge-index.json) - 机读知识索引
 
 ## Quick Links
 

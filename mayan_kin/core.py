@@ -85,6 +85,135 @@ TONE_GUIDANCE = {
     "宇宙": "这一调性的主题是超越与持久。你的成长不是一时爆发，而是长期活出更高版本的自己。",
 }
 
+STYLE_CONFIG = {
+    "beginner": {
+        "label": "小白版",
+        "description": "优先用生活化语言解释概念，降低术语密度，先让普通用户看懂再追问。",
+    },
+    "consulting": {
+        "label": "咨询版",
+        "description": "优先突出卡点、判断点与下一步行动，适合咨询、陪伴和深度对话。",
+    },
+    "professional": {
+        "label": "专业版",
+        "description": "优先保留结构关系、解释层术语和可复用表述，适合专业使用者和内容生产。",
+    },
+}
+
+
+def normalize_report_style(style):
+    if not style:
+        return "beginner"
+    normalized = str(style).strip().lower().replace(" ", "_")
+    alias_map = {
+        "xiaobai": "beginner",
+        "beginner": "beginner",
+        "simple": "beginner",
+        "novice": "beginner",
+        "consulting": "consulting",
+        "consultation": "consulting",
+        "advisor": "consulting",
+        "professional": "professional",
+        "pro": "professional",
+        "expert": "professional",
+    }
+    if normalized not in alias_map:
+        valid = ", ".join(sorted(STYLE_CONFIG))
+        raise ValueError(f"未知报告风格 '{style}'，可选值: {valid}")
+    return alias_map[normalized]
+
+
+def style_meta(style):
+    normalized = normalize_report_style(style)
+    return {
+        "key": normalized,
+        "label": STYLE_CONFIG[normalized]["label"],
+        "description": STYLE_CONFIG[normalized]["description"],
+    }
+
+
+def stylize_text(text, style, field="general"):
+    if not text:
+        return text
+    normalized = normalize_report_style(style)
+    if normalized == "beginner":
+        beginner_prefix = {
+            "questions": "可以先问自己：",
+            "decision_checks": "先检查：",
+            "instructions": "使用时记住：",
+            "prompts": "可直接这样问：",
+        }
+        prefix = beginner_prefix.get(field)
+        return f"{prefix}{text}" if prefix else text
+    if normalized == "consulting":
+        consulting_prefix = {
+            "summary": "咨询提示：",
+            "focus": "本轮重点：",
+            "questions": "追问：",
+            "decision_checks": "判断点：",
+            "instructions": "咨询用法：",
+            "prompts": "对话提示：",
+            "action": "行动建议：",
+        }
+        prefix = consulting_prefix.get(field, "咨询视角：")
+        return f"{prefix}{text}"
+    professional_prefix = {
+        "summary": "结构判断：",
+        "focus": "解释层重点：",
+        "questions": "分析问题：",
+        "decision_checks": "校验点：",
+        "angles": "选题入口：",
+        "formats": "输出形式：",
+        "instructions": "调用说明：",
+        "prompts": "提示词模板：",
+        "action": "方法建议：",
+    }
+    prefix = professional_prefix.get(field, "专业表述：")
+    return f"{prefix}{text}"
+
+
+def stylize_sequence(items, style, field):
+    return [stylize_text(item, style, field) for item in items]
+
+
+def stylize_summary(summary, style):
+    return {key: stylize_text(value, style, "summary") for key, value in summary.items()}
+
+
+def stylize_growth_path(path, style):
+    stylized = []
+    for item in path:
+        stylized.append(
+            {
+                **item,
+                "focus": stylize_text(item["focus"], style, "focus"),
+                "action": stylize_text(item["action"], style, "action"),
+            }
+        )
+    return stylized
+
+
+def stylize_action_guide(action_guide, style):
+    return {
+        section: stylize_sequence(items, style, "action")
+        for section, items in action_guide.items()
+    }
+
+
+def stylize_delivery_layers(layers, style):
+    stylized = {}
+    for section_name, section in layers.items():
+        stylized_section = {}
+        for field, value in section.items():
+            if isinstance(value, list):
+                stylized_section[field] = stylize_sequence(value, style, field)
+            elif isinstance(value, str):
+                stylized_section[field] = stylize_text(value, style, field)
+            else:
+                stylized_section[field] = value
+        stylized[section_name] = stylized_section
+    return stylized
+
 
 def is_leap_year(year):
     return (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0)
@@ -482,13 +611,13 @@ def build_action_guide(destiny):
     }
 
 
-def build_personal_delivery_layers(destiny):
+def build_personal_delivery_layers(destiny, style="beginner"):
     main = destiny["main"]
     support = destiny["support"]
     challenge = destiny["challenge"]
     occult = destiny["occult"]
     guide = destiny["guide"]
-    return {
+    layers = {
         "consultation": {
             "focus": "围绕天赋、卡点和边界来提问，先看清哪里堵，再决定怎么动。",
             "questions": [
@@ -531,15 +660,16 @@ def build_personal_delivery_layers(destiny):
             ],
         },
     }
+    return stylize_delivery_layers(layers, style)
 
 
-def build_yearly_delivery_layers(natal_destiny, annual_destiny, interaction):
+def build_yearly_delivery_layers(natal_destiny, annual_destiny, interaction, style="beginner"):
     natal = natal_destiny["main"]
     annual = annual_destiny["main"]
     support = annual_destiny["support"]
     challenge = annual_destiny["challenge"]
     guide = annual_destiny["guide"]
-    return {
+    layers = {
         "consultation": {
             "focus": "围绕年度主轴、年度与本命的关系，以及这一年该怎么种种子来提问。",
             "questions": [
@@ -582,13 +712,14 @@ def build_yearly_delivery_layers(natal_destiny, annual_destiny, interaction):
             ],
         },
     }
+    return stylize_delivery_layers(layers, style)
 
 
-def build_compatibility_delivery_layers(result):
+def build_compatibility_delivery_layers(result, style="beginner"):
     person_a = result["person_a"]["main"]
     person_b = result["person_b"]["main"]
     combined = result["combined_destiny"]["main"]
-    return {
+    layers = {
         "consultation": {
             "focus": "围绕合作类型、冲突来源、分工边界和长期可持续性来提问。",
             "questions": [
@@ -631,6 +762,7 @@ def build_compatibility_delivery_layers(result):
             ],
         },
     }
+    return stylize_delivery_layers(layers, style)
 
 
 def format_delivery_layers(lines, layers):
@@ -660,7 +792,9 @@ def format_delivery_layers(lines, layers):
                     lines.append(f"  {item}")
 
 
-def build_yearly_report(birth_date, year):
+def build_yearly_report(birth_date, year, style="beginner"):
+    normalized_style = normalize_report_style(style)
+    style_info = style_meta(normalized_style)
     natal_kin = date_to_kin(birth_date)
     natal_destiny = calc_five_destiny(natal_kin)
     annual_kin = calc_yearly_kin(birth_date, year)
@@ -674,13 +808,13 @@ def build_yearly_report(birth_date, year):
         }
         for role in ("main", "support", "guide", "challenge", "occult")
     }
-    summary = {
+    summary = stylize_summary({
         "core_theme": f"{year} 年的主轴是 {annual_destiny['main']['tone_name']}{annual_destiny['main']['seal_name']}：{annual_destiny['main']['keywords']}。",
         "resource": f"这一年的资源来自 {annual_destiny['support']['seal_name']}：{annual_destiny['support']['keywords']}；本命 {natal_destiny['support']['seal_name']} 也会影响你能不能稳住节奏。",
         "challenge": f"年度课题落在 {annual_destiny['challenge']['seal_name']}：{annual_destiny['challenge']['keywords']}，与本命互动呈现 {interaction['color_relation']} / {interaction['tone_relation']}。",
         "guidance": f"这不是一味冲刺的一年，而是先种对种子、再让结构长稳的一年。",
-    }
-    action_guide = {
+    }, normalized_style)
+    action_guide = stylize_action_guide({
         "focus": [
             f"优先把 {annual_destiny['main']['seal_name']} 对应的主题落地，而不是继续分散能量。",
             f"把 {interaction['color_relation']} 当成年度风格参考，决定你是更适合外扩还是内收整理。",
@@ -696,10 +830,13 @@ def build_yearly_report(birth_date, year):
             "把每次犹豫翻译成一个最小可执行动作。",
             "让年度目标和本命天赋对齐，而不是彼此拉扯。",
         ],
-    }
+    }, normalized_style)
     report = {
         "scene": "yearly",
         "scene_label": f"{year} 年流年说明书",
+        "style": normalized_style,
+        "style_label": style_info["label"],
+        "style_description": style_info["description"],
         "birth_date": str(birth_date) if birth_date else None,
         "year": year,
         "kin": annual_kin,
@@ -710,9 +847,9 @@ def build_yearly_report(birth_date, year):
         "interaction": interaction,
         "summary": summary,
         "positions": positions,
-        "growth_path": build_growth_path(annual_destiny),
+        "growth_path": stylize_growth_path(build_growth_path(annual_destiny), normalized_style),
         "action_guide": action_guide,
-        "delivery_layers": build_yearly_delivery_layers(natal_destiny, annual_destiny, interaction),
+        "delivery_layers": build_yearly_delivery_layers(natal_destiny, annual_destiny, interaction, normalized_style),
     }
     return report
 
@@ -728,8 +865,10 @@ def format_yearly_report(report):
     if report["birth_date"]:
         lines.append(f"\n  出生日期: {report['birth_date']}")
     lines.append(f"  年度主轴: {report['title']}")
+    lines.append(f"  输出风格: {report.get('style_label', '小白版')}")
     lines.append(f"  本命参考: Kin {report['natal_kin']} {natal['main']['tone_name']}{natal['main']['seal_name']}")
     lines.append(f"  年度与本命关系: {interaction['color_relation']} | {interaction['tone_relation']}")
+    lines.append(f"  风格说明: {report.get('style_description', STYLE_CONFIG['beginner']['description'])}")
 
     lines.append(f"\n{'─' * 50}")
     lines.append("  年度摘要")
@@ -764,17 +903,19 @@ def format_yearly_report(report):
     return "\n".join(lines) + "\n"
 
 
-def _build_compatibility_report_from_result(result):
+def _build_compatibility_report_from_result(result, style="beginner"):
+    normalized_style = normalize_report_style(style)
+    style_info = style_meta(normalized_style)
     person_a = result["person_a"]
     person_b = result["person_b"]
     combined = result["combined_destiny"]
-    summary = {
+    summary = stylize_summary({
         "core_theme": f"这段关系的合盘主轴是 Kin {result['combined_kin']} {combined['main']['tone_name']}{combined['main']['seal_name']}：{combined['main']['keywords']}。",
         "strength": f"你们的优势来自 {result['color_relation']}，而 {result['tone_relation']} 决定了协作时的同步方式。",
         "challenge": f"A 与 B 的天赋位互照，说明你们既容易互相看见，也容易互相放大卡点。",
         "guidance": f"要让关系顺起来，关键不是谁更对，而是先对齐目标、边界和节奏。",
-    }
-    action_guide = {
+    }, normalized_style)
+    action_guide = stylize_action_guide({
         "cooperation": [
             f"先把 {combined['support']['seal_name']} 式支持系统建立起来，把分工和责任说清楚。",
             "如果一方总在推进、另一方总在承接，要尽早重画协作方式。",
@@ -790,10 +931,13 @@ def _build_compatibility_report_from_result(result):
             "每次冲突都回到：我们是在共同解决问题，还是在互相消耗。",
             "这段关系最好的版本，是双方都更清楚自己，也更能尊重对方。",
         ],
-    }
+    }, normalized_style)
     return {
         "scene": "compatibility",
         "scene_label": "双人合盘说明书",
+        "style": normalized_style,
+        "style_label": style_info["label"],
+        "style_description": style_info["description"],
         "kin_a": result["person_a"]["kin"],
         "kin_b": result["person_b"]["kin"],
         "title": f"Kin {result['combined_kin']} {combined['main']['tone_name']}{combined['main']['seal_name']}",
@@ -803,14 +947,14 @@ def _build_compatibility_report_from_result(result):
         "combined_destiny": combined,
         "interaction": result,
         "summary": summary,
-        "growth_path": build_growth_path(combined),
+        "growth_path": stylize_growth_path(build_growth_path(combined), normalized_style),
         "action_guide": action_guide,
-        "delivery_layers": build_compatibility_delivery_layers(result),
+        "delivery_layers": build_compatibility_delivery_layers(result, normalized_style),
     }
 
 
-def build_compatibility_report(kin_a, kin_b):
-    return _build_compatibility_report_from_result(calc_relationship(kin_a, kin_b))
+def build_compatibility_report(kin_a, kin_b, style="beginner"):
+    return _build_compatibility_report_from_result(calc_relationship(kin_a, kin_b), style=style)
 
 
 def format_compatibility_report(report):
@@ -822,6 +966,8 @@ def format_compatibility_report(report):
     lines.append("=" * 50)
     lines.append(f"  {report['scene_label']}")
     lines.append("=" * 50)
+    lines.append(f"\n  输出风格: {report.get('style_label', '小白版')}")
+    lines.append(f"  风格说明: {report.get('style_description', STYLE_CONFIG['beginner']['description'])}")
     lines.append(f"\n  A: Kin {report['kin_a']} {person_a['tone_name']}{person_a['tone']}·{person_a['seal_name']}")
     lines.append(f"  B: Kin {report['kin_b']} {person_b['tone_name']}{person_b['tone']}·{person_b['seal_name']}")
     lines.append(f"  合盘: {report['title']}")
@@ -875,10 +1021,12 @@ def explain_position(role, detail):
     return " ".join(parts)
 
 
-def build_personal_report(destiny, birth_date=None):
-    summary = summarize_destiny(destiny)
-    path = build_growth_path(destiny)
-    actions = build_action_guide(destiny)
+def build_personal_report(destiny, birth_date=None, style="beginner"):
+    normalized_style = normalize_report_style(style)
+    style_info = style_meta(normalized_style)
+    summary = stylize_summary(summarize_destiny(destiny), normalized_style)
+    path = stylize_growth_path(build_growth_path(destiny), normalized_style)
+    actions = stylize_action_guide(build_action_guide(destiny), normalized_style)
     positions = {
         role: {
             "name": f"{destiny[role]['tone_name']}{destiny[role]['seal_name']}",
@@ -892,12 +1040,15 @@ def build_personal_report(destiny, birth_date=None):
         "kin": destiny["kin"],
         "scene": "personal",
         "scene_label": "玛雅天赋个人说明书",
+        "style": normalized_style,
+        "style_label": style_info["label"],
+        "style_description": style_info["description"],
         "title": f"Kin {destiny['kin']} {destiny['main']['tone_name']}{destiny['main']['seal_name']}",
         "summary": summary,
         "positions": positions,
         "growth_path": path,
         "action_guide": actions,
-        "delivery_layers": build_personal_delivery_layers(destiny),
+        "delivery_layers": build_personal_delivery_layers(destiny, normalized_style),
     }
     return report
 
@@ -910,6 +1061,8 @@ def format_personal_report(report):
     if report["birth_date"]:
         lines.append(f"\n  出生日期: {report['birth_date']}")
     lines.append(f"  核心印记: {report['title']}")
+    lines.append(f"  输出风格: {report.get('style_label', '小白版')}")
+    lines.append(f"  风格说明: {report.get('style_description', STYLE_CONFIG['beginner']['description'])}")
 
     lines.append(f"\n{'─' * 50}")
     lines.append("  核心摘要")

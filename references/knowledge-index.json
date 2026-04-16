@@ -1,0 +1,105 @@
+{
+  "version": "v1",
+  "description": "Machine-readable knowledge card index for mayan-kin references.",
+  "cards": [
+    {
+      "id": "seals",
+      "path": "references/20-seals.md",
+      "title": "20 Seals",
+      "category": "foundation",
+      "keywords": ["图腾", "solar seal", "seal meaning", "kin seal"],
+      "use_cases": ["基础排盘", "解释图腾含义", "个人说明书"],
+      "when_to_load": "用户询问某个图腾、主印记、支持位或挑战位是什么意思"
+    },
+    {
+      "id": "tones",
+      "path": "references/13-tones.md",
+      "title": "13 Tones",
+      "category": "foundation",
+      "keywords": ["调性", "galactic tone", "tone meaning"],
+      "use_cases": ["解释行动风格", "年度趋势", "成长主题"],
+      "when_to_load": "用户询问某个调性、行动风格或节奏差异"
+    },
+    {
+      "id": "five_destiny",
+      "path": "references/five-destiny.md",
+      "title": "Five Destiny Positions",
+      "category": "foundation",
+      "keywords": ["五大天赋盘", "主印记", "支持位", "挑战位", "引导位", "隐藏推动"],
+      "use_cases": ["个人说明书", "深度解读", "成长路径"],
+      "when_to_load": "用户需要理解五个位置各自代表什么"
+    },
+    {
+      "id": "guidance",
+      "path": "references/guidance.md",
+      "title": "Talent Guidance",
+      "category": "application",
+      "keywords": ["天赋运用", "行动建议", "成长方向", "边界"],
+      "use_cases": ["行动建议", "咨询输出", "成长路径"],
+      "when_to_load": "用户在问怎么用天赋、怎么突破卡点、怎么落到现实"
+    },
+    {
+      "id": "yearly",
+      "path": "references/yearly-fortune.md",
+      "title": "Yearly Trends",
+      "category": "application",
+      "keywords": ["流年", "年度趋势", "yearly reading", "birthday cycle"],
+      "use_cases": ["年度说明书", "生日复盘", "年度规划"],
+      "when_to_load": "用户询问某一年的主题、节奏或流年和本命的互动"
+    },
+    {
+      "id": "compatibility",
+      "path": "references/compatibility.md",
+      "title": "Relationship Dynamics",
+      "category": "application",
+      "keywords": ["合盘", "compatibility", "relationship dynamics", "合作关系"],
+      "use_cases": ["情侣合盘", "事业伙伴", "亲子关系", "关系建议"],
+      "when_to_load": "用户询问两个人的关系、张力、互补和边界"
+    },
+    {
+      "id": "colors_wavespell",
+      "path": "references/colors-wavespell.md",
+      "title": "Colors and Wavespells",
+      "category": "advanced",
+      "keywords": ["颜色", "波符", "wavespell", "color cycles"],
+      "use_cases": ["进阶解读", "波符定位", "颜色主题"],
+      "when_to_load": "用户询问颜色含义、波符位置或进阶结构"
+    },
+    {
+      "id": "oracle",
+      "path": "references/oracle.md",
+      "title": "Oracle Cross",
+      "category": "advanced",
+      "keywords": ["神谕十字", "oracle cross", "五位关系结构"],
+      "use_cases": ["深度咨询", "结构阅读", "成长路径"],
+      "when_to_load": "用户需要从五位互动关系来理解盘，而不是只看单点标签"
+    },
+    {
+      "id": "earth_families",
+      "path": "references/earth-families.md",
+      "title": "Earth Families",
+      "category": "advanced",
+      "keywords": ["地球家族", "earth families", "共振分组", "team resonance"],
+      "use_cases": ["团队匹配", "关系共振", "高阶专题解读"],
+      "when_to_load": "用户询问为什么会和某类人或团队天然同频或失调"
+    },
+    {
+      "id": "career_emotion",
+      "path": "references/career-emotion.md",
+      "title": "Career and Emotion Applications",
+      "category": "application",
+      "keywords": ["事业", "情感", "career", "emotion"],
+      "use_cases": ["职业建议", "关系表达", "内容创作"],
+      "when_to_load": "用户直接问事业、工作方式、感情模式"
+    },
+    {
+      "id": "validation_samples",
+      "path": "references/validation-samples.md",
+      "title": "Validation Samples",
+      "category": "verification",
+      "keywords": ["校验", "样本", "validation", "anchor dates"],
+      "use_cases": ["测试", "算法验证", "公开锚点对照"],
+      "when_to_load": "开发者需要校验算法或补测试样本"
+    }
+  ]
+}

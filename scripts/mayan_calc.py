@@ -34,6 +34,7 @@ CLI_NAME = "mayan_calc.py"
 CLI_VERSION = "v1.0"
 CLI_USAGE = "python3 scripts/mayan_calc.py [birthday] [options]"
 CLI_OUTPUT_PRECEDENCE = ["--contract", "--report", "--json", "text"]
+CLI_STYLE_CHOICES = ["beginner", "consulting", "professional"]
 
 
 def build_cli_contract():
@@ -57,6 +58,12 @@ def build_cli_contract():
                 "optional": True,
                 "type": "integer",
                 "purpose": "计算指定年份的流年结果",
+            },
+            "style": {
+                "optional": True,
+                "choices": CLI_STYLE_CHOICES,
+                "default": "beginner",
+                "purpose": "控制报告输出风格：小白版 / 咨询版 / 专业版",
             },
         },
         "output_modes": {
@@ -104,6 +111,7 @@ def main():
               python3 scripts/mayan_calc.py 1995-03-03
               python3 scripts/mayan_calc.py 1995-03-03 --json
               python3 scripts/mayan_calc.py 1995-03-03 --report
+              python3 scripts/mayan_calc.py 1995-03-03 --report --style consulting
               python3 scripts/mayan_calc.py 1995-03-03 --yearly 2026
               python3 scripts/mayan_calc.py 1995-03-03 --compatibility 1992-07-20
               python3 scripts/mayan_calc.py --contract
@@ -115,6 +123,7 @@ def main():
               - `birthday` is required for normal modes.
               - `--contract` does not require `birthday`.
               - `--report` is intended for human reading; use `--json` for downstream systems.
+              - `--style` only affects report output.
             """
         ).strip(),
     )
@@ -141,6 +150,12 @@ def main():
         "--report", "-r",
         action="store_true",
         help="输出个人说明书报告"
+    )
+    parser.add_argument(
+        "--style",
+        choices=CLI_STYLE_CHOICES,
+        default="beginner",
+        help="报告输出风格: beginner / consulting / professional"
     )
     parser.add_argument(
         "--contract",
@@ -171,14 +186,14 @@ def main():
     destiny = calc_five_destiny(kin)
 
     if args.report:
-        report = build_personal_report(destiny, birth_date=birth_date)
+        report = build_personal_report(destiny, birth_date=birth_date, style=args.style)
         sys.stdout.write(format_personal_report(report))
         if args.yearly:
-            yearly_report = build_yearly_report(birth_date, args.yearly)
+            yearly_report = build_yearly_report(birth_date, args.yearly, style=args.style)
             sys.stdout.write(format_yearly_report(yearly_report))
         if other_date:
             other_kin = date_to_kin(other_date)
-            compatibility_report = build_compatibility_report(kin, other_kin)
+            compatibility_report = build_compatibility_report(kin, other_kin, style=args.style)
             sys.stdout.write(format_compatibility_report(compatibility_report))
         return
 

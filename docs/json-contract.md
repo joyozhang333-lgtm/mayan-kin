@@ -13,6 +13,8 @@
 - `yearly`（可选）
 - `compatibility`（可选）
 
+报告风格参数 `--style` 不进入 `--json` 输出体，它只影响 `--report` 的人类可读文本层。
+
 ### `--contract`
 
 `--contract` 不计算生日结果，只输出 CLI 与 JSON 契约说明，方便对接前先看边界。

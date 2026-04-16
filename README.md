@@ -266,14 +266,22 @@ python3 scripts/mayan_calc.py 1990-03-15 --report
 python3 scripts/mayan_calc.py --contract
 ```
 
-### 5. 查看流年或合盘
+### 5. 切换报告风格
+
+```bash
+python3 scripts/mayan_calc.py 1995-03-03 --report --style beginner
+python3 scripts/mayan_calc.py 1995-03-03 --report --style consulting
+python3 scripts/mayan_calc.py 1995-03-03 --report --style professional
+```
+
+### 6. 查看流年或合盘
 
 ```bash
 python3 scripts/mayan_calc.py 1990-03-15 --yearly 2026
 python3 scripts/mayan_calc.py 1990-03-15 --compatibility 1992-07-20
 ```
 
-### 6. 跑测试
+### 7. 跑测试
 
 ```bash
 python3 -m unittest discover -s tests -p 'test_*.py'
@@ -295,6 +303,7 @@ python3 scripts/mayan_calc.py [birthday] [options]
 - `birthday` 是普通模式的必填输入，格式为 `YYYY-MM-DD`
 - `--json` 输出机器可读结果，适合前端、数据库和二次处理
 - `--report` 输出指导型个人说明书，适合人阅读
+- `--style` 控制报告风格，可选 `beginner / consulting / professional`
 - `--contract` 输出 CLI / JSON 契约说明，不需要 `birthday`
 - 输出优先级固定为 `--contract > --report > --json > 默认文本`
 
@@ -306,6 +315,8 @@ python3 scripts/mayan_calc.py [birthday] [options]
 - [docs/json-contract.md](docs/json-contract.md) - JSON 契约说明
 - [docs/kin-calculator.md](docs/kin-calculator.md) - 英文落地页
 - [docs/v2-roadmap.md](docs/v2-roadmap.md) - v2 / v1.0 路线图
+- [references/README.md](references/README.md) - 知识卡导航页
+- [references/knowledge-index.json](references/knowledge-index.json) - 机读知识索引
 
 ## Examples
 
@@ -377,7 +388,20 @@ python3 scripts/mayan_calc.py 1995-03-03 --report
 - 输出成长路径、位置解释和行动建议
 - 作为咨询、内容产品或 AI 对话的中间层材料
 
-### 示例六：接口契约
+### 示例六：咨询版报告
+
+输入：
+
+```bash
+python3 scripts/mayan_calc.py 1995-03-03 --report --style consulting
+```
+
+适合：
+- 咨询师、陪伴者、教练直接拿来追问和判断
+- 更快看见卡点、判断点和下一步动作
+- 把同一份盘切换成更偏对话与行动的输出
+
+### 示例七：接口契约
 
 输入：
 
@@ -536,6 +560,8 @@ mayan-kin/
 │   ├── hermes/SYSTEM_PROMPT.md   ← Hermes 版本
 │   └── hermes/DEMO.md            ← Hermes 示例对话
 ├── references/
+│   ├── README.md                 ← 知识卡导航页
+│   ├── knowledge-index.json      ← 机读知识索引
 │   ├── 20-seals.md               ← 20图腾详解
 │   ├── 13-tones.md               ← 13调性详解
 │   ├── five-destiny.md           ← 五大天赋位详解
@@ -562,6 +588,8 @@ python3 -m unittest discover -s tests -p 'test_*.py'
 - `docs/cli.md`：CLI usage 与参数说明
 - `docs/report.md`：report 命令说明
 - `docs/json-contract.md`：JSON 契约说明
+- `references/README.md`：知识卡导航页
+- `references/knowledge-index.json`：机读知识索引
 - `runtimes/openclaw/AGENTS.md`：OpenClaw 对应版本
 - `runtimes/openclaw/DEMO.md`：OpenClaw 示例对话
 - `runtimes/hermes/SYSTEM_PROMPT.md`：Hermes 对应版本

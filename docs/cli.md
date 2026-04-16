@@ -17,6 +17,7 @@ python3 scripts/mayan_calc.py [birthday] [options]
 - `--yearly / -y` - 计算指定年份的流年结果
 - `--json / -j` - 输出机器可读 JSON
 - `--report / -r` - 输出个人说明书
+- `--style` - 选择报告风格：`beginner / consulting / professional`
 - `--contract` - 输出 CLI / JSON 契约说明
 
 ## Output Precedence
@@ -36,6 +37,7 @@ python3 scripts/mayan_calc.py [birthday] [options]
 python3 scripts/mayan_calc.py 1995-03-03
 python3 scripts/mayan_calc.py 1995-03-03 --json
 python3 scripts/mayan_calc.py 1995-03-03 --report
+python3 scripts/mayan_calc.py 1995-03-03 --report --style consulting
 python3 scripts/mayan_calc.py 1995-03-03 --yearly 2026
 python3 scripts/mayan_calc.py 1995-03-03 --compatibility 1992-07-20
 python3 scripts/mayan_calc.py --contract
@@ -51,4 +53,5 @@ python3 scripts/mayan_calc.py --contract
 - 默认文本输出适合人工阅读。
 - `--json` 适合前端、数据库、自动化脚本和 AI 二次处理。
 - `--report` 适合直接给用户看的说明书。
+- `--style` 只影响报告模式，不影响默认文本和 JSON 结构。
 - `--contract` 适合对接前先确认接口边界。
