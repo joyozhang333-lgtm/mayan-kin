@@ -81,27 +81,27 @@ def recommend_report_style(query, cards=None):
     query_text = (query or "").strip().casefold()
     card_ids = {card["id"] for card in (cards or [])}
 
-    professional_terms = (
+    deep_terms = (
         "专业", "课程", "内容产品", "prompt", "模板", "结构", "术语", "研究", "系统", "framework"
     )
-    consulting_terms = (
+    real_world_terms = (
         "卡点", "边界", "怎么做", "怎么办", "咨询", "关系", "合盘", "流年", "方向", "事业", "成长"
     )
-    beginner_terms = (
+    basic_terms = (
         "小白", "不懂", "入门", "先讲清楚", "什么意思", "怎么看", "第一次"
     )
 
-    if any(term in query_text for term in professional_terms):
-        return "professional"
-    if any(term in query_text for term in beginner_terms):
-        return "beginner"
-    if any(term in query_text for term in consulting_terms):
-        return "consulting"
+    if any(term in query_text for term in deep_terms):
+        return "deep"
+    if any(term in query_text for term in basic_terms):
+        return "basic"
+    if any(term in query_text for term in real_world_terms):
+        return "deep"
     if {"compatibility", "yearly", "guidance", "career_emotion"} & card_ids:
-        return "consulting"
+        return "deep"
     if {"oracle", "earth_families"} & card_ids:
-        return "professional"
-    return "beginner"
+        return "deep"
+    return "basic"
 
 
 def recommend_report_mode(query, cards=None):
@@ -142,12 +142,10 @@ def build_auto_plan(query, limit=4):
     report_mode = recommend_report_mode(query, recommended_cards)
     card_ids = [card["id"] for card in recommended_cards]
 
-    if style == "professional":
-        reason = "问题更偏专业结构、内容复用或方法论表达，适合保留更多术语和结构。"
-    elif style == "consulting":
-        reason = "问题更偏现实卡点、关系判断或行动建议，适合用咨询版突出判断点和下一步。"
+    if style == "deep":
+        reason = "问题更偏现实卡点、关系判断、结构分析或深度方法，适合直接进入有穿透力的深度解读。"
     else:
-        reason = "问题更偏入门理解或概念澄清，适合先用小白版降低术语门槛。"
+        reason = "问题更偏入门理解或概念澄清，适合先用基础版快速看懂盘面。"
 
     return {
         "query": query,

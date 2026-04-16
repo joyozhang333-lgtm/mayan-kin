@@ -17,7 +17,7 @@ python3 scripts/mayan_calc.py [birthday] [options]
 - `--yearly / -y` - 计算指定年份的流年结果
 - `--json / -j` - 输出机器可读 JSON
 - `--report / -r` - 输出个人说明书
-- `--style` - 选择报告风格：`beginner / consulting / professional`
+- `--style` - 选择报告风格：`basic / deep`
 - `--auto-answer` - 自动推荐知识卡和报告风格；提供生日时直接出报告
 - `--auto-answer` 也会自动推荐 `personal / yearly / compatibility / combined` 报告模式
 - `--route-query` - 根据自然语言问题推荐知识卡
@@ -45,7 +45,7 @@ python3 scripts/mayan_calc.py --auto-answer "我想看流年和事业方向"
 python3 scripts/mayan_calc.py 1995-03-03 --auto-answer "我想看流年和事业方向" --yearly 2026
 python3 scripts/mayan_calc.py --route-query "我想看流年和事业方向"
 python3 scripts/mayan_calc.py 1995-03-03 --report
-python3 scripts/mayan_calc.py 1995-03-03 --report --style consulting
+python3 scripts/mayan_calc.py 1995-03-03 --report --style deep
 python3 scripts/mayan_calc.py 1995-03-03 --yearly 2026
 python3 scripts/mayan_calc.py 1995-03-03 --compatibility 1992-07-20
 python3 scripts/mayan_calc.py --contract

@@ -25,6 +25,7 @@ from mayan_kin.core import (  # noqa: E402
     format_destiny,
     format_personal_report,
     format_yearly_report,
+    normalize_report_style,
     parse_iso_date,
     serialize_destiny,
 )
@@ -35,7 +36,7 @@ CLI_NAME = "mayan_calc.py"
 CLI_VERSION = "v1.0"
 CLI_USAGE = "python3 scripts/mayan_calc.py [birthday] [options]"
 CLI_OUTPUT_PRECEDENCE = ["--contract", "--auto-answer", "--route-query", "--report", "--json", "text"]
-CLI_STYLE_CHOICES = ["beginner", "consulting", "professional"]
+CLI_STYLE_CHOICES = ["basic", "deep"]
 
 
 def build_cli_contract():
@@ -63,8 +64,8 @@ def build_cli_contract():
             "style": {
                 "optional": True,
                 "choices": CLI_STYLE_CHOICES,
-                "default": "beginner",
-                "purpose": "控制报告输出风格：小白版 / 咨询版 / 专业版",
+                "default": "basic",
+                "purpose": "控制报告输出风格：基础版 / 深度版",
             },
             "route_query": {
                 "optional": True,
@@ -122,7 +123,7 @@ def main():
               python3 scripts/mayan_calc.py 1995-03-03
               python3 scripts/mayan_calc.py 1995-03-03 --json
               python3 scripts/mayan_calc.py 1995-03-03 --report
-              python3 scripts/mayan_calc.py 1995-03-03 --report --style consulting
+              python3 scripts/mayan_calc.py 1995-03-03 --report --style deep
               python3 scripts/mayan_calc.py --auto-answer "我想看2026流年和事业方向"
               python3 scripts/mayan_calc.py 1995-03-03 --auto-answer "我想看2026流年和事业方向"
               python3 scripts/mayan_calc.py --route-query "我想看2026流年和事业方向"
@@ -169,9 +170,8 @@ def main():
     )
     parser.add_argument(
         "--style",
-        choices=CLI_STYLE_CHOICES,
-        default="beginner",
-        help="报告输出风格: beginner / consulting / professional"
+        default="basic",
+        help="报告输出风格: basic / deep（兼容旧值: beginner / consulting / professional）"
     )
     parser.add_argument(
         "--contract",
@@ -188,6 +188,7 @@ def main():
     )
 
     args = parser.parse_args()
+    args.style = normalize_report_style(args.style)
 
     if args.contract:
         print(json.dumps(build_cli_contract(), ensure_ascii=False, indent=2))

@@ -20,13 +20,13 @@
 - 小白用户第一次看自己的玛雅天赋
 - 咨询、陪伴、课程或内容产品
 - 想把“计算结果”转成“可以行动的建议”
-- 想在同一份盘上切换 `beginner / consulting / professional` 三种报告风格
+- 想在同一份盘上切换 `basic / deep` 两种报告风格
 
 ## Examples
 
 ```bash
 python3 scripts/mayan_calc.py 1995-03-03 --report
-python3 scripts/mayan_calc.py 1995-03-03 --report --style consulting
+python3 scripts/mayan_calc.py 1995-03-03 --report --style deep
 python3 scripts/mayan_calc.py 1995-03-03 --report --yearly 2026
 ```
 
@@ -34,7 +34,7 @@ python3 scripts/mayan_calc.py 1995-03-03 --report --yearly 2026
 
 - `--report` 的优先级高于 `--json`
 - `--report` 可以和 `--yearly` 一起使用
-- `--style` 可以切换报告风格，小白版偏解释，咨询版偏追问，专业版偏结构
+- `--style` 可以切换报告风格，`basic` 偏快速看懂盘面，`deep` 偏穿透式深度解读
 - 当同时请求多个输出模式时，报告模式会优先执行
 
 ## Reading Tip

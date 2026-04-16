@@ -95,36 +95,35 @@ TONE_GUIDANCE = {
 }
 
 STYLE_CONFIG = {
-    "beginner": {
-        "label": "小白版",
-        "description": "优先用生活化语言解释概念，降低术语密度，先让普通用户看懂再追问。",
+    "basic": {
+        "label": "基础版",
+        "description": "优先快速看懂盘面结构，适合先了解基本情况和核心主题。",
     },
-    "consulting": {
-        "label": "咨询版",
-        "description": "优先突出卡点、判断点与下一步行动，适合咨询、陪伴和深度对话。",
-    },
-    "professional": {
-        "label": "专业版",
-        "description": "优先保留结构关系、解释层术语和可复用表述，适合专业使用者和内容生产。",
+    "deep": {
+        "label": "深度版",
+        "description": "优先做有穿透力的深度解读，结合结构、卡点、现实处境和下一步动作。",
     },
 }
 
 
 def normalize_report_style(style):
     if not style:
-        return "beginner"
+        return "basic"
     normalized = str(style).strip().lower().replace(" ", "_")
     alias_map = {
-        "xiaobai": "beginner",
-        "beginner": "beginner",
-        "simple": "beginner",
-        "novice": "beginner",
-        "consulting": "consulting",
-        "consultation": "consulting",
-        "advisor": "consulting",
-        "professional": "professional",
-        "pro": "professional",
-        "expert": "professional",
+        "basic": "basic",
+        "simple": "basic",
+        "beginner": "basic",
+        "novice": "basic",
+        "xiaobai": "basic",
+        "deep": "deep",
+        "deep_dialogue": "deep",
+        "consulting": "deep",
+        "consultation": "deep",
+        "advisor": "deep",
+        "professional": "deep",
+        "pro": "deep",
+        "expert": "deep",
     }
     if normalized not in alias_map:
         valid = ", ".join(sorted(STYLE_CONFIG))
@@ -145,34 +144,26 @@ def stylize_text(text, style, field="general"):
     if not text:
         return text
     normalized = normalize_report_style(style)
-    if normalized == "beginner":
-        beginner_prefix = {
+    if normalized == "basic":
+        basic_prefix = {
             "questions": "可以先问自己：",
             "decision_checks": "先检查：",
             "instructions": "使用时记住：",
             "prompts": "可直接这样问：",
         }
-        prefix = beginner_prefix.get(field)
+        prefix = basic_prefix.get(field)
         return f"{prefix}{text}" if prefix else text
-    if normalized == "consulting":
-        consulting_prefix = {
-            "summary": "咨询提示：",
-            "focus": "本轮重点：",
+    if normalized == "deep":
+        deep_prefix = {
             "questions": "追问：",
             "decision_checks": "判断点：",
-            "instructions": "咨询用法：",
+            "instructions": "深度用法：",
             "prompts": "对话提示：",
             "action": "行动建议：",
         }
-        prefix = consulting_prefix.get(field, "咨询视角：")
+        prefix = deep_prefix.get(field)
         return f"{prefix}{text}"
-    professional_prefix = {
-        "questions": "分析问题：",
-        "decision_checks": "校验点：",
-        "prompts": "提示词模板：",
-    }
-    prefix = professional_prefix.get(field)
-    return f"{prefix}{text}" if prefix else text
+    return text
 
 
 def stylize_sequence(items, style, field):
@@ -770,7 +761,7 @@ def build_professional_yearly_analysis(natal_destiny, annual_destiny, interactio
     }
 
 
-def build_personal_delivery_layers(destiny, style="beginner"):
+def build_personal_delivery_layers(destiny, style="basic"):
     main = destiny["main"]
     support = destiny["support"]
     challenge = destiny["challenge"]
@@ -822,7 +813,7 @@ def build_personal_delivery_layers(destiny, style="beginner"):
     return stylize_delivery_layers(layers, style)
 
 
-def build_yearly_delivery_layers(natal_destiny, annual_destiny, interaction, style="beginner"):
+def build_yearly_delivery_layers(natal_destiny, annual_destiny, interaction, style="basic"):
     natal = natal_destiny["main"]
     annual = annual_destiny["main"]
     support = annual_destiny["support"]
@@ -874,7 +865,7 @@ def build_yearly_delivery_layers(natal_destiny, annual_destiny, interaction, sty
     return stylize_delivery_layers(layers, style)
 
 
-def build_compatibility_delivery_layers(result, style="beginner"):
+def build_compatibility_delivery_layers(result, style="basic"):
     person_a = result["person_a"]["main"]
     person_b = result["person_b"]["main"]
     combined = result["combined_destiny"]["main"]
@@ -951,7 +942,7 @@ def format_delivery_layers(lines, layers):
                     lines.append(f"  {item}")
 
 
-def build_yearly_report(birth_date, year, style="beginner"):
+def build_yearly_report(birth_date, year, style="basic"):
     normalized_style = normalize_report_style(style)
     style_info = style_meta(normalized_style)
     natal_kin = date_to_kin(birth_date)
@@ -1010,8 +1001,8 @@ def build_yearly_report(birth_date, year, style="beginner"):
         "action_guide": action_guide,
         "delivery_layers": build_yearly_delivery_layers(natal_destiny, annual_destiny, interaction, normalized_style),
     }
-    if normalized_style == "professional":
-        report["professional_analysis"] = build_professional_yearly_analysis(
+    if normalized_style == "deep":
+        report["deep_analysis"] = build_professional_yearly_analysis(
             natal_destiny,
             annual_destiny,
             interaction,
@@ -1031,10 +1022,10 @@ def format_yearly_report(report):
     if report["birth_date"]:
         lines.append(f"\n  出生日期: {report['birth_date']}")
     lines.append(f"  年度主轴: {report['title']}")
-    lines.append(f"  输出风格: {report.get('style_label', '小白版')}")
+    lines.append(f"  输出风格: {report.get('style_label', '基础版')}")
     lines.append(f"  本命参考: Kin {report['natal_kin']} {natal['main']['tone_name']}{natal['main']['seal_name']}")
     lines.append(f"  年度与本命关系: {interaction['color_relation']} | {interaction['tone_relation']}")
-    lines.append(f"  风格说明: {report.get('style_description', STYLE_CONFIG['beginner']['description'])}")
+    lines.append(f"  风格说明: {report.get('style_description', STYLE_CONFIG['basic']['description'])}")
 
     lines.append(f"\n{'─' * 50}")
     lines.append("  年度摘要")
@@ -1044,8 +1035,8 @@ def format_yearly_report(report):
     lines.append(f"- 课题: {report['summary']['challenge']}")
     lines.append(f"- 指引: {report['summary']['guidance']}")
 
-    if report.get("professional_analysis"):
-        analysis = report["professional_analysis"]
+    if report.get("deep_analysis"):
+        analysis = report["deep_analysis"]
         lines.append(f"\n{'─' * 50}")
         lines.append("  年度结构")
         lines.append(f"{'─' * 50}")
@@ -1079,8 +1070,8 @@ def format_yearly_report(report):
     for item in report["action_guide"]["practice"]:
         lines.append(f"  {item}")
 
-    if report.get("professional_analysis"):
-        strategy = report["professional_analysis"]["strategy_matrix"]
+    if report.get("deep_analysis"):
+        strategy = report["deep_analysis"]["strategy_matrix"]
         lines.append(f"\n{'─' * 50}")
         lines.append("  策略配置")
         lines.append(f"{'─' * 50}")
@@ -1098,7 +1089,7 @@ def format_yearly_report(report):
     return "\n".join(lines) + "\n"
 
 
-def _build_compatibility_report_from_result(result, style="beginner"):
+def _build_compatibility_report_from_result(result, style="basic"):
     normalized_style = normalize_report_style(style)
     style_info = style_meta(normalized_style)
     person_a = result["person_a"]
@@ -1146,12 +1137,12 @@ def _build_compatibility_report_from_result(result, style="beginner"):
         "action_guide": action_guide,
         "delivery_layers": build_compatibility_delivery_layers(result, normalized_style),
     }
-    if normalized_style == "professional":
-        report["professional_analysis"] = build_professional_compatibility_analysis(result)
+    if normalized_style == "deep":
+        report["deep_analysis"] = build_professional_compatibility_analysis(result)
     return report
 
 
-def build_compatibility_report(kin_a, kin_b, style="beginner"):
+def build_compatibility_report(kin_a, kin_b, style="basic"):
     return _build_compatibility_report_from_result(calc_relationship(kin_a, kin_b), style=style)
 
 
@@ -1164,8 +1155,8 @@ def format_compatibility_report(report):
     lines.append("=" * 50)
     lines.append(f"  {report['scene_label']}")
     lines.append("=" * 50)
-    lines.append(f"\n  输出风格: {report.get('style_label', '小白版')}")
-    lines.append(f"  风格说明: {report.get('style_description', STYLE_CONFIG['beginner']['description'])}")
+    lines.append(f"\n  输出风格: {report.get('style_label', '基础版')}")
+    lines.append(f"  风格说明: {report.get('style_description', STYLE_CONFIG['basic']['description'])}")
     lines.append(f"\n  A: Kin {report['kin_a']} {person_a['tone_name']}{person_a['tone']}·{person_a['seal_name']}")
     lines.append(f"  B: Kin {report['kin_b']} {person_b['tone_name']}{person_b['tone']}·{person_b['seal_name']}")
     lines.append(f"  合盘: {report['title']}")
@@ -1182,8 +1173,8 @@ def format_compatibility_report(report):
     lines.append(f"- 课题: {report['summary']['challenge']}")
     lines.append(f"- 指引: {report['summary']['guidance']}")
 
-    if report.get("professional_analysis"):
-        analysis = report["professional_analysis"]
+    if report.get("deep_analysis"):
+        analysis = report["deep_analysis"]
         lines.append(f"\n{'─' * 50}")
         lines.append("  关系结构")
         lines.append(f"{'─' * 50}")
@@ -1218,8 +1209,8 @@ def format_compatibility_report(report):
     for item in report["action_guide"]["growth"]:
         lines.append(f"  {item}")
 
-    if report.get("professional_analysis"):
-        model = report["professional_analysis"]["collaboration_model"]
+    if report.get("deep_analysis"):
+        model = report["deep_analysis"]["collaboration_model"]
         lines.append(f"\n{'─' * 50}")
         lines.append("  协作模型")
         lines.append(f"{'─' * 50}")
@@ -1248,7 +1239,7 @@ def explain_position(role, detail):
     return " ".join(parts)
 
 
-def build_personal_report(destiny, birth_date=None, style="beginner"):
+def build_personal_report(destiny, birth_date=None, style="basic"):
     normalized_style = normalize_report_style(style)
     style_info = style_meta(normalized_style)
     summary = stylize_summary(summarize_destiny(destiny), normalized_style)
@@ -1277,8 +1268,8 @@ def build_personal_report(destiny, birth_date=None, style="beginner"):
         "action_guide": actions,
         "delivery_layers": build_personal_delivery_layers(destiny, normalized_style),
     }
-    if normalized_style == "professional":
-        report["professional_analysis"] = build_professional_personal_analysis(destiny)
+    if normalized_style == "deep":
+        report["deep_analysis"] = build_professional_personal_analysis(destiny)
     return report
 
 
@@ -1290,8 +1281,8 @@ def format_personal_report(report):
     if report["birth_date"]:
         lines.append(f"\n  出生日期: {report['birth_date']}")
     lines.append(f"  核心印记: {report['title']}")
-    lines.append(f"  输出风格: {report.get('style_label', '小白版')}")
-    lines.append(f"  风格说明: {report.get('style_description', STYLE_CONFIG['beginner']['description'])}")
+    lines.append(f"  输出风格: {report.get('style_label', '基础版')}")
+    lines.append(f"  风格说明: {report.get('style_description', STYLE_CONFIG['basic']['description'])}")
 
     lines.append(f"\n{'─' * 50}")
     lines.append("  核心摘要")
@@ -1302,8 +1293,8 @@ def format_personal_report(report):
     lines.append(f"- 深层推动: {report['summary']['hidden_driver']}")
     lines.append(f"- 引导方向: {report['summary']['guidance']}")
 
-    if report.get("professional_analysis"):
-        analysis = report["professional_analysis"]
+    if report.get("deep_analysis"):
+        analysis = report["deep_analysis"]
         lines.append(f"\n{'─' * 50}")
         lines.append("  结构分析")
         lines.append(f"{'─' * 50}")
@@ -1351,10 +1342,10 @@ def format_personal_report(report):
     for item in report["action_guide"]["growth"]:
         lines.append(f"  {item}")
 
-    if report.get("professional_analysis"):
-        matrix = report["professional_analysis"]["application_matrix"]
+    if report.get("deep_analysis"):
+        matrix = report["deep_analysis"]["application_matrix"]
         lines.append(f"\n{'─' * 50}")
-        lines.append("  专业应用")
+        lines.append("  深度应用")
         lines.append(f"{'─' * 50}")
         lines.append("- 事业")
         for item in matrix["career"]:
