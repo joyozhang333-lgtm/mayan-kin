@@ -667,6 +667,56 @@ def build_professional_personal_analysis(destiny):
     }
 
 
+def build_professional_compatibility_analysis(result):
+    person_a = result["person_a"]["main"]
+    person_b = result["person_b"]["main"]
+    combined = result["combined_destiny"]["main"]
+
+    return {
+        "relationship_structure": [
+            f"A 以 {person_a['tone_name']}{person_a['seal_name']} 运作，B 以 {person_b['tone_name']}{person_b['seal_name']} 运作，说明双方天然带入关系的不是同一种驱动力，合作前提不是相同，而是是否能被正确翻译。",
+            f"合盘主轴落在 {combined['tone_name']}{combined['seal_name']}，所以这段关系真正要服务的主题是 {combined['keywords']}，不能只停留在感觉投射，还要看这条主轴能否落地。",
+            f"颜色关系显示为 {result['color_relation']}，这决定了你们更像互补型、同频型还是彼此拉扯型搭档；颜色关系往往比单点感觉更能解释长期稳定度。",
+            f"调性关系是 {result['tone_relation']}，这通常不只是沟通快慢问题，而是双方在推进、承接、反馈和修正上的节奏模型是否匹配。",
+        ],
+        "tension_matrix": [
+            {
+                "label": "主要张力源",
+                "detail": "合盘里最常见的冲突，不是因为谁更坏，而是双方默认的表达方式、承压方式和决策顺序不同。",
+            },
+            {
+                "label": "结构风险",
+                "detail": f"如果 {result['tone_relation']} 长期没有被翻译成明确节奏，关系会从互相照见滑向互相放大卡点。",
+            },
+            {
+                "label": "优势条件",
+                "detail": f"当 {result['color_relation']} 被高质量使用时，双方其实可以形成天然分工：一方负责推动，一方负责校准，或者一方负责扩张，一方负责稳定。",
+            },
+            {
+                "label": "关系边界",
+                "detail": f"合盘 {combined['seal_name']} 的成长要求不是无限包容，而是先对齐目标、责任、边界和节奏，再谈情感浓度。",
+            },
+        ],
+        "collaboration_model": {
+            "division": [
+                "先明确谁更适合发起、谁更适合承接、谁更适合校准，而不是默认两个人必须用同一种方式做事。",
+                f"如果 A 的强项更靠近 {person_a['keywords']}，B 的强项更靠近 {person_b['keywords']}，分工就应该顺着差异设计，而不是压成一致。",
+                f"合盘 {combined['seal_name']} 更像在提醒：真正可持续的关系，一定有明确角色，不靠长期猜测维持。",
+            ],
+            "communication": [
+                "沟通上要优先处理节奏错位，而不是先争对错；很多冲突本质上是推进顺序不同。",
+                "把情绪化表达翻译成任务、期待、边界和可执行动作，关系才会从消耗型进入协作型。",
+                "每次卡住时先问：我们现在卡的是目标不一致，还是表达方式不兼容，还是责任没有落地。",
+            ],
+            "decision": [
+                "是否继续投入，不只看感觉深不深，还要看这段关系能不能提升双方的稳定度、清晰度和执行质量。",
+                "如果一段关系长期只剩下拉扯感、猜测感和代偿感，就算有合盘吸引，也不代表它适合长期配置。",
+                "专业判断的关键不是这段关系有没有缘分，而是它有没有结构条件支撑长期成长。",
+            ],
+        },
+    }
+
+
 def build_personal_delivery_layers(destiny, style="beginner"):
     main = destiny["main"]
     support = destiny["support"]
@@ -988,7 +1038,7 @@ def _build_compatibility_report_from_result(result, style="beginner"):
             "这段关系最好的版本，是双方都更清楚自己，也更能尊重对方。",
         ],
     }, normalized_style)
-    return {
+    report = {
         "scene": "compatibility",
         "scene_label": "双人合盘说明书",
         "style": normalized_style,
@@ -1007,6 +1057,9 @@ def _build_compatibility_report_from_result(result, style="beginner"):
         "action_guide": action_guide,
         "delivery_layers": build_compatibility_delivery_layers(result, normalized_style),
     }
+    if normalized_style == "professional":
+        report["professional_analysis"] = build_professional_compatibility_analysis(result)
+    return report
 
 
 def build_compatibility_report(kin_a, kin_b, style="beginner"):
@@ -1040,6 +1093,20 @@ def format_compatibility_report(report):
     lines.append(f"- 课题: {report['summary']['challenge']}")
     lines.append(f"- 指引: {report['summary']['guidance']}")
 
+    if report.get("professional_analysis"):
+        analysis = report["professional_analysis"]
+        lines.append(f"\n{'─' * 50}")
+        lines.append("  关系结构")
+        lines.append(f"{'─' * 50}")
+        for item in analysis["relationship_structure"]:
+            lines.append(f"- {item}")
+
+        lines.append(f"\n{'─' * 50}")
+        lines.append("  张力来源")
+        lines.append(f"{'─' * 50}")
+        for item in analysis["tension_matrix"]:
+            lines.append(f"- {item['label']}: {item['detail']}")
+
     lines.append(f"\n{'─' * 50}")
     lines.append("  合盘与成长")
     lines.append(f"{'─' * 50}")
@@ -1061,6 +1128,21 @@ def format_compatibility_report(report):
     lines.append("- 成长")
     for item in report["action_guide"]["growth"]:
         lines.append(f"  {item}")
+
+    if report.get("professional_analysis"):
+        model = report["professional_analysis"]["collaboration_model"]
+        lines.append(f"\n{'─' * 50}")
+        lines.append("  协作模型")
+        lines.append(f"{'─' * 50}")
+        lines.append("- 分工")
+        for item in model["division"]:
+            lines.append(f"  {item}")
+        lines.append("- 沟通")
+        for item in model["communication"]:
+            lines.append(f"  {item}")
+        lines.append("- 决策")
+        for item in model["decision"]:
+            lines.append(f"  {item}")
 
     format_delivery_layers(lines, report["delivery_layers"])
     return "\n".join(lines) + "\n"

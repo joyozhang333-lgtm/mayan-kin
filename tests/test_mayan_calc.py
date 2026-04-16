@@ -279,6 +279,17 @@ class MayanCalcTests(unittest.TestCase):
         self.assertIn("内容产品视角", rendered)
         self.assertIn("AI 对话视角", rendered)
 
+    def test_professional_compatibility_report_contains_deeper_sections(self):
+        report = mayan_calc.build_compatibility_report(216, 67, style="professional")
+        self.assertEqual(report["style"], "professional")
+        self.assertIn("professional_analysis", report)
+        self.assertEqual(len(report["professional_analysis"]["relationship_structure"]), 4)
+        self.assertEqual(len(report["professional_analysis"]["tension_matrix"]), 4)
+        rendered = mayan_calc.format_compatibility_report(report)
+        self.assertIn("关系结构", rendered)
+        self.assertIn("张力来源", rendered)
+        self.assertIn("协作模型", rendered)
+
 
 if __name__ == "__main__":
     unittest.main()
