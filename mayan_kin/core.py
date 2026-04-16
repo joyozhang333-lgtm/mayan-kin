@@ -717,6 +717,59 @@ def build_professional_compatibility_analysis(result):
     }
 
 
+def build_professional_yearly_analysis(natal_destiny, annual_destiny, interaction, year):
+    natal = natal_destiny["main"]
+    annual = annual_destiny["main"]
+    support = annual_destiny["support"]
+    challenge = annual_destiny["challenge"]
+    guide = annual_destiny["guide"]
+
+    return {
+        "annual_structure": [
+            f"{year} 年主轴由 {annual['tone_name']}{annual['seal_name']} 构成，意味着年度议题首先落在 {annual['keywords']}，这一年更看重结构化成长，而不是情绪式冲刺。",
+            f"年度资源位是 {annual_destiny['support']['tone_name']}{support['seal_name']}，说明真正能帮你跑稳这一年的，不只是能力，而是视野、系统感和支撑结构能否跟上。",
+            f"年度挑战位落在 {annual_destiny['challenge']['tone_name']}{challenge['seal_name']}，所以风险不是单点失误，而是理想化、沉浸感或节奏失真会不会让你偏离主轴。",
+            f"本命 {natal['tone_name']}{natal['seal_name']} 与流年 {annual['tone_name']}{annual['seal_name']} 的互动表现为 {interaction['color_relation']} / {interaction['tone_relation']}，这决定了你今年该顺势放大，还是先做调频和整理。",
+            f"引导位走向 {annual_destiny['guide']['tone_name']}{guide['seal_name']}，说明这一年的正确打开方式不是盲目加码，而是让年度主题进入可持续配置。",
+        ],
+        "risk_windows": [
+            {
+                "label": "年度主风险",
+                "detail": f"如果 {challenge['seal_name']} 被低水平触发，容易把年度课题活成理想化判断、拖延确认、或在感觉里绕圈却迟迟不落地。",
+            },
+            {
+                "label": "节奏风险",
+                "detail": f"{interaction['tone_relation']} 提示今年很怕节奏失配。方向不一定错，但推进顺序和承接方式如果错了，摩擦会显著放大。",
+            },
+            {
+                "label": "资源风险",
+                "detail": f"如果没有先调用 {support['seal_name']} 的支持系统，你会更容易把年度压力误判为自己能力不足，而不是系统没搭好。",
+            },
+            {
+                "label": "年度机会",
+                "detail": f"当 {annual['seal_name']} 的主题被高质量落地时，这一年很适合做聚焦、筛选、搭结构、养长期项目，而不是到处分散试错。",
+            },
+        ],
+        "strategy_matrix": {
+            "focus": [
+                f"年度配置上优先服务 {annual['keywords']}，先决定今年真正值得种下的 1 到 3 个主题，再分配资源。",
+                f"涉及扩张、转型或重大投入时，先用 {support['seal_name']} 的方式做全局视角检查，而不是只看短期情绪反馈。",
+                f"如果本命 {natal['seal_name']} 的惯性还在主导你，今年要特别注意：不能只凭熟悉的做法推进，要按年度主轴重新校准。",
+            ],
+            "watch": [
+                f"不要把 {challenge['seal_name']} 式的不确定感当成灵感本身；先验证，再投入。",
+                "不要同时维护过多目标。对你来说，年度质量通常来自聚焦，而不是并行项目数量。",
+                "不要在系统还没搭稳前就急着追结果，不然很容易出现前期看起来有感觉，后期却全靠补救的情况。",
+            ],
+            "timing": [
+                "更适合先做盘点、筛选、结构搭建，再进入放量或公开表达阶段。",
+                "季度复盘要围绕：我现在是在播种、培育、修剪，还是收割，而不是只看忙不忙。",
+                "每次卡顿时先判断：这是方向需要调整，还是节奏需要调整，还是支持系统没有跟上。",
+            ],
+        },
+    }
+
+
 def build_personal_delivery_layers(destiny, style="beginner"):
     main = destiny["main"]
     support = destiny["support"]
@@ -957,6 +1010,13 @@ def build_yearly_report(birth_date, year, style="beginner"):
         "action_guide": action_guide,
         "delivery_layers": build_yearly_delivery_layers(natal_destiny, annual_destiny, interaction, normalized_style),
     }
+    if normalized_style == "professional":
+        report["professional_analysis"] = build_professional_yearly_analysis(
+            natal_destiny,
+            annual_destiny,
+            interaction,
+            year,
+        )
     return report
 
 
@@ -984,6 +1044,20 @@ def format_yearly_report(report):
     lines.append(f"- 课题: {report['summary']['challenge']}")
     lines.append(f"- 指引: {report['summary']['guidance']}")
 
+    if report.get("professional_analysis"):
+        analysis = report["professional_analysis"]
+        lines.append(f"\n{'─' * 50}")
+        lines.append("  年度结构")
+        lines.append(f"{'─' * 50}")
+        for item in analysis["annual_structure"]:
+            lines.append(f"- {item}")
+
+        lines.append(f"\n{'─' * 50}")
+        lines.append("  风险窗口")
+        lines.append(f"{'─' * 50}")
+        for item in analysis["risk_windows"]:
+            lines.append(f"- {item['label']}: {item['detail']}")
+
     lines.append(f"\n{'─' * 50}")
     lines.append("  年度五大位置")
     lines.append(f"{'─' * 50}")
@@ -1004,6 +1078,21 @@ def format_yearly_report(report):
     lines.append("- 练习")
     for item in report["action_guide"]["practice"]:
         lines.append(f"  {item}")
+
+    if report.get("professional_analysis"):
+        strategy = report["professional_analysis"]["strategy_matrix"]
+        lines.append(f"\n{'─' * 50}")
+        lines.append("  策略配置")
+        lines.append(f"{'─' * 50}")
+        lines.append("- 聚焦")
+        for item in strategy["focus"]:
+            lines.append(f"  {item}")
+        lines.append("- 盯防")
+        for item in strategy["watch"]:
+            lines.append(f"  {item}")
+        lines.append("- 节奏")
+        for item in strategy["timing"]:
+            lines.append(f"  {item}")
 
     format_delivery_layers(lines, report["delivery_layers"])
     return "\n".join(lines) + "\n"
