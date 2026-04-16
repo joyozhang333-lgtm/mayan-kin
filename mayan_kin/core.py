@@ -162,7 +162,7 @@ def stylize_text(text, style, field="general"):
             "action": "行动建议：",
         }
         prefix = deep_prefix.get(field)
-        return f"{prefix}{text}"
+        return f"{prefix}{text}" if prefix else text
     return text
 
 
@@ -653,6 +653,23 @@ def build_professional_personal_analysis(destiny):
                 f"个人发展上，要把 {main['seal_name']} 的敏感度训练成方法，而不是停留在体验层。",
                 "建议长期保留一套自己的堵点诊断框架，用来区分信息堵、情绪堵、边界堵、责任堵和节奏堵。",
                 f"当你能稳定调用 {support['seal_name']} 的资源、承接 {challenge['seal_name']} 的波动，并兑现 {occult['seal_name']} 的判断力时，这张盘会进入高水平发挥。",
+            ],
+        },
+        "situational_insight": {
+            "current_block": [
+                f"你现在最可能反复卡住的，不是看不见问题，而是明明已经感受到 {main['seal_name']} 式失真，却还没有把它足够快地推进成决定。",
+                f"当 {support['seal_name']} 想维持关系质量、而 {challenge['seal_name']} 又把变化推到你面前时，你很容易卡在“我再看一下”而不是“我现在就表态”。",
+                f"{occult['seal_name']} 的课题说明，你真正难的不是理解别人，而是理解完之后，有没有及时站回自己的判断。",
+            ],
+            "low_frequency": [
+                "低频时，你会把敏感活成长期承受，把觉察活成迟疑，把理解活成代偿。",
+                "你可能会先处理气氛、照顾关系、维持流动，最后才轮到处理自己真正的边界和选择。",
+                "表面上看像是在忍，实质上是在延迟那一个早该做出的判断。",
+            ],
+            "minimum_move": [
+                "现在最小但最有效的动作，不是想清全部，而是把一个已经感受到的不对劲，翻译成一句明确的话或一个明确边界。",
+                "你要先从“我知道哪里不对”走到“所以我现在准备怎么处理”，这一步比继续分析更关键。",
+                "对你这张盘来说，真正的升级通常不是更努力，而是更早识别、更早表达、更早止损、更早投入对的地方。",
             ],
         },
     }
@@ -1355,6 +1372,19 @@ def format_personal_report(report):
             lines.append(f"  {item}")
         lines.append("- 发展")
         for item in matrix["development"]:
+            lines.append(f"  {item}")
+        insight = report["deep_analysis"]["situational_insight"]
+        lines.append(f"\n{'─' * 50}")
+        lines.append("  情境直读")
+        lines.append(f"{'─' * 50}")
+        lines.append("- 你现在最可能的卡点")
+        for item in insight["current_block"]:
+            lines.append(f"  {item}")
+        lines.append("- 低频表现")
+        for item in insight["low_frequency"]:
+            lines.append(f"  {item}")
+        lines.append("- 最小动作")
+        for item in insight["minimum_move"]:
             lines.append(f"  {item}")
     format_delivery_layers(lines, report["delivery_layers"])
     return "\n".join(lines) + "\n"

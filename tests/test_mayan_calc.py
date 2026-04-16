@@ -106,6 +106,7 @@ class MayanCalcTests(unittest.TestCase):
         self.assertIn("deep_analysis", deep)
         self.assertEqual(len(deep["deep_analysis"]["structural_analysis"]), 5)
         self.assertEqual(len(deep["deep_analysis"]["risk_matrix"]), 4)
+        self.assertEqual(len(deep["deep_analysis"]["situational_insight"]["current_block"]), 3)
 
     def test_cli_report_output_is_rendered(self):
         result = subprocess.run(
@@ -141,6 +142,7 @@ class MayanCalcTests(unittest.TestCase):
         self.assertIn("结构分析", result.stdout)
         self.assertIn("风险矩阵", result.stdout)
         self.assertIn("深度应用", result.stdout)
+        self.assertIn("情境直读", result.stdout)
 
     def test_cli_yearly_report_output_is_rendered(self):
         result = subprocess.run(
