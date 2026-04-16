@@ -103,7 +103,10 @@ class MayanCalcTests(unittest.TestCase):
         self.assertEqual(professional["style_label"], "专业版")
         self.assertNotEqual(beginner["summary"]["core_theme"], consulting["summary"]["core_theme"])
         self.assertTrue(consulting["summary"]["core_theme"].startswith("咨询提示："))
-        self.assertTrue(professional["summary"]["core_theme"].startswith("结构判断："))
+        self.assertIn("磁性红月的主轴", professional["summary"]["core_theme"])
+        self.assertIn("professional_analysis", professional)
+        self.assertEqual(len(professional["professional_analysis"]["structural_analysis"]), 5)
+        self.assertEqual(len(professional["professional_analysis"]["risk_matrix"]), 4)
 
     def test_cli_report_output_is_rendered(self):
         result = subprocess.run(
@@ -127,6 +130,18 @@ class MayanCalcTests(unittest.TestCase):
         )
         self.assertIn("输出风格: 咨询版", result.stdout)
         self.assertIn("咨询提示：", result.stdout)
+
+    def test_cli_professional_style_report_contains_deeper_sections(self):
+        result = subprocess.run(
+            [sys.executable, str(SCRIPT), "1995-03-03", "--report", "--style", "professional"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        self.assertIn("输出风格: 专业版", result.stdout)
+        self.assertIn("结构分析", result.stdout)
+        self.assertIn("风险矩阵", result.stdout)
+        self.assertIn("专业应用", result.stdout)
 
     def test_cli_yearly_report_output_is_rendered(self):
         result = subprocess.run(

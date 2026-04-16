@@ -167,18 +167,12 @@ def stylize_text(text, style, field="general"):
         prefix = consulting_prefix.get(field, "咨询视角：")
         return f"{prefix}{text}"
     professional_prefix = {
-        "summary": "结构判断：",
-        "focus": "解释层重点：",
         "questions": "分析问题：",
         "decision_checks": "校验点：",
-        "angles": "选题入口：",
-        "formats": "输出形式：",
-        "instructions": "调用说明：",
         "prompts": "提示词模板：",
-        "action": "方法建议：",
     }
-    prefix = professional_prefix.get(field, "专业表述：")
-    return f"{prefix}{text}"
+    prefix = professional_prefix.get(field)
+    return f"{prefix}{text}" if prefix else text
 
 
 def stylize_sequence(items, style, field):
@@ -617,6 +611,59 @@ def build_action_guide(destiny):
             "每次卡住时，先问这是信息堵、情绪堵、边界堵、责任堵还是节奏堵。",
             "把感受推进成选择，把觉察推进成行动，而不是长期停留在“我知道不对”。",
         ],
+    }
+
+
+def build_professional_personal_analysis(destiny):
+    main = destiny["main"]
+    support = destiny["support"]
+    challenge = destiny["challenge"]
+    occult = destiny["occult"]
+    guide = destiny["guide"]
+
+    return {
+        "structural_analysis": [
+            f"主轴由 {main['tone_name']}{main['seal_name']} 构成，说明核心驱动力首先落在 {main['keywords']}，不是外放征服型，而是先感知、再校准、再推进。",
+            f"资源位是 {support['tone_name']}{support['seal_name']}，意味着你的稳定输出依赖关系质量、信任密度与合作氛围；资源系统一旦失真，主轴发挥就会明显下滑。",
+            f"挑战位是 {challenge['tone_name']}{challenge['seal_name']}，所以真正的压力不是“事情很多”，而是变化、重组、能量波动会不会打乱你的中心。",
+            f"隐藏推动 {occult['tone_name']}{occult['seal_name']} 指向 {occult['keywords']}，说明你最终不是停留在感受层，而是会被推向判断、选择与影响力。",
+            f"引导位回到 {guide['tone_name']}{guide['seal_name']}，这通常表示成长终点不是换人格，而是把原有天赋活得更稳定、更清楚、更可持续。",
+        ],
+        "risk_matrix": [
+            {
+                "label": "高频优势",
+                "detail": f"你最容易在需要 {main['keywords']}、关系理解与系统调频的场景中发挥价值，尤其适合处理混乱、堵塞、失真与关系张力。",
+            },
+            {
+                "label": "主要风险",
+                "detail": f"当 {challenge['seal_name']} 被低水平触发时，容易表现为过度承压、阶段性推翻重来、在情绪或变化里先失去节奏再谈判断。",
+            },
+            {
+                "label": "资源条件",
+                "detail": f"{support['seal_name']} 提醒你：专业发挥并不只看能力，还看环境是否允许真诚沟通、角色清晰与相互信任。",
+            },
+            {
+                "label": "升级方向",
+                "detail": f"{occult['seal_name']} 对应的成长不是“更能忍”，而是把感受转换成边界、把直觉转换成选择、把经验转换成影响力。",
+            },
+        ],
+        "application_matrix": {
+            "career": [
+                f"职业定位上，优先选择需要 {main['keywords']}、洞察、梳理、咨询、陪伴、内容转译或复杂关系协同的工作。",
+                f"管理与合作上，要先建 {support['seal_name']} 型支持系统，再谈高压推进；没有信任基础时，硬推只会放大 {challenge['seal_name']} 的成本。",
+                f"决策上要避免把所有变化都当成机会。先判断这次变化是在升级结构，还是只是在重复消耗。",
+            ],
+            "relationship": [
+                "关系层面不能只看感觉强不强，还要看这段关系是否真的提高了你的稳定度、清晰度和生命流动感。",
+                f"当 {challenge['seal_name']} 型冲击出现时，第一动作应该是重建边界和节奏，而不是继续用理解去覆盖问题。",
+                f"{occult['seal_name']} 的课题要求你在关系里长出选择权，不再让“我理解你”自动滑向“那我继续承担”。",
+            ],
+            "development": [
+                f"个人发展上，要把 {main['seal_name']} 的敏感度训练成方法，而不是停留在体验层。",
+                "建议长期保留一套自己的堵点诊断框架，用来区分信息堵、情绪堵、边界堵、责任堵和节奏堵。",
+                f"当你能稳定调用 {support['seal_name']} 的资源、承接 {challenge['seal_name']} 的波动，并兑现 {occult['seal_name']} 的判断力时，这张盘会进入高水平发挥。",
+            ],
+        },
     }
 
 
@@ -1059,6 +1106,8 @@ def build_personal_report(destiny, birth_date=None, style="beginner"):
         "action_guide": actions,
         "delivery_layers": build_personal_delivery_layers(destiny, normalized_style),
     }
+    if normalized_style == "professional":
+        report["professional_analysis"] = build_professional_personal_analysis(destiny)
     return report
 
 
@@ -1081,6 +1130,20 @@ def format_personal_report(report):
     lines.append(f"- 功课: {report['summary']['challenge']}")
     lines.append(f"- 深层推动: {report['summary']['hidden_driver']}")
     lines.append(f"- 引导方向: {report['summary']['guidance']}")
+
+    if report.get("professional_analysis"):
+        analysis = report["professional_analysis"]
+        lines.append(f"\n{'─' * 50}")
+        lines.append("  结构分析")
+        lines.append(f"{'─' * 50}")
+        for item in analysis["structural_analysis"]:
+            lines.append(f"- {item}")
+
+        lines.append(f"\n{'─' * 50}")
+        lines.append("  风险矩阵")
+        lines.append(f"{'─' * 50}")
+        for item in analysis["risk_matrix"]:
+            lines.append(f"- {item['label']}: {item['detail']}")
 
     lines.append(f"\n{'─' * 50}")
     lines.append("  五大位置解释")
@@ -1116,6 +1179,21 @@ def format_personal_report(report):
     lines.append("- 成长")
     for item in report["action_guide"]["growth"]:
         lines.append(f"  {item}")
+
+    if report.get("professional_analysis"):
+        matrix = report["professional_analysis"]["application_matrix"]
+        lines.append(f"\n{'─' * 50}")
+        lines.append("  专业应用")
+        lines.append(f"{'─' * 50}")
+        lines.append("- 事业")
+        for item in matrix["career"]:
+            lines.append(f"  {item}")
+        lines.append("- 关系")
+        for item in matrix["relationship"]:
+            lines.append(f"  {item}")
+        lines.append("- 发展")
+        for item in matrix["development"]:
+            lines.append(f"  {item}")
     format_delivery_layers(lines, report["delivery_layers"])
     return "\n".join(lines) + "\n"
 
