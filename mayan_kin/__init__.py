@@ -22,8 +22,10 @@ from .core import (
 )
 from .knowledge import (
     KNOWLEDGE_INDEX_PATH,
+    build_auto_plan,
     load_knowledge_index,
     recommend_knowledge_cards,
+    recommend_report_style,
     route_query,
 )
 
@@ -47,7 +49,9 @@ __all__ = [
     "parse_iso_date",
     "serialize_destiny",
     "KNOWLEDGE_INDEX_PATH",
+    "build_auto_plan",
     "load_knowledge_index",
     "recommend_knowledge_cards",
+    "recommend_report_style",
     "route_query",
 ]

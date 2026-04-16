@@ -272,7 +272,14 @@ python3 scripts/mayan_calc.py --contract
 python3 scripts/mayan_calc.py --route-query "我想看2026流年和事业方向"
 ```
 
-### 6. 切换报告风格
+### 6. 自动路由并决定报告风格
+
+```bash
+python3 scripts/mayan_calc.py --auto-answer "我想看2026流年和事业方向"
+python3 scripts/mayan_calc.py 1995-03-03 --auto-answer "我想看2026流年和事业方向" --yearly 2026
+```
+
+### 7. 切换报告风格
 
 ```bash
 python3 scripts/mayan_calc.py 1995-03-03 --report --style beginner
@@ -280,14 +287,14 @@ python3 scripts/mayan_calc.py 1995-03-03 --report --style consulting
 python3 scripts/mayan_calc.py 1995-03-03 --report --style professional
 ```
 
-### 7. 查看流年或合盘
+### 8. 查看流年或合盘
 
 ```bash
 python3 scripts/mayan_calc.py 1990-03-15 --yearly 2026
 python3 scripts/mayan_calc.py 1990-03-15 --compatibility 1992-07-20
 ```
 
-### 8. 跑测试
+### 9. 跑测试
 
 ```bash
 python3 -m unittest discover -s tests -p 'test_*.py'
@@ -310,9 +317,10 @@ python3 scripts/mayan_calc.py [birthday] [options]
 - `--json` 输出机器可读结果，适合前端、数据库和二次处理
 - `--report` 输出指导型个人说明书，适合人阅读
 - `--style` 控制报告风格，可选 `beginner / consulting / professional`
+- `--auto-answer` 根据自然语言问题自动选知识卡和风格；提供生日时直接出报告
 - `--route-query` 根据自然语言问题推荐知识卡，适合 agent / runtime 做最小加载
 - `--contract` 输出 CLI / JSON 契约说明，不需要 `birthday`
-- 输出优先级固定为 `--contract > --route-query > --report > --json > 默认文本`
+- 输出优先级固定为 `--contract > --auto-answer > --route-query > --report > --json > 默认文本`
 
 ### Documentation Entry Points
 
@@ -408,7 +416,20 @@ python3 scripts/mayan_calc.py --route-query "我想看合盘和关系边界"
 - 调试 `knowledge-index.json` 的匹配效果
 - 判断当前问题最应该读哪几张卡
 
-### 示例七：咨询版报告
+### 示例七：自动选卡 + 自动选风格
+
+输入：
+
+```bash
+python3 scripts/mayan_calc.py 1995-03-03 --auto-answer "我想看2026流年和事业方向" --yearly 2026
+```
+
+适合：
+- 让系统先判断这是哪类问题
+- 自动决定更适合 `beginner / consulting / professional` 哪种风格
+- 先打印决策结果，再直接输出对应报告
+
+### 示例八：咨询版报告
 
 输入：
 
@@ -421,7 +442,7 @@ python3 scripts/mayan_calc.py 1995-03-03 --report --style consulting
 - 更快看见卡点、判断点和下一步动作
 - 把同一份盘切换成更偏对话与行动的输出
 
-### 示例八：接口契约
+### 示例九：接口契约
 
 输入：
 

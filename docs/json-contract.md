@@ -23,6 +23,19 @@
 
 `--route-query` 返回知识路由结果，帮助 agent / runtime 根据自然语言问题先选知识卡，再决定读取哪些正文。
 
+### `--auto-answer`
+
+`--auto-answer` 先返回自动规划结果：
+
+- `query`
+- `index_version`
+- `recommended_style`
+- `recommended_cards`
+- `card_ids`
+- `reason`
+
+如果同时提供了 `birthday`，它会在自动规划 JSON 之后继续输出对应风格的报告文本。
+
 ## `--json` Top-Level Shape
 
 ```json
@@ -82,4 +95,5 @@
 - 顶层键是该版本最重要的稳定边界。
 - 如果未来要破坏性改动 JSON 结构，应在新版本里显式说明。
 - `--contract` 会优先于其他输出模式，因此适合作为接口验收入口。
+- `--auto-answer` 的规划部分以 `recommended_style / recommended_cards / card_ids / reason` 为稳定边界。
 - `--route-query` 的返回体以 `query / index_version / recommended_cards` 为核心稳定边界。

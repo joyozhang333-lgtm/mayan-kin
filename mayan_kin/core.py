@@ -3,7 +3,13 @@
 
 from datetime import date
 
-from .knowledge import load_knowledge_index, recommend_knowledge_cards, route_query
+from .knowledge import (
+    build_auto_plan,
+    load_knowledge_index,
+    recommend_knowledge_cards,
+    recommend_report_style,
+    route_query,
+)
 
 
 SEALS = [

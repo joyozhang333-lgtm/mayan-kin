@@ -187,6 +187,42 @@ class MayanCalcTests(unittest.TestCase):
         ids = [card["id"] for card in payload["recommended_cards"]]
         self.assertIn("compatibility", ids)
 
+    def test_auto_plan_recommends_consulting_for_yearly_direction_query(self):
+        plan = mayan_calc.build_auto_plan("我想看2026流年和事业方向")
+        self.assertEqual(plan["recommended_style"], "consulting")
+        self.assertIn("yearly", plan["card_ids"])
+
+    def test_cli_auto_answer_without_birthday_is_parseable(self):
+        result = subprocess.run(
+            [sys.executable, str(SCRIPT), "--auto-answer", "我完全不懂玛雅天赋，先给我讲清楚"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        payload = json.loads(result.stdout)
+        self.assertEqual(payload["recommended_style"], "beginner")
+        self.assertIn("five_destiny", payload["card_ids"])
+
+    def test_cli_auto_answer_with_birthday_renders_plan_and_report(self):
+        result = subprocess.run(
+            [
+                sys.executable,
+                str(SCRIPT),
+                "1995-03-03",
+                "--auto-answer",
+                "我想看2026流年和事业方向",
+                "--yearly",
+                "2026",
+            ],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        self.assertIn("\"recommended_style\": \"consulting\"", result.stdout)
+        self.assertIn("玛雅天赋个人说明书", result.stdout)
+        self.assertIn("2026 年流年说明书", result.stdout)
+        self.assertIn("输出风格: 咨询版", result.stdout)
+
     def test_build_yearly_report_contains_multi_scene_layers(self):
         report = mayan_calc.build_yearly_report("1995-03-03", 2026, style="professional")
         self.assertEqual(report["scene"], "yearly")
