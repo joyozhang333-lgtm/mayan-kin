@@ -1,6 +1,8 @@
 # 🌀 mayan-kin · Mayan Destiny / Dreamspell / Tzolkin Kin Calculator
 
-> 开源的玛雅天赋、星系印记、Kin 计算器与 AI skill toolkit。输入一个阳历生日，生成 `Kin`、图腾、调性、五大天赋盘、流年与合盘结果。
+> Open-source `Kin calculator` for **Mayan Destiny / Dreamspell / Tzolkin**. 输入一个阳历生日，生成 `Kin`、图腾、调性、五大天赋盘、流年与合盘结果。
+
+**Search terms:** `mayan destiny`, `dreamspell`, `tzolkin`, `kin calculator`, `maya calendar`, `玛雅天赋`, `星系印记`, `玛雅合盘`
 
 `mayan-kin` 是一个开源的 **Mayan Destiny / Dreamspell / Tzolkin / Maya Calendar / Kin Calculator** 项目，面向 AI 助手、创作者、咨询场景和个人探索者。
 它把阳历生日转换为可计算、可验证的星系印记信息，包括 `Kin`、图腾、调性、五大天赋盘、波符、流年与合盘结果，
