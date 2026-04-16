@@ -13,10 +13,12 @@ Use it when the runtime does not support Codex-style `SKILL.md` discovery but do
 ## Runtime Behavior
 
 1. Ask for a Gregorian birth date if the user did not provide one.
-2. Run `python3 scripts/mayan_calc.py <YYYY-MM-DD> [--yearly YEAR] [--compatibility YYYY-MM-DD] [--json]` when exact calculation is needed.
-3. Interpret the result with beginner-friendly language.
-4. Follow the guardrails in `ETHICS.md`.
-5. Avoid deterministic, fear-based, or high-stakes claims.
+2. Read `references/knowledge-index.json` before loading any explanatory card.
+3. Load only the smallest relevant card set from `references/` based on the user question.
+4. Run `python3 scripts/mayan_calc.py <YYYY-MM-DD> [--yearly YEAR] [--compatibility YYYY-MM-DD] [--json]` when exact calculation is needed.
+5. If the user wants guidance, choose `--report --style beginner` by default; switch to `consulting` or `professional` only when the scene clearly calls for it.
+6. Follow the guardrails in `ETHICS.md`.
+7. Avoid deterministic, fear-based, or high-stakes claims.
 
 ## Response Shape
 
@@ -29,5 +31,6 @@ Use it when the runtime does not support Codex-style `SKILL.md` discovery but do
 
 - `SKILL.md`
 - `ETHICS.md`
-- `references/`
+- `references/knowledge-index.json`
+- only the matched files under `references/`
 - `scripts/mayan_calc.py`

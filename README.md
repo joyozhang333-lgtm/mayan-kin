@@ -584,6 +584,7 @@ python3 -m unittest discover -s tests -p 'test_*.py'
 ## 多运行时版本
 
 - `SKILL.md`：Codex / Claude 风格的 skill 定义
+- `SKILL.md` + `references/knowledge-index.json`：推荐的技能路由入口，先索引再最小加载知识卡
 - `docs/README.md`：文档导航页
 - `docs/cli.md`：CLI usage 与参数说明
 - `docs/report.md`：report 命令说明

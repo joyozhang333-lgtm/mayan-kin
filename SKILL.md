@@ -36,6 +36,8 @@ description: "玛雅天赋 (Mayan Destiny / Dreamspell) 星系印记解读技能
 ├── ETHICS.md                 ← 伦理准则
 ├── README.md                 ← 项目说明
 ├── references/
+│   ├── README.md                 ← 知识卡导航页
+│   ├── knowledge-index.json      ← 机读知识索引
 │   ├── 20-seals.md               ← 20图腾详解
 │   ├── 13-tones.md               ← 13调性详解
 │   ├── five-destiny.md           ← 五大天赋位详解
@@ -47,6 +49,22 @@ description: "玛雅天赋 (Mayan Destiny / Dreamspell) 星系印记解读技能
 └── scripts/
     └── mayan_calc.py             ← 玛雅历计算工具
 ```
+
+## 知识加载顺序
+
+优先按“索引 → 最小知识集合”的方式读取，不要每次都把 `references/` 整包读完。
+
+推荐顺序：
+
+1. 先读 `references/knowledge-index.json`
+2. 根据用户问题匹配 `keywords / use_cases / when_to_load`
+3. 只加载当前问题最相关的 1 到 3 张知识卡
+4. 如果是综合问题，再补 `guidance.md` 或 `five-destiny.md`
+
+这样做有两个目的：
+
+- 降低上下文噪音，避免一次性塞入过多术语
+- 让同一套知识卡可以被不同 runtime 复用
 
 ## 用户引导
 
@@ -261,6 +279,8 @@ description: "玛雅天赋 (Mayan Destiny / Dreamspell) 星系印记解读技能
 
 读取 `references/yearly-fortune.md` 获取完整流年解读方法。
 
+如果是 agent / runtime 环境，先通过 `references/knowledge-index.json` 确认应该加载这张卡，再按需读取正文。
+
 核心关注：
 - 流年图腾与本命图腾的关系
 - 流年调性代表的年度主题
@@ -271,6 +291,8 @@ description: "玛雅天赋 (Mayan Destiny / Dreamspell) 星系印记解读技能
 ### 合盘方法
 
 读取 `references/compatibility.md` 获取完整合盘解读方法。
+
+如果问题同时涉及团队、关系节奏或深层镜像，可继续按索引补 `oracle.md` 或 `earth-families.md`。
 
 核心分析：
 1. **图腾关系**：两人主图腾之间是支持、挑战、引导还是隐藏推动关系？
@@ -378,6 +400,8 @@ XX图腾                         XX图腾
 ```
 用户请求
     │
+    ├─ 任何解释请求 ───────────→ 先读 references/knowledge-index.json
+    │
     ├─ 请求排盘/查Kin ─────────→ 收集生日 → 执行 scripts/mayan_calc.py → 排盘解读
     │
     ├─ 询问图腾含义 ────────────→ 读取 references/20-seals.md
@@ -389,6 +413,7 @@ XX图腾                         XX图腾
     ├─ 询问流年运势 ────────────→ 读取 references/yearly-fortune.md
     │
     ├─ 请求合盘分析 ────────────→ 读取 references/compatibility.md
+    │                              └─ 如需深层结构 → 补读取 references/oracle.md / references/earth-families.md
     │
     ├─ 询问事业/情感 ──────────→ 读取 references/career-emotion.md
     │
@@ -401,11 +426,15 @@ XX图腾                         XX图腾
 
 | 文件 | 用途 | 何时使用 |
 |------|------|----------|
+| `references/knowledge-index.json` | 机读知识索引 | 先路由、再最小加载知识卡 |
+| `references/README.md` | 知识卡导航页 | 需要人工快速查找知识入口 |
 | `20-seals.md` | 20图腾详解 | 解读具体图腾含义 |
 | `13-tones.md` | 13调性详解 | 解读具体调性含义 |
 | `five-destiny.md` | 五大天赋位详解 | 解释天赋盘各位置 |
 | `yearly-fortune.md` | 流年分析方法 | 预测年度运势 |
 | `compatibility.md` | 合盘分析方法 | 双人关系解读 |
+| `oracle.md` | 神谕十字结构 | 需要从五位互动解释成长路径 |
+| `earth-families.md` | 地球家族共振 | 需要解释团队/关系同频与失调 |
 | `guidance.md` | 天赋运用指导 | 指导用户运用天赋 |
 | `colors-wavespell.md` | 颜色与波符 | 解读颜色和波符含义 |
 | `career-emotion.md` | 事业与情感 | 职业和感情建议 |
