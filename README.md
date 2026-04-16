@@ -4,6 +4,44 @@
 
 **Search terms:** `mayan destiny`, `dreamspell`, `tzolkin`, `kin calculator`, `maya calendar`, `玛雅天赋`, `星系印记`, `玛雅合盘`
 
+**Also relevant for searches like:** `mayan destiny calculator`, `dreamspell calculator`, `tzolkin calculator`, `kin number calculator`, `maya calendar calculator`, `mayan compatibility reading`, `yearly kin reading`
+
+**Repository URL:** [github.com/joyozhang333-lgtm/mayan-kin](https://github.com/joyozhang333-lgtm/mayan-kin)
+
+## What This Repository Does
+
+`mayan-kin` helps you:
+- calculate a `Kin number` from a Gregorian birth date
+- generate a `Mayan Destiny / Dreamspell / Tzolkin` chart
+- read the `solar seal`, `galactic tone`, and `five destiny positions`
+- check `yearly readings` and `compatibility readings`
+- reuse the calculator in `AI agents`, `skills`, and `runtime toolkits`
+
+如果你是中文用户，这个仓库主要解决的是：
+- 玛雅天赋 / 星系印记怎么计算
+- Kin 号、图腾、调性怎么查
+- 五大天赋盘怎么排
+- 流年和合盘怎么做
+- 怎么把这套能力接进 AI 助手或内容系统
+
+## Popular Search Queries
+
+People may discover this repository through queries such as:
+
+- `Mayan Destiny calculator`
+- `Dreamspell calculator`
+- `Tzolkin calculator`
+- `Kin calculator`
+- `Kin number calculator`
+- `Maya calendar calculator`
+- `Mayan compatibility reading`
+- `yearly Kin reading`
+- `玛雅天赋 计算`
+- `星系印记 计算器`
+- `Kin 计算器`
+- `玛雅合盘`
+- `玛雅流年`
+
 `mayan-kin` 是一个开源的 **Mayan Destiny / Dreamspell / Tzolkin / Maya Calendar / Kin Calculator** 项目，面向 AI 助手、创作者、咨询场景和个人探索者。
 它把阳历生日转换为可计算、可验证的星系印记信息，包括 `Kin`、图腾、调性、五大天赋盘、波符、流年与合盘结果，
 同时把这些结果翻译成普通人也能理解的解释语言，以及专业使用者可继续复用的结构化输出。
@@ -55,6 +93,9 @@ This repository is especially useful if you want to:
 - read the five destiny positions
 - check yearly cycles and compatibility
 - integrate a Mayan Destiny skill into AI runtimes and agent workflows
+
+For search engines and repository discovery, the shortest accurate summary is:
+`mayan-kin` is an open-source Mayan Destiny, Dreamspell, and Tzolkin Kin calculator with five-destiny reading, yearly reading, compatibility reading, and AI runtime integration.
 
 For beginners, the goal is simple: make Mayan Destiny understandable without assuming prior knowledge.
 You do not need to know the terminology, calendar system, or oracle structure in advance.
