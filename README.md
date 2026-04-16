@@ -260,14 +260,20 @@ python3 scripts/mayan_calc.py 1990-03-15 --json
 python3 scripts/mayan_calc.py 1990-03-15 --report
 ```
 
-### 4. 查看流年或合盘
+### 4. 查看 CLI 契约
+
+```bash
+python3 scripts/mayan_calc.py --contract
+```
+
+### 5. 查看流年或合盘
 
 ```bash
 python3 scripts/mayan_calc.py 1990-03-15 --yearly 2026
 python3 scripts/mayan_calc.py 1990-03-15 --compatibility 1992-07-20
 ```
 
-### 5. 跑测试
+### 6. 跑测试
 
 ```bash
 python3 -m unittest discover -s tests -p 'test_*.py'
@@ -277,6 +283,29 @@ python3 -m unittest discover -s tests -p 'test_*.py'
 - Codex / Claude 风格：看 `SKILL.md`
 - OpenClaw：看 `runtimes/openclaw/AGENTS.md` 和 `runtimes/openclaw/DEMO.md`
 - Hermes：看 `runtimes/hermes/SYSTEM_PROMPT.md` 和 `runtimes/hermes/DEMO.md`
+
+## Interface & Docs
+
+### CLI Usage
+
+```bash
+python3 scripts/mayan_calc.py [birthday] [options]
+```
+
+- `birthday` 是普通模式的必填输入，格式为 `YYYY-MM-DD`
+- `--json` 输出机器可读结果，适合前端、数据库和二次处理
+- `--report` 输出指导型个人说明书，适合人阅读
+- `--contract` 输出 CLI / JSON 契约说明，不需要 `birthday`
+- 输出优先级固定为 `--contract > --report > --json > 默认文本`
+
+### Documentation Entry Points
+
+- [docs/README.md](docs/README.md) - 文档导航页
+- [docs/cli.md](docs/cli.md) - CLI 参考、usage 和参数说明
+- [docs/report.md](docs/report.md) - `--report` 命令说明
+- [docs/json-contract.md](docs/json-contract.md) - JSON 契约说明
+- [docs/kin-calculator.md](docs/kin-calculator.md) - 英文落地页
+- [docs/v2-roadmap.md](docs/v2-roadmap.md) - v2 / v1.0 路线图
 
 ## Examples
 
@@ -347,6 +376,19 @@ python3 scripts/mayan_calc.py 1995-03-03 --report
 - 生成更有指导性的个人说明书
 - 输出成长路径、位置解释和行动建议
 - 作为咨询、内容产品或 AI 对话的中间层材料
+
+### 示例六：接口契约
+
+输入：
+
+```bash
+python3 scripts/mayan_calc.py --contract
+```
+
+适合：
+- 快速确认 CLI 的参数、优先级和 JSON 结构
+- 给前端、自动化脚本和 AI agent 对接前先看契约
+- 让外部用户明确这不是“猜输出”，而是有稳定边界的接口
 
 ## FAQ
 
@@ -480,6 +522,13 @@ mayan-kin/
 ├── ETHICS.md                     ← 伦理准则
 ├── README.md                     ← 本文件
 ├── LICENSE                       ← MIT 开源协议
+├── docs/
+│   ├── README.md                 ← 文档导航页
+│   ├── cli.md                    ← CLI 参考与 usage
+│   ├── report.md                 ← report 命令说明
+│   ├── json-contract.md          ← JSON 契约说明
+│   ├── kin-calculator.md         ← 英文落地页
+│   └── v2-roadmap.md             ← v2 / v1.0 路线图
 ├── runtimes/
 │   ├── README.md                 ← 多运行时适配说明
 │   ├── openclaw/AGENTS.md        ← OpenClaw 版本
@@ -509,6 +558,10 @@ python3 -m unittest discover -s tests -p 'test_*.py'
 ## 多运行时版本
 
 - `SKILL.md`：Codex / Claude 风格的 skill 定义
+- `docs/README.md`：文档导航页
+- `docs/cli.md`：CLI usage 与参数说明
+- `docs/report.md`：report 命令说明
+- `docs/json-contract.md`：JSON 契约说明
 - `runtimes/openclaw/AGENTS.md`：OpenClaw 对应版本
 - `runtimes/openclaw/DEMO.md`：OpenClaw 示例对话
 - `runtimes/hermes/SYSTEM_PROMPT.md`：Hermes 对应版本

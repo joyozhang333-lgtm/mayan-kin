@@ -2,6 +2,13 @@
 
 `mayan-kin` is an open-source **Kin calculator** for **Mayan Destiny**, **Dreamspell**, and **Tzolkin** charting.
 
+If you want the full navigation for the docs, start here:
+
+- [Documentation Index](README.md)
+- [CLI Reference](cli.md)
+- [Report Command](report.md)
+- [JSON Contract](json-contract.md)
+
 If you are searching for:
 
 - Kin calculator
@@ -60,6 +67,7 @@ Many repositories mention Dreamspell or Tzolkin as abstract ideas, but fewer pro
 ## Related Pages
 
 - [README](../README.md)
+- [Documentation Index](README.md)
 - [validation samples](../references/validation-samples.md)
 - [OpenClaw runtime](../runtimes/openclaw/AGENTS.md)
 - [Hermes runtime](../runtimes/hermes/SYSTEM_PROMPT.md)
