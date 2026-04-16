@@ -83,6 +83,24 @@ class MayanCalcTests(unittest.TestCase):
                 self.assertEqual(destiny["main"]["seal_name"], seal_name)
                 self.assertEqual(destiny["main"]["tone_name"], tone_name)
 
+    def test_build_personal_report_contains_growth_path(self):
+        destiny = mayan_calc.calc_five_destiny(mayan_calc.date_to_kin("1995-03-03"))
+        report = mayan_calc.build_personal_report(destiny, birth_date="1995-03-03")
+        self.assertEqual(report["kin"], 209)
+        self.assertEqual(len(report["growth_path"]), 5)
+        self.assertIn("career", report["action_guide"])
+
+    def test_cli_report_output_is_rendered(self):
+        result = subprocess.run(
+            [sys.executable, str(SCRIPT), "1995-03-03", "--report"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        self.assertIn("玛雅天赋个人说明书", result.stdout)
+        self.assertIn("成长路径", result.stdout)
+        self.assertIn("行动建议", result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()

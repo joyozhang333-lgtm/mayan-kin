@@ -12,12 +12,14 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from mayan_kin.core import (  # noqa: E402
+    build_personal_report,
     calc_five_destiny,
     calc_relationship,
     calc_yearly_report,
     date_to_kin,
     format_compatibility,
     format_destiny,
+    format_personal_report,
     parse_iso_date,
     serialize_destiny,
 )
@@ -45,6 +47,11 @@ def main():
         action="store_true",
         help="以JSON格式输出"
     )
+    parser.add_argument(
+        "--report", "-r",
+        action="store_true",
+        help="输出个人说明书报告"
+    )
 
     args = parser.parse_args()
 
@@ -60,6 +67,15 @@ def main():
 
     kin = date_to_kin(birth_date)
     destiny = calc_five_destiny(kin)
+
+    if args.report:
+        report = build_personal_report(destiny, birth_date=birth_date)
+        print(format_personal_report(report))
+        if args.yearly:
+            yearly = calc_yearly_report(birth_date, args.yearly)
+            yearly_report = build_personal_report(yearly, birth_date=f"{args.yearly}年流年")
+            print(format_personal_report(yearly_report))
+        return
 
     if args.json:
         result = {"birth_date": str(birth_date), "destiny": serialize_destiny(destiny)}

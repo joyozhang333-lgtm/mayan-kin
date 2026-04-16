@@ -9,8 +9,10 @@ from .core import (
     calc_yearly_kin,
     calc_yearly_report,
     date_to_kin,
+    build_personal_report,
     format_compatibility,
     format_destiny,
+    format_personal_report,
     parse_iso_date,
     serialize_destiny,
 )
@@ -24,8 +26,10 @@ __all__ = [
     "calc_yearly_kin",
     "calc_yearly_report",
     "date_to_kin",
+    "build_personal_report",
     "format_compatibility",
     "format_destiny",
+    "format_personal_report",
     "parse_iso_date",
     "serialize_destiny",
 ]

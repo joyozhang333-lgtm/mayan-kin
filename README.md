@@ -15,6 +15,7 @@
 - generate a `Mayan Destiny / Dreamspell / Tzolkin` chart
 - read the `solar seal`, `galactic tone`, and `five destiny positions`
 - check `yearly readings` and `compatibility readings`
+- generate a guided personal report with growth path and action advice
 - reuse the calculator in `AI agents`, `skills`, and `runtime toolkits`
 
 如果你是中文用户，这个仓库主要解决的是：
@@ -256,6 +257,7 @@ python3 scripts/mayan_calc.py 1990-03-15
 
 ```bash
 python3 scripts/mayan_calc.py 1990-03-15 --json
+python3 scripts/mayan_calc.py 1990-03-15 --report
 ```
 
 ### 4. 查看流年或合盘
@@ -332,6 +334,19 @@ python3 scripts/mayan_calc.py 1990-03-15 --json
 - 存数据库
 - 做 AI agent 二次解释
 - 做批量报告生成
+
+### 示例五：个人说明书报告
+
+输入：
+
+```bash
+python3 scripts/mayan_calc.py 1995-03-03 --report
+```
+
+适合：
+- 生成更有指导性的个人说明书
+- 输出成长路径、位置解释和行动建议
+- 作为咨询、内容产品或 AI 对话的中间层材料
 
 ## FAQ
 
