@@ -154,15 +154,7 @@ def stylize_text(text, style, field="general"):
         prefix = basic_prefix.get(field)
         return f"{prefix}{text}" if prefix else text
     if normalized == "deep":
-        deep_prefix = {
-            "questions": "追问：",
-            "decision_checks": "判断点：",
-            "instructions": "深度用法：",
-            "prompts": "对话提示：",
-            "action": "行动建议：",
-        }
-        prefix = deep_prefix.get(field)
-        return f"{prefix}{text}" if prefix else text
+        return text
     return text
 
 
@@ -978,7 +970,7 @@ def format_delivery_layers(lines, layers):
         lines.append(f"\n{'─' * 50}")
         lines.append(f"  {section_titles[key]}")
         lines.append(f"{'─' * 50}")
-        lines.append(f"- 重点: {section['focus']}")
+        lines.append(f"- {section['focus']}")
         for field in ("questions", "decision_checks", "angles", "formats", "instructions", "prompts"):
             if field in section:
                 label = {

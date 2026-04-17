@@ -129,7 +129,8 @@ class MayanCalcTests(unittest.TestCase):
             check=True,
         )
         self.assertIn("输出风格: 深度版", result.stdout)
-        self.assertIn("行动建议：", result.stdout)
+        self.assertIn("情境直读", result.stdout)
+        self.assertNotIn("行动建议：", result.stdout)
 
     def test_cli_deep_style_report_contains_deeper_sections(self):
         result = subprocess.run(
