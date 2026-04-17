@@ -107,6 +107,9 @@ class MayanCalcTests(unittest.TestCase):
         self.assertEqual(len(deep["deep_analysis"]["structural_analysis"]), 5)
         self.assertEqual(len(deep["deep_analysis"]["risk_matrix"]), 4)
         self.assertEqual(len(deep["deep_analysis"]["situational_insight"]["current_block"]), 3)
+        self.assertIn("这股力量是你最像自己的地方", deep["positions"]["main"]["explanation"])
+        self.assertIn("放在你身上，它通常会表现成这样", deep["positions"]["main"]["explanation"])
+        self.assertIn("它会把问题不断拉回一个核心追问", deep["positions"]["main"]["explanation"])
 
     def test_cli_report_output_is_rendered(self):
         result = subprocess.run(

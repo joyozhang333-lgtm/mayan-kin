@@ -94,6 +94,21 @@ TONE_GUIDANCE = {
     "宇宙": "这一调性的主题是超越与持久。你的成长不是一时爆发，而是长期活出更高版本的自己。",
 }
 
+DEEP_ROLE_GUIDANCE = {
+    "main": "这股力量是你最像自己的地方。很多时候别人还没完全说清楚，你已经先用这种方式在感受、判断和反应。",
+    "support": "这不是锦上添花的辅助项，而是你一稳下来就会自然调用的资源。它对了，你整个人会顺很多；它失真了，你会明显变累。",
+    "guide": "这更像你正在被推过去的方向。不是要你立刻变成另一个人，而是提醒你，成熟以后会更像这样活。",
+    "challenge": "这里往往不是你最不会，而是你最容易在低频里卡住的地方。它会先让你不舒服，但真正整合以后反而会变成力量。",
+    "occult": "这股力量平时不一定挂在脸上，但总会在关键阶段把你往更深的选择上推。很多反复出现的课题，背后都和它有关。",
+}
+
+DEEP_TONE_GUIDANCE = {
+    "磁性": "它会把问题不断拉回一个核心追问：你到底要把生命力放在哪里，而不是继续分散。",
+    "韵律": "它会逼你面对节奏、结构和承接能力。很多卡点不是方向错，而是系统还没被整理好。",
+    "银河": "它要求你把感受、现实、关系和表达慢慢活成一致，不能只停在其中一层。",
+    "宇宙": "它会把你推向更长期的版本，不只是短期灵感或阶段性爆发，而是能不能持续活出来。",
+}
+
 STYLE_CONFIG = {
     "basic": {
         "label": "基础版",
@@ -998,7 +1013,7 @@ def build_yearly_report(birth_date, year, style="basic"):
         role: {
             "name": f"{annual_destiny[role]['tone_name']}{annual_destiny[role]['seal_name']}",
             "keywords": annual_destiny[role]["keywords"],
-            "explanation": explain_position(role, annual_destiny[role]),
+            "explanation": explain_position(role, annual_destiny[role], normalized_style),
         }
         for role in ("main", "support", "guide", "challenge", "occult")
     }
@@ -1298,7 +1313,18 @@ def format_compatibility_report(report):
     return "\n".join(lines) + "\n"
 
 
-def explain_position(role, detail):
+def explain_position(role, detail, style="basic"):
+    normalized_style = normalize_report_style(style)
+    if normalized_style == "deep":
+        parts = [DEEP_ROLE_GUIDANCE[role]]
+        seal_hint = SEAL_GUIDANCE.get(detail["seal_name"])
+        if seal_hint:
+            parts.append(f"放在你身上，它通常会表现成这样：{seal_hint}")
+        tone_hint = DEEP_TONE_GUIDANCE.get(detail["tone_name"])
+        if tone_hint:
+            parts.append(tone_hint)
+        return " ".join(parts)
+
     parts = [ROLE_GUIDANCE[role]]
     seal_hint = SEAL_GUIDANCE.get(detail["seal_name"])
     if seal_hint:
@@ -1319,7 +1345,7 @@ def build_personal_report(destiny, birth_date=None, style="basic"):
         role: {
             "name": f"{destiny[role]['tone_name']}{destiny[role]['seal_name']}",
             "keywords": destiny[role]["keywords"],
-            "explanation": explain_position(role, destiny[role]),
+            "explanation": explain_position(role, destiny[role], normalized_style),
         }
         for role in ("main", "support", "guide", "challenge", "occult")
     }
