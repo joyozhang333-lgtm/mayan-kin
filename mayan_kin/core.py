@@ -679,6 +679,7 @@ def build_professional_compatibility_analysis(result):
     person_a = result["person_a"]["main"]
     person_b = result["person_b"]["main"]
     combined = result["combined_destiny"]["main"]
+    combined_challenge = result["combined_destiny"]["challenge"]
 
     return {
         "relationship_structure": [
@@ -720,6 +721,23 @@ def build_professional_compatibility_analysis(result):
                 "是否继续投入，不只看感觉深不深，还要看这段关系能不能提升双方的稳定度、清晰度和执行质量。",
                 "如果一段关系长期只剩下拉扯感、猜测感和代偿感，就算有合盘吸引，也不代表它适合长期配置。",
                 "专业判断的关键不是这段关系有没有缘分，而是它有没有结构条件支撑长期成长。",
+            ],
+        },
+        "situational_insight": {
+            "current_knot": [
+                "你们现在最可能卡住的，不是爱不爱或值不值得，而是关系里有些东西已经不顺了，却还没有被说清楚。",
+                f"{result['tone_relation']} 说明这段关系很容易卡在节奏错位：一方觉得已经在推进，另一方却觉得自己还没准备好或还没被听见。",
+                f"如果 {combined_challenge['seal_name']} 的课题已经开始反复出现，那当前要处理的通常不是感觉本身，而是边界、分工和现实承接能力。",
+            ],
+            "relationship_drift": [
+                "低频时，这段关系容易从连接滑向猜测，从合作滑向代偿，从互相看见滑向互相消耗。",
+                "最常见的表现不是一次大冲突，而是很多没说开的不舒服慢慢堆起来，最后谁都觉得累。",
+                "如果你们总在讨论感受，却迟迟不处理目标、责任、节奏和决定方式，关系就会一直原地打转。",
+            ],
+            "minimum_alignment": [
+                "先不要急着证明谁更懂这段关系，先把一件最现实的事讲清楚：你们现在到底卡在目标、边界、节奏，还是责任。",
+                "先做一个最小对齐动作，比如重新确认分工、设一个明确的沟通节点，或把含糊的期待翻译成一句可执行的话。",
+                "如果连最小对齐都做不到，那你们要面对的就不是如何继续升温，而是这段关系有没有长期配置条件。",
             ],
         },
     }
@@ -773,6 +791,23 @@ def build_professional_yearly_analysis(natal_destiny, annual_destiny, interactio
                 "更适合先做盘点、筛选、结构搭建，再进入放量或公开表达阶段。",
                 "季度复盘要围绕：我现在是在播种、培育、修剪，还是收割，而不是只看忙不忙。",
                 "每次卡顿时先判断：这是方向需要调整，还是节奏需要调整，还是支持系统没有跟上。",
+            ],
+        },
+        "situational_insight": {
+            "current_pressure": [
+                f"你今年最可能的真实压力，不是事情太多，而是 {annual['seal_name']} 要你聚焦，可现实里你还在被旧节奏、旧责任或旧惯性拉着走。",
+                f"{interaction['tone_relation']} 说明你一旦节奏乱了，就很容易开始怀疑方向；但今年真正要调的，往往先是推进顺序，不是全部推翻。",
+                f"如果 {challenge['seal_name']} 的低频已经在冒头，你现在最需要警惕的，不是没机会，而是把感觉、犹豫和理想化误当成判断本身。",
+            ],
+            "common_misread": [
+                "你很容易把今年的摩擦感理解成自己状态不好，其实很多时候是因为年度主题要求你做减法和重排，而不是继续硬撑。",
+                "低频时会表现成：明明知道该聚焦，却还是同时抓很多目标；明明知道该搭结构，却总想等更有感觉再开始。",
+                "如果一直停留在分析和盘点，却没有进入真正的配置动作，这一年会显得很忙，但推进感很弱。",
+            ],
+            "minimum_move": [
+                "先不要急着回答‘我今年到底要不要大改’，先选出一个最值得种的主题，把资源集中回去。",
+                "先做一个最小结构动作，比如删掉一个分散目标、固定一个复盘节奏，或补上一个一直缺位的支持系统。",
+                "今年最有效的推进不是更拼，而是先让系统稳下来，再决定哪些事情值得放大。",
             ],
         },
     }
@@ -1065,6 +1100,19 @@ def format_yearly_report(report):
         lines.append(f"{'─' * 50}")
         for item in analysis["risk_windows"]:
             lines.append(f"- {item['label']}: {item['detail']}")
+        insight = analysis["situational_insight"]
+        lines.append(f"\n{'─' * 50}")
+        lines.append("  年度情境直读")
+        lines.append(f"{'─' * 50}")
+        lines.append("- 你现在最可能承受的压力")
+        for item in insight["current_pressure"]:
+            lines.append(f"  {item}")
+        lines.append("- 常见误读")
+        for item in insight["common_misread"]:
+            lines.append(f"  {item}")
+        lines.append("- 最小动作")
+        for item in insight["minimum_move"]:
+            lines.append(f"  {item}")
 
     lines.append(f"\n{'─' * 50}")
     lines.append("  年度五大位置")
@@ -1203,6 +1251,19 @@ def format_compatibility_report(report):
         lines.append(f"{'─' * 50}")
         for item in analysis["tension_matrix"]:
             lines.append(f"- {item['label']}: {item['detail']}")
+        insight = analysis["situational_insight"]
+        lines.append(f"\n{'─' * 50}")
+        lines.append("  关系情境直读")
+        lines.append(f"{'─' * 50}")
+        lines.append("- 你们现在最可能卡住的地方")
+        for item in insight["current_knot"]:
+            lines.append(f"  {item}")
+        lines.append("- 关系低频表现")
+        for item in insight["relationship_drift"]:
+            lines.append(f"  {item}")
+        lines.append("- 最小对齐动作")
+        for item in insight["minimum_alignment"]:
+            lines.append(f"  {item}")
 
     lines.append(f"\n{'─' * 50}")
     lines.append("  合盘与成长")

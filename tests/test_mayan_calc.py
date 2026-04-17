@@ -266,6 +266,7 @@ class MayanCalcTests(unittest.TestCase):
         self.assertIn("输出风格: 深度版", rendered)
         self.assertIn("年度结构", rendered)
         self.assertIn("风险窗口", rendered)
+        self.assertIn("年度情境直读", rendered)
         self.assertIn("策略配置", rendered)
         self.assertIn("咨询视角", rendered)
         self.assertIn("内容产品视角", rendered)
@@ -292,10 +293,29 @@ class MayanCalcTests(unittest.TestCase):
         self.assertIn("deep_analysis", report)
         self.assertEqual(len(report["deep_analysis"]["relationship_structure"]), 4)
         self.assertEqual(len(report["deep_analysis"]["tension_matrix"]), 4)
+        self.assertIn("situational_insight", report["deep_analysis"])
         rendered = mayan_calc.format_compatibility_report(report)
         self.assertIn("关系结构", rendered)
         self.assertIn("张力来源", rendered)
+        self.assertIn("关系情境直读", rendered)
         self.assertIn("协作模型", rendered)
+
+    def test_deep_yearly_report_contains_situational_insight(self):
+        report = mayan_calc.build_yearly_report("1995-03-03", 2026, style="deep")
+        self.assertIn("deep_analysis", report)
+        self.assertIn("situational_insight", report["deep_analysis"])
+        insight = report["deep_analysis"]["situational_insight"]
+        self.assertEqual(len(insight["current_pressure"]), 3)
+        self.assertEqual(len(insight["common_misread"]), 3)
+        self.assertEqual(len(insight["minimum_move"]), 3)
+
+    def test_deep_compatibility_report_contains_situational_insight(self):
+        report = mayan_calc.build_compatibility_report(216, 67, style="deep")
+        self.assertIn("deep_analysis", report)
+        insight = report["deep_analysis"]["situational_insight"]
+        self.assertEqual(len(insight["current_knot"]), 3)
+        self.assertEqual(len(insight["relationship_drift"]), 3)
+        self.assertEqual(len(insight["minimum_alignment"]), 3)
 
 
 if __name__ == "__main__":
