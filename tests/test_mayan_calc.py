@@ -107,6 +107,7 @@ class MayanCalcTests(unittest.TestCase):
         self.assertEqual(len(deep["deep_analysis"]["structural_analysis"]), 5)
         self.assertEqual(len(deep["deep_analysis"]["risk_matrix"]), 4)
         self.assertEqual(len(deep["deep_analysis"]["situational_insight"]["current_block"]), 3)
+        self.assertEqual(len(deep["deep_analysis"]["reflection_dialogue"]["resonance_points"]), 3)
         self.assertIn("这股力量是你最像自己的地方", deep["positions"]["main"]["explanation"])
         self.assertIn("放在你身上，它通常会表现成这样", deep["positions"]["main"]["explanation"])
         self.assertIn("它会把问题不断拉回一个核心追问", deep["positions"]["main"]["explanation"])
@@ -133,6 +134,7 @@ class MayanCalcTests(unittest.TestCase):
         )
         self.assertIn("输出风格: 深度版", result.stdout)
         self.assertIn("情境直读", result.stdout)
+        self.assertIn("个人感悟对话入口", result.stdout)
         self.assertNotIn("行动建议：", result.stdout)
 
     def test_cli_deep_style_report_contains_deeper_sections(self):

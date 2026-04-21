@@ -621,28 +621,28 @@ def build_professional_personal_analysis(destiny):
 
     return {
         "structural_analysis": [
-            f"主轴由 {main['tone_name']}{main['seal_name']} 构成，说明核心驱动力首先落在 {main['keywords']}，不是外放征服型，而是先感知、再校准、再推进。",
-            f"资源位是 {support['tone_name']}{support['seal_name']}，意味着你的稳定输出依赖关系质量、信任密度与合作氛围；资源系统一旦失真，主轴发挥就会明显下滑。",
-            f"挑战位是 {challenge['tone_name']}{challenge['seal_name']}，所以真正的压力不是“事情很多”，而是变化、重组、能量波动会不会打乱你的中心。",
-            f"隐藏推动 {occult['tone_name']}{occult['seal_name']} 指向 {occult['keywords']}，说明你最终不是停留在感受层，而是会被推向判断、选择与影响力。",
-            f"引导位回到 {guide['tone_name']}{guide['seal_name']}，这通常表示成长终点不是换人格，而是把原有天赋活得更稳定、更清楚、更可持续。",
+            f"你这张盘的核心，不是靠外放征服世界，而是先用 {main['keywords']} 去感受到哪里失真、哪里堵住、哪里需要重新校准，然后再决定怎么动。",
+            f"你真正稳的时候，通常不是因为一个人硬撑住了，而是因为 {support['seal_name']} 这层资源到位了：关系质量、信任密度、合作氛围都在帮你稳住自己。",
+            f"你的人生压力点也不只是事情多，而是 {challenge['seal_name']} 一来，变化、重组和能量冲击会不会先把你的中心打散，让你一边感受到不对，一边又很难马上表态。",
+            f"更深一层看，{occult['seal_name']} 一直在推着你长判断、长选择、长影响力，所以你的人生不会只停在“我感受很多”，最后一定会走向“那我到底怎么选”。",
+            f"引导位又回到 {guide['seal_name']}，说明你真正成熟后的样子，不是换成另一个人格，而是把原本这套天赋活得更稳定、更清楚，也更不容易被外界拖走。",
         ],
         "risk_matrix": [
             {
                 "label": "高频优势",
-                "detail": f"你最容易在需要 {main['keywords']}、关系理解与系统调频的场景中发挥价值，尤其适合处理混乱、堵塞、失真与关系张力。",
+                "detail": f"你最容易在需要 {main['keywords']}、关系理解与系统调频的场景中发挥价值。别人觉得乱的地方，你反而比较容易先感觉到真正的堵点。",
             },
             {
                 "label": "主要风险",
-                "detail": f"当 {challenge['seal_name']} 被低水平触发时，容易表现为过度承压、阶段性推翻重来、在情绪或变化里先失去节奏再谈判断。",
+                "detail": f"当 {challenge['seal_name']} 被低水平触发时，你很容易先失去节奏，再谈判断。外面看像你在犹豫，里面其实常常是变化已经压到你了。",
             },
             {
                 "label": "资源条件",
-                "detail": f"{support['seal_name']} 提醒你：专业发挥并不只看能力，还看环境是否允许真诚沟通、角色清晰与相互信任。",
+                "detail": f"{support['seal_name']} 提醒你：你的发挥从来不只看能力，还看环境是不是允许真诚沟通、角色清晰和相互信任。土壤不对，你会明显耗掉。",
             },
             {
                 "label": "升级方向",
-                "detail": f"{occult['seal_name']} 对应的成长不是“更能忍”，而是把感受转换成边界、把直觉转换成选择、把经验转换成影响力。",
+                "detail": f"{occult['seal_name']} 对应的成长，不是把自己练得更能忍，而是把感受转换成边界，把直觉转换成选择，把经验转换成影响力。",
             },
         ],
         "application_matrix": {
@@ -677,6 +677,23 @@ def build_professional_personal_analysis(destiny):
                 "现在最小但最有效的动作，不是想清全部，而是把一个已经感受到的不对劲，翻译成一句明确的话或一个明确边界。",
                 "你要先从“我知道哪里不对”走到“所以我现在准备怎么处理”，这一步比继续分析更关键。",
                 "对你这张盘来说，真正的升级通常不是更努力，而是更早识别、更早表达、更早止损、更早投入对的地方。",
+            ],
+        },
+        "reflection_dialogue": {
+            "resonance_points": [
+                f"如果你最近一直觉得哪里不太对，却又说不清，那通常不是你想太多，而是 {main['seal_name']} 已经先感觉到了流动出了问题。",
+                f"如果你一边想维持关系，一边又越来越累，这往往是 {support['seal_name']} 想守住连接，而 {challenge['seal_name']} 又在不断把真实问题顶出来。",
+                f"如果你最近反复在想“我到底要不要为自己做一个更清楚的决定”，那不是偶然，通常是 {occult['seal_name']} 已经开始往前推你了。",
+            ],
+            "conversation_questions": [
+                "你最近最明显的一次委屈，背后其实在提醒你什么边界？",
+                "你现在最不想承认、但其实已经感觉到不对的地方，是哪一件事？",
+                "如果这次你不再只理解别人，而是站回自己，你最想先说出来的一句话会是什么？",
+            ],
+            "next_opening": [
+                "如果你愿意继续聊，可以直接从最近最卡的一件事讲起，不用先讲大道理。",
+                "你也可以直接说：我现在最难受的是哪段关系、哪个环境、还是哪个决定，我会顺着这张盘继续帮你往下拆。",
+                "对你来说，真正有价值的不是把盘读完，而是把它放回你现在的生活里，看它到底在提醒你什么。",
             ],
         },
     }
@@ -1464,6 +1481,19 @@ def format_personal_report(report):
             lines.append(f"  {item}")
         lines.append("- 最小动作")
         for item in insight["minimum_move"]:
+            lines.append(f"  {item}")
+        dialogue = report["deep_analysis"]["reflection_dialogue"]
+        lines.append(f"\n{'─' * 50}")
+        lines.append("  个人感悟对话入口")
+        lines.append(f"{'─' * 50}")
+        lines.append("- 你最近可能会有共鸣的地方")
+        for item in dialogue["resonance_points"]:
+            lines.append(f"  {item}")
+        lines.append("- 可以继续往下聊的问题")
+        for item in dialogue["conversation_questions"]:
+            lines.append(f"  {item}")
+        lines.append("- 如果现在就想继续聊，可以这样开口")
+        for item in dialogue["next_opening"]:
             lines.append(f"  {item}")
     format_delivery_layers(lines, report["delivery_layers"])
     return "\n".join(lines) + "\n"
