@@ -1,38 +1,60 @@
-# Kin Calculator
+# Kin Calculator for Mayan Destiny, Dreamspell, and Tzolkin
 
-`mayan-kin` is an open-source **Kin calculator** for **Mayan Destiny**, **Dreamspell**, and **Tzolkin** charting.
+`mayan-kin` is an open-source **Kin calculator** for **Mayan Destiny**, **Dreamspell**, **Tzolkin**, and **Maya calendar** workflows.
 
-If you want the full navigation for the docs, start here:
+It helps you calculate a `Kin number` from a Gregorian birth date, read the related `solar seal`, `galactic tone`, and five destiny positions, and generate structured reports for yearly readings, compatibility readings, and AI-assisted interpretation.
+
+Use this page if you are looking for:
+
+- `Kin calculator`
+- `Kin number calculator`
+- `Mayan Destiny calculator`
+- `Dreamspell calculator`
+- `Tzolkin calculator`
+- `Maya calendar calculator`
+- `Galactic signature calculator`
+- `Solar seal calculator`
+- `Galactic tone calculator`
+- `Mayan compatibility reading`
+- `Yearly Kin reading`
+- `Dreamspell birth chart`
+- `Tzolkin birth chart`
+
+## Documentation Navigation
+
+If you want the full navigation for the repository docs, start here:
 
 - [Documentation Index](README.md)
 - [CLI Reference](cli.md)
 - [Report Command](report.md)
 - [JSON Contract](json-contract.md)
 
-If you are searching for:
+## What It Does
 
-- Kin calculator
-- Kin number calculator
-- Mayan Destiny calculator
-- Dreamspell calculator
-- Tzolkin calculator
-- Maya calendar calculator
-- yearly Kin reading
-- Mayan compatibility reading
-
-this repository is built for that exact use case.
-
-## What It Calculates
-
-Given a Gregorian birth date, `mayan-kin` can calculate:
+Given a Gregorian birth date, `mayan-kin` can calculate and explain:
 
 - `Kin number`
 - `solar seal`
 - `galactic tone`
 - `five destiny positions`
 - `wavespell position`
-- `yearly reading`
+- `yearly Kin reading`
 - `compatibility reading`
+- `color relationship`
+- `tone relationship`
+- beginner-friendly and deep interpretation reports
+- JSON output for apps, databases, and AI agents
+
+## Why Use This Kin Calculator?
+
+Most users do not only want a Kin number. They want to understand what the Kin number means, how the solar seal and galactic tone interact, and how the result may show up in work, relationships, self-development, yearly cycles, and collaboration patterns.
+
+`mayan-kin` combines calculation and interpretation:
+
+- The calculation layer keeps the Kin, seal, tone, wavespell, yearly, and compatibility logic reusable.
+- The report layer turns symbolic output into readable guidance.
+- The deep interpretation layer adds trigger conditions, misread risks, validation questions, and minimum experiments.
+- The runtime layer makes the same core usable in Codex, Claude-style skills, OpenClaw, Hermes, and other AI agent environments.
 
 ## Who It Is For
 
@@ -52,6 +74,21 @@ python3 scripts/mayan_calc.py 1995-03-03 --compatibility 1992-07-20
 python3 scripts/mayan_calc.py 1995-03-03 --json
 ```
 
+For a human-readable report:
+
+```bash
+python3 scripts/mayan_calc.py 1995-03-03 --report
+python3 scripts/mayan_calc.py 1995-03-03 --report --style deep
+```
+
+For an AI or app integration:
+
+```bash
+python3 scripts/mayan_calc.py 1995-03-03 --json
+python3 scripts/mayan_calc.py --contract
+python3 scripts/mayan_calc.py --route-query "I want a yearly Kin reading and career direction"
+```
+
 ## Why This Exists
 
 Many repositories mention Dreamspell or Tzolkin as abstract ideas, but fewer provide:
@@ -61,6 +98,7 @@ Many repositories mention Dreamspell or Tzolkin as abstract ideas, but fewer pro
 - yearly and compatibility features
 - AI runtime adapters
 - a beginner-friendly interpretation layer
+- deep interpretation calibration for real-world reflection
 
 `mayan-kin` is designed to cover all of those.
 

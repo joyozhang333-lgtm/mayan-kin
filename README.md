@@ -1,37 +1,119 @@
 # 🌀 mayan-kin · Mayan Destiny / Dreamspell / Tzolkin Kin Calculator
 
-> Open-source `Kin calculator` and `AI-ready interpretation toolkit` for **Mayan Destiny / Dreamspell / Tzolkin**. 输入一个阳历生日，自动生成 `Kin`、图腾、调性、五大天赋盘、流年、合盘，以及会自动选卡、自动选风格、自动选报告模式的指导型解读。
-
-**Search terms:** `mayan destiny`, `dreamspell`, `tzolkin`, `kin calculator`, `maya calendar`, `玛雅天赋`, `星系印记`, `玛雅合盘`
-
-**Also relevant for searches like:** `mayan destiny calculator`, `dreamspell calculator`, `tzolkin calculator`, `kin number calculator`, `maya calendar calculator`, `mayan compatibility reading`, `yearly kin reading`
+> Open-source **Mayan Destiny / Dreamspell / Tzolkin Kin calculator** and AI-ready interpretation toolkit. 输入一个阳历生日，即可计算 `Kin number / Kin 号`、`solar seal / 图腾`、`galactic tone / 调性`、五大天赋盘、波符、流年、合盘，并生成面向小白和专业人士的非宿命论解读报告。
 
 **Repository URL:** [github.com/joyozhang333-lgtm/mayan-kin](https://github.com/joyozhang333-lgtm/mayan-kin)
 
-## What This Repository Does
+**Core search keywords:** `mayan destiny calculator`, `dreamspell calculator`, `tzolkin calculator`, `kin calculator`, `kin number calculator`, `maya calendar calculator`, `galactic signature`, `solar seal`, `galactic tone`, `mayan compatibility reading`, `yearly kin reading`, `玛雅天赋`, `星系印记`, `Kin 计算器`, `玛雅合盘`, `玛雅流年`
 
-`mayan-kin` helps you:
-- calculate a `Kin number` from a Gregorian birth date
-- generate a `Mayan Destiny / Dreamspell / Tzolkin` chart
-- read the `solar seal`, `galactic tone`, and `five destiny positions`
-- check `yearly readings` and `compatibility readings`
-- generate guided `personal`, `yearly`, and `compatibility` reports with growth path and action advice
-- generate deep interpretation calibration for personal, yearly, and compatibility reports with triggers, misread risks, validation questions, and minimum experiments
-- auto-route user questions to the right knowledge cards, report style, and report mode
-- reuse the calculator in `AI agents`, `skills`, and `runtime toolkits`
+## 中文简介：这是什么项目？
 
-如果你是中文用户，这个仓库主要解决的是：
-- 玛雅天赋 / 星系印记怎么计算
-- Kin 号、图腾、调性怎么查
-- 五大天赋盘怎么排
-- 流年和合盘怎么做
-- 深度版如何把个人、流年和合盘盘面翻译成触发条件、误读风险、验证问题和最小实验
-- 怎么让系统自动判断该读哪些知识卡、该用什么解释风格、该出哪种报告
-- 怎么把这套能力接进 AI 助手或内容系统
+`mayan-kin` 是一个开源的 **玛雅天赋 / Mayan Destiny / Dreamspell / Tzolkin / Kin Calculator** 项目。它不是一个只告诉你编号的玩具脚本，而是一套可以被普通用户阅读、也可以被开发者和 AI agent 集成的玛雅天赋计算与解读基础设施。
 
-## Popular Search Queries
+你只需要输入一个阳历生日，例如 `1995-03-03`，系统就可以计算并输出：
 
-People may discover this repository through queries such as:
+- `Kin number / Kin 号`
+- `Solar Seal / 图腾`
+- `Galactic Tone / 调性`
+- 五大天赋盘：主印记、支持位、引导位、挑战位、隐藏推动
+- 波符与波符内位置
+- 任意年份的流年 Kin 与年度主题
+- 双人合盘、颜色关系、调性关系与互相照见位置
+- 适合人阅读的基础版 / 深度版报告
+- 适合程序、前端、数据库和 AI agent 复用的 JSON 输出
+
+这个项目的核心定位是：**用可计算、可验证、可集成的方式，把玛雅天赋从“神秘标签”变成“可解释的自我理解工具”。**
+
+它强调非宿命论。玛雅天赋在这里不是用来定义你、限制你、替你决定人生，而是帮助你观察：
+
+- 你的核心天赋是什么，它在现实里通常怎么表现
+- 你的卡点在哪里，哪些压力其实是在提醒你成长
+- 你的支持力量来自哪里，什么样的关系、环境和节奏更能让你发挥
+- 你的挑战位不是缺点，而是需要被整合的成长入口
+- 你的隐藏推动如何把你从“感受到很多”推向“做出清楚选择”
+- 你如何把自己的天赋落到事业、关系、内容、咨询和个人成长中
+
+## English Introduction
+
+`mayan-kin` is an open-source **Mayan Destiny, Dreamspell, Tzolkin, Maya Calendar, and Kin calculator** for self-exploration, AI assistants, consultants, creators, and developers.
+
+It converts a Gregorian birth date into structured Mayan Destiny data, including `Kin number`, `solar seal`, `galactic tone`, five destiny positions, wavespell placement, yearly Kin cycles, and compatibility readings. On top of the calculation layer, it also generates beginner-friendly and deep interpretation reports that can be used in personal reflection, coaching, content creation, or AI agent workflows.
+
+If you are searching GitHub or Google for a **Mayan Destiny calculator**, **Dreamspell calculator**, **Tzolkin calculator**, **Kin number calculator**, **Maya calendar calculator**, **galactic signature lookup**, **solar seal reading**, **galactic tone reading**, **Mayan compatibility reading**, or **yearly Kin reading**, this repository is designed to be a practical open-source foundation.
+
+The project is built around three principles:
+
+- **Accessible:** beginners can start with one birth date and understand what their Kin, solar seal, galactic tone, and five destiny positions mean.
+- **Structured:** developers can import the Python core, call the CLI, consume JSON output, or connect the logic to AI agents and runtime toolkits.
+- **Verifiable:** the calculation core is covered by tests and validation samples, so the project can improve without silently breaking core Kin calculations.
+
+## What Can You Build With It?
+
+`mayan-kin` can be used as:
+
+- a `Kin calculator` for personal Mayan Destiny lookup
+- a `Dreamspell / Tzolkin chart` generator
+- a `Mayan Destiny reading` engine for beginner-friendly reports
+- a `Mayan compatibility reading` tool for relationship or collaboration analysis
+- a `yearly Kin reading` tool for annual themes and timing reflection
+- a Python CLI for structured `Maya calendar` calculations
+- an AI skill for Codex, Claude-style runtimes, OpenClaw, Hermes, and other agent systems
+- a reusable interpretation layer for coaching, consulting, courses, content products, or self-reflection apps
+
+## 核心功能
+
+### 计算层
+
+- 阳历生日转 `Kin number / Kin 号`
+- 20 个图腾与 13 个调性的组合计算
+- 五大天赋盘排盘
+- 波符与波符内位置计算
+- 流年 Kin 计算
+- 双人合盘与关系互动计算
+
+### 解读层
+
+- 基础版报告：快速看懂盘面结构，适合第一次接触玛雅天赋的人
+- 深度版报告：输出结构分析、风险矩阵、情境直读、成长路径和行动建议
+- 解读校准：把盘面翻译成触发条件、误读风险、验证问题和最小实验
+- 小白友好表达：减少术语堆叠，让用户知道“这和我的生活有什么关系”
+- 专业输出结构：适合咨询师、内容创作者、课程设计者和 AI 产品开发者二次使用
+
+### 工程层
+
+- CLI 命令行工具
+- JSON 机器可读输出
+- `--contract` 接口契约
+- `--route-query` 知识卡路由
+- `--auto-answer` 自动判断知识卡、报告风格和报告模式
+- Codex / Claude 风格 skill
+- OpenClaw runtime 版本
+- Hermes runtime 版本
+- 测试基线与公开样本校验
+
+## Who Is This For?
+
+### For Beginners
+
+Use this repository if you want to understand your Mayan Destiny without learning the whole system first. You can enter one birth date and get a readable explanation of your Kin, solar seal, galactic tone, five destiny positions, yearly cycle, or compatibility pattern.
+
+This project is intentionally written in a non-fatalistic way. It does not tell you that your life is fixed. It helps you notice your talents, recurring blocks, support conditions, and possible growth directions.
+
+### For Developers
+
+Use this project if you want an open-source `Mayan Destiny calculator`, `Dreamspell calculator`, or `Tzolkin calculator` that can be integrated into another tool. You can call the CLI, import the Python module, use JSON output, or adapt the skill files for AI runtime environments.
+
+### For AI Builders
+
+Use `mayan-kin` if you want to build an AI assistant that can answer questions about Kin, solar seals, galactic tones, five destiny positions, yearly readings, and compatibility readings. The repository includes a knowledge index, report styles, route-query support, and runtime prompts for agent systems.
+
+### For Consultants, Coaches, and Creators
+
+Use it as a structured reference layer for self-exploration reports, coaching conversations, relationship reflection, career direction content, personal growth courses, or long-form article generation. The output is designed to support conversation and reflection, not to replace human judgment.
+
+## SEO Search Phrases
+
+This repository is relevant to searches such as:
 
 - `Mayan Destiny calculator`
 - `Dreamspell calculator`
@@ -39,109 +121,25 @@ People may discover this repository through queries such as:
 - `Kin calculator`
 - `Kin number calculator`
 - `Maya calendar calculator`
+- `Galactic signature calculator`
+- `Solar seal calculator`
+- `Galactic tone calculator`
+- `Mayan astrology calculator`
 - `Mayan compatibility reading`
-- `yearly Kin reading`
+- `Mayan relationship compatibility`
+- `Yearly Kin reading`
+- `Dreamspell birth chart`
+- `Tzolkin birth chart`
 - `玛雅天赋 计算`
+- `玛雅天赋 计算器`
+- `星系印记 查询`
 - `星系印记 计算器`
+- `Kin 号 查询`
 - `Kin 计算器`
 - `玛雅合盘`
 - `玛雅流年`
-
-## English Use Cases
-
-This repository is a good fit if you want to:
-
-- find a `Kin calculator` repository on GitHub
-- calculate a `Kin number` from a birth date
-- generate a `Dreamspell` or `Tzolkin` chart
-- read `Mayan Destiny` in a beginner-friendly way
-- build an AI tool around `Kin`, `solar seals`, `galactic tones`, yearly readings, or compatibility readings
-- reuse an open-source `Maya calendar` / `Kin calculator` codebase in your own workflow
-
-## Related Keywords
-
-Related keywords that describe this repository:
-
-- `Mayan Destiny tool`
-- `Dreamspell tool`
-- `Tzolkin chart`
-- `Kin number lookup`
-- `Maya calendar reading`
-- `Mayan astrology tool`
-- `compatibility reading`
-- `yearly cycle reading`
-- `AI skill toolkit`
-- `agent runtime integration`
-
-`mayan-kin` 是一个开源的 **Mayan Destiny / Dreamspell / Tzolkin / Maya Calendar / Kin Calculator** 项目，面向 AI 助手、创作者、咨询场景和个人探索者。
-它把阳历生日转换为可计算、可验证的星系印记信息，包括 `Kin`、图腾、调性、五大天赋盘、波符、流年与合盘结果，
-同时把这些结果翻译成普通人也能理解的解释语言，以及专业使用者可继续复用的结构化输出。
-
-如果别人正在 GitHub 或搜索引擎上找以下内容，这个项目就是对应结果之一：
-- Mayan Destiny
-- Dreamspell
-- Tzolkin
-- Kin calculator
-- Maya calendar
-- 玛雅天赋
-- 星系印记
-- Kin 计算器
-- 玛雅合盘
-- 流年 Kin 计算
-
-这个仓库特别适合以下需求：
-- 想查自己的 `Kin number / Kin 号`
-- 想做 `Dreamspell / Tzolkin` 的基础排盘
-- 想生成五大天赋盘、流年、合盘结果
-- 想把玛雅天赋能力接入 `Codex`、`Claude`、`OpenClaw`、`Hermes` 等 AI runtime
-- 想做一个开源、可验证、可扩展的 `Maya / Kin` 计算与解释底座
-
-如果你是小白，这个项目能帮你从零理解“玛雅天赋到底在看什么”：什么是 Kin、什么是图腾、什么是调性、五大位置为什么这样排、这些能量在事业、情感和成长里通常如何体现。
-你不需要先懂术语，也不需要会算历法，只要输入一个阳历生日，就能得到一份完整、相对友好、不宿命化的解读入口。
-
-如果你是专业使用者，这个项目也适合作为一个可扩展的基础设施层：
-- 可以作为 AI agent / skill / prompt runtime 的底层计算模块
-- 可以输出适合二次处理的 JSON 结果
-- 可以接入 Codex、Claude、OpenClaw、Hermes 等不同运行时
-- 可以作为咨询、内容创作、课程产品或研究型项目的计算与解释底座
-
-项目当前同时强调三件事：
-- **可用性**：让第一次接触玛雅天赋的人也能看懂、继续问下去、真的用起来
-- **可复用性**：让开发者、研究者、咨询师可以把计算核心和解释框架接进自己的系统
-- **可验证性**：核心计算支持脚本调用、测试基线和公开样本校验，而不是只停留在“神秘描述”
-
-## Overview (English)
-
-`mayan-kin` is an open-source **Mayan Destiny, Dreamspell, Tzolkin, Maya Calendar, and Kin calculator** project for AI assistants, creators, consultants, and self-exploration use cases.
-It turns a Gregorian birth date into structured and reusable outputs such as `Kin`, solar seal, galactic tone, the five destiny positions, wavespell placement, yearly cycles, and compatibility data,
-then translates those symbolic results into readable explanations for beginners and machine-friendly outputs for advanced workflows.
-
-If someone is searching for a repository about **Kin calculation, Mayan Destiny, Dreamspell charting, Tzolkin interpretation, yearly Kin reading, or compatibility reading**, this repository is intended to be that result.
-
-This repository is especially useful if you want to:
-- calculate a `Kin number`
-- generate a `Dreamspell / Tzolkin` chart
-- read the five destiny positions
-- check yearly cycles and compatibility
-- integrate a Mayan Destiny skill into AI runtimes and agent workflows
-
-For search engines and repository discovery, the shortest accurate summary is:
-`mayan-kin` is an open-source Mayan Destiny, Dreamspell, and Tzolkin Kin calculator with five-destiny reading, yearly reading, compatibility reading, and AI runtime integration.
-
-For beginners, the goal is simple: make Mayan Destiny understandable without assuming prior knowledge.
-You do not need to know the terminology, calendar system, or oracle structure in advance.
-You can start with one birth date and immediately get an explanation of what each position means, why it appears in the chart, and how it may show up in work, relationships, and personal growth.
-
-For advanced users, this project is designed as a reusable foundation:
-- a calculation core that can be imported into other tools
-- JSON output for downstream processing
-- runtime adapters for Codex, Claude-style skills, OpenClaw, and Hermes
-- a practical base for consulting workflows, educational products, content generation, or research-oriented experimentation
-
-In short, `mayan-kin` is built to be both accessible and rigorous:
-- accessible enough for first-time users
-- structured enough for builders
-- explicit enough to test, validate, and improve over time
+- `玛雅图腾`
+- `玛雅调性`
 
 ## 适用人群
 
