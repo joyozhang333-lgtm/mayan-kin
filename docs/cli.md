@@ -89,6 +89,29 @@ python3 scripts/evaluate_public_figure_holdout.py \
 
 该评估是公开人物职业 / 生平证据的 forced-choice benchmark，不等于命运系统科学证明。当前 holdout 结果低于随机基线，必须如实报告。
 
+### Detailed Biography Labels v2
+
+```bash
+python3 scripts/enrich_public_figure_history_labels.py \
+  --input references/public-figures-wikidata-expanded.json \
+  --output references/public-figures-history-labels-v2.json \
+  --cutoff-year 2010
+
+python3 scripts/evaluate_history_label_holdout.py \
+  --dataset references/public-figures-history-labels-v2.json \
+  --protocol references/frozen-scoring-protocol-v2.json \
+  --split holdout \
+  --write references/history-label-holdout-results-v2.json
+
+python3 scripts/evaluate_time_split_predictions.py \
+  --dataset references/public-figures-history-labels-v2.json \
+  --protocol references/frozen-scoring-protocol-v2.json \
+  --split holdout \
+  --write references/time-split-prediction-results-v2.json
+```
+
+v2 会标注核心成就、反复主题、重大转折、关系模式、公众表达、精神/价值主题、危机与重生。标注脚本不导入 `mayan_kin`，避免在答案标签阶段看到 Kin。
+
 ### Prospective Predictions
 
 ```bash

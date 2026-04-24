@@ -89,6 +89,7 @@ The project is built around three principles:
 - 公开人物 benchmark：包含 12 位人工样本 benchmark 与 1425 条 Wikidata 公开人物 train/dev/holdout 数据集
 - 科学验证盲测工具：生成匿名候选报告、分离答案 key、按正确率/随机基线/p 值计算科学准确率分数
 - 冻结评分协议与前瞻预测登记：支持 holdout 评估、失败记录和未来证据回填
+- 七维公开传记标签：核心成就、反复主题、重大转折、关系模式、公众表达、精神/价值主题、危机与重生
 - Codex / Claude 风格 skill
 - OpenClaw runtime 版本
 - Hermes runtime 版本
@@ -329,7 +330,24 @@ python3 scripts/evaluate_public_figure_holdout.py \
 
 当前 `1425` 条 Wikidata 公开人物数据的 holdout 结果是 `7.08%`，低于 `20%` 随机基线。这个结果必须如实报告：它说明当前版本不能声称“公开人物命运预测 90 分”。
 
-### 12. 生成科学盲测实验包
+### 12. 跑七维公开传记标签 v2
+
+```bash
+python3 scripts/enrich_public_figure_history_labels.py \
+  --input references/public-figures-wikidata-expanded.json \
+  --output references/public-figures-history-labels-v2.json \
+  --cutoff-year 2010
+
+python3 scripts/evaluate_history_label_holdout.py \
+  --dataset references/public-figures-history-labels-v2.json \
+  --protocol references/frozen-scoring-protocol-v2.json \
+  --split holdout \
+  --write references/history-label-holdout-results-v2.json
+```
+
+v2 使用 `1080` 条公开人物传记细标签，holdout 结果是 `11.9%`，仍低于 `20%` 随机基线。它比职业粗标签更有价值，但当前版本仍不能声称 90 分。
+
+### 13. 生成科学盲测实验包
 
 ```bash
 python3 scripts/generate_blind_trial_packets.py \
@@ -341,7 +359,7 @@ python3 scripts/generate_blind_trial_packets.py \
 
 盲测包会隐藏生日、Kin 号、图腾、调性等直接识别信息。参与者只能在多份匿名报告中选择最像自己的报告。
 
-### 13. 评估盲测科学准确率
+### 14. 评估盲测科学准确率
 
 ```bash
 python3 scripts/evaluate_blind_trials.py \
@@ -354,7 +372,7 @@ python3 scripts/evaluate_blind_trials.py \
 
 真实科学准确率必须由正式盲测 responses 计算。当前仓库已具备实验框架，不会在没有盲测数据时伪造“科学证明 90 分”。
 
-### 14. 生成前瞻预测登记表
+### 15. 生成前瞻预测登记表
 
 ```bash
 python3 scripts/generate_prospective_predictions.py \
@@ -401,9 +419,12 @@ python3 scripts/mayan_calc.py [birthday] [options]
 - [references/scientific-validation-protocol.md](references/scientific-validation-protocol.md) - 科学盲测实验协议
 - [references/scientific-validation-readiness.json](references/scientific-validation-readiness.json) - 当前科学验证框架成熟度
 - [references/frozen-scoring-protocol-v1.json](references/frozen-scoring-protocol-v1.json) - 冻结评分协议、holdout 与前瞻预测边界
+- [references/frozen-scoring-protocol-v2.json](references/frozen-scoring-protocol-v2.json) - 七维公开传记标签评分协议
 - [references/public-figure-benchmark.json](references/public-figure-benchmark.json) - 公开人物解读贴合度 benchmark
 - [references/public-figures-wikidata-1000.json](references/public-figures-wikidata-1000.json) - 1425 条公开人物数据集
+- [references/public-figures-history-labels-v2.json](references/public-figures-history-labels-v2.json) - 1080 条七维传记标签数据集
 - [references/validation-findings-2026-04-24.md](references/validation-findings-2026-04-24.md) - 本轮 holdout 结果与失败分析
+- [references/validation-findings-2026-04-24-v2.md](references/validation-findings-2026-04-24-v2.md) - v2 细标签与时间切分结果
 - [references/public-figure-benchmark-results.json](references/public-figure-benchmark-results.json) - 最近一次 benchmark 结果
 
 ## Examples
@@ -686,8 +707,13 @@ mayan-kin/
 │   ├── scientific-validation-protocol.md ← 科学盲测实验协议
 │   ├── scientific-validation-readiness.json ← 实验框架成熟度
 │   ├── frozen-scoring-protocol-v1.json ← 冻结评分协议
+│   ├── frozen-scoring-protocol-v2.json ← 七维传记标签协议
 │   ├── public-figures-wikidata-1000.json ← 公开人物 holdout 数据集
+│   ├── public-figures-wikidata-expanded.json ← 扩展公开人物源数据集
+│   ├── public-figures-history-labels-v2.json ← 七维公开传记标签
 │   ├── public-figure-holdout-results.json ← 公开人物 holdout 结果
+│   ├── history-label-holdout-results-v2.json ← 七维传记标签 holdout 结果
+│   ├── time-split-prediction-results-v2.json ← 时间切分结果
 │   ├── blind-participants-template.json ← 盲测参与者模板
 │   ├── blind-responses-template.json ← 盲测回答模板
 │   ├── prospective-subjects-template.json ← 前瞻预测对象模板
@@ -699,7 +725,10 @@ mayan-kin/
     ├── mayan_calc.py             ← CLI 入口
     ├── evaluate_public_figures.py ← 公开人物 benchmark
     ├── collect_public_figures_wikidata.py ← 公开人物数据采集
+    ├── enrich_public_figure_history_labels.py ← 七维传记标签生成
     ├── evaluate_public_figure_holdout.py ← 公开人物 holdout 评分
+    ├── evaluate_history_label_holdout.py ← 七维传记标签评分
+    ├── evaluate_time_split_predictions.py ← 时间切分评分
     ├── generate_blind_trial_packets.py ← 科学盲测包生成
     ├── evaluate_blind_trials.py  ← 科学盲测评分
     ├── generate_prospective_predictions.py ← 前瞻预测登记

@@ -214,3 +214,76 @@ python3 scripts/evaluate_prospective_predictions.py \
 ```
 
 前瞻预测在目标年份结束前不能算成功。
+
+## 七维公开传记标签 v2
+
+v2 不再只使用职业和简介，而是从公开传记文本中标注七个维度：
+
+- 核心成就
+- 反复主题
+- 重大转折
+- 关系模式
+- 公众表达
+- 精神或价值主题
+- 危机与重生
+
+标注脚本：
+
+- `scripts/enrich_public_figure_history_labels.py`
+
+防泄漏规则：
+
+- 标注脚本不导入 `mayan_kin`
+- 标注阶段不计算 Kin、图腾、调性
+- 标签只来自 Wikidata / Wikipedia 公开资料
+
+生成数据：
+
+```bash
+python3 scripts/collect_public_figures_wikidata.py \
+  --limit 4000 \
+  --min-records 2500 \
+  --output references/public-figures-wikidata-expanded.json
+
+python3 scripts/enrich_public_figure_history_labels.py \
+  --input references/public-figures-wikidata-expanded.json \
+  --output references/public-figures-history-labels-v2.json \
+  --cutoff-year 2010
+```
+
+评估：
+
+```bash
+python3 scripts/evaluate_history_label_holdout.py \
+  --dataset references/public-figures-history-labels-v2.json \
+  --protocol references/frozen-scoring-protocol-v2.json \
+  --split holdout \
+  --write references/history-label-holdout-results-v2.json
+```
+
+当前结果：
+
+- v2 细标签样本：`1080`
+- v2 holdout：`168`
+- 命中：`20`
+- 准确率：`11.9%`
+- 随机基线：`20.0%`
+- 结论：未通过，不能声称 90 分。
+
+时间切分：
+
+```bash
+python3 scripts/evaluate_time_split_predictions.py \
+  --dataset references/public-figures-history-labels-v2.json \
+  --protocol references/frozen-scoring-protocol-v2.json \
+  --split holdout \
+  --write references/time-split-prediction-results-v2.json
+```
+
+当前时间切分结果：
+
+- 切分年份：`2010`
+- holdout eligible：`26`
+- 平均 F1：`0.0602`
+- 分数：`6.02`
+- 结论：未通过。

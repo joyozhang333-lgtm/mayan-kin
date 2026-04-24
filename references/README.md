@@ -35,8 +35,13 @@
 - [public-figure-benchmark.json](public-figure-benchmark.json) - 公开人物生日、生平主题与解读贴合度 benchmark
 - [public-figure-benchmark-results.json](public-figure-benchmark-results.json) - 最近一次公开人物 benchmark 结果
 - [public-figures-wikidata-1000.json](public-figures-wikidata-1000.json) - 1425 条 Wikidata 公开人物 train/dev/holdout 数据集
+- [public-figures-wikidata-expanded.json](public-figures-wikidata-expanded.json) - 3710 条扩展公开人物源数据集
+- [public-figures-history-labels-v2.json](public-figures-history-labels-v2.json) - 1080 条七维公开传记细标签数据集
 - [public-figure-holdout-results.json](public-figure-holdout-results.json) - 公开人物 holdout forced-choice 评估结果
+- [history-label-holdout-results-v2.json](history-label-holdout-results-v2.json) - 七维传记标签 holdout 评估结果
+- [time-split-prediction-results-v2.json](time-split-prediction-results-v2.json) - 2010 时间切分前瞻式评估结果
 - [validation-findings-2026-04-24.md](validation-findings-2026-04-24.md) - 本轮验证结论与失败分析
+- [validation-findings-2026-04-24-v2.md](validation-findings-2026-04-24-v2.md) - 七维传记标签与时间切分验证结论
 - [prospective-subjects-template.json](prospective-subjects-template.json) - 前瞻预测对象模板
 - [prospective-outcomes-template.json](prospective-outcomes-template.json) - 前瞻预测结果编码模板
 

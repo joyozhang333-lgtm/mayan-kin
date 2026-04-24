@@ -13,8 +13,11 @@ sys.path.insert(0, str(ROOT))
 
 from mayan_kin import core as mayan_calc
 from scripts.collect_public_figures_wikidata import normalize_bindings
+from scripts.enrich_public_figure_history_labels import build_history_label
+from scripts.evaluate_history_label_holdout import evaluate as evaluate_history_label_holdout
 from scripts.evaluate_public_figure_holdout import evaluate as evaluate_public_figure_holdout
 from scripts.evaluate_public_figure_holdout import expression_weights_for_birth_date
+from scripts.evaluate_time_split_predictions import evaluate as evaluate_time_split_predictions
 from scripts.evaluate_prospective_predictions import evaluate as evaluate_prospective_predictions
 from scripts.generate_prospective_predictions import build_registry
 
@@ -487,6 +490,82 @@ class MayanCalcTests(unittest.TestCase):
             self.assertEqual(result["sample_size"], 6)
             self.assertIn("public_figure_accuracy_score", result)
             self.assertIn(result["status"], {"passed", "significant_but_below_target", "not_significant"})
+
+    def test_history_label_builder_uses_public_biography_without_kin(self):
+        record = {
+            "id": "Q-test",
+            "name": "Public Sample",
+            "birth_date": "1970-01-02",
+            "split": "holdout",
+            "description": "civil rights leader and writer",
+            "occupations": ["writer", "activist"],
+        }
+        extract = (
+            "Public Sample founded a civil rights organization in 2005. "
+            "In 2018, she won an award for humanitarian leadership after surviving exile."
+        )
+        label = build_history_label(record, "Public Sample", extract, "https://example.com", 2010)
+        self.assertFalse(label["history_labels"]["leakage_guard"]["uses_kin"])
+        self.assertIn("core_achievements", label["history_labels"]["dimensions"])
+        self.assertIn("human_rights", label["history_labels"]["detailed_tags"])
+        self.assertIn("humanitarian", label["time_split"]["post_cutoff_tags"])
+
+    def test_history_label_and_time_split_evaluators_run_on_control_data(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp = pathlib.Path(tmpdir)
+            records = []
+            for index, birth_date in enumerate([
+                "1995-03-03",
+                "1990-03-15",
+                "1981-09-04",
+                "1955-02-24",
+                "1879-03-14",
+                "1918-07-18",
+            ]):
+                tags = list(expression_weights_for_birth_date(birth_date, top_n=18))[:6]
+                records.append({
+                    "id": f"Q{index + 1}",
+                    "name": f"History Control {index + 1}",
+                    "birth_date": birth_date,
+                    "split": "holdout",
+                    "history_labels": {
+                        "detailed_tags": tags,
+                        "dimensions": {
+                            "core_achievements": {"tags": tags[:3]},
+                            "public_expression": {"tags": tags[3:]},
+                        },
+                    },
+                    "time_split": {
+                        "cutoff_year": 2010,
+                        "post_cutoff_tags": tags[:4],
+                        "post_cutoff_sentences": ["In 2018, public evidence matched the control tags."],
+                    },
+                })
+            dataset_path = tmp / "history.json"
+            dataset_path.write_text(
+                json.dumps({"version": "test", "record_count": len(records), "records": records}, ensure_ascii=False),
+                encoding="utf-8",
+            )
+            history_result = evaluate_history_label_holdout(
+                dataset_path,
+                protocol_path=tmp / "missing-protocol.json",
+                split="holdout",
+                candidate_count=3,
+                top_n=18,
+                min_sample_size=1,
+            )
+            time_result = evaluate_time_split_predictions(
+                dataset_path,
+                protocol_path=tmp / "missing-protocol.json",
+                split="holdout",
+                top_n=18,
+                min_sample_size=1,
+                min_score=0,
+            )
+            self.assertEqual(history_result["sample_size"], 6)
+            self.assertIn("history_label_accuracy_score", history_result)
+            self.assertEqual(time_result["eligible_sample_size"], 6)
+            self.assertIsNotNone(time_result["time_split_prediction_score"])
 
     def test_prospective_prediction_registry_and_evaluator(self):
         with tempfile.TemporaryDirectory() as tmpdir:

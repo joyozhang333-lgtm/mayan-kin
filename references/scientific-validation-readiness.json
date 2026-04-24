@@ -5,6 +5,10 @@
   "scientific_accuracy_score_note": "真实科学准确率必须由正式盲测 responses + answer key 计算，不能由开发者手动填写。",
   "public_figure_holdout_score": 7.08,
   "public_figure_holdout_score_note": "2026-04-24 的 1425 条 Wikidata 公开人物数据中，212 条 holdout 的 forced-choice 准确率为 7.08%，低于 20% 随机基线，因此不是 90 分验证结果。",
+  "history_label_holdout_score_v2": 11.9,
+  "history_label_holdout_score_v2_note": "2026-04-24 的 1080 条详细公开传记标签数据中，168 条 holdout 的 forced-choice 准确率为 11.9%，低于 20% 随机基线。",
+  "time_split_prediction_score_v2": 6.02,
+  "time_split_prediction_score_v2_note": "以 2010 年为切分点，只统计明确带年份的 post-cutoff 证据，holdout eligible 样本 26 条，平均 F1 为 0.0602。",
   "validation_readiness_score": 98,
   "readiness_items": [
     {
@@ -78,6 +82,18 @@
       "score": 8,
       "max_score": 8,
       "file": "scripts/generate_prospective_predictions.py"
+    },
+    {
+      "item": "detailed_public_history_labels",
+      "score": 10,
+      "max_score": 10,
+      "file": "references/public-figures-history-labels-v2.json"
+    },
+    {
+      "item": "time_split_evaluator",
+      "score": 8,
+      "max_score": 8,
+      "file": "scripts/evaluate_time_split_predictions.py"
     }
   ],
   "next_to_reach_actual_scientific_90": [

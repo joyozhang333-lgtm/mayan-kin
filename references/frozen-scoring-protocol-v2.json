@@ -1,0 +1,53 @@
+{
+  "version": "frozen_scoring_protocol_v2",
+  "frozen_at": "2026-04-24",
+  "claim_boundary": "This protocol evaluates whether birth-date-only Mayan expression signatures align with independently labeled public biography themes. It is stronger than occupation-only scoring, but still does not prove metaphysical destiny.",
+  "dataset": {
+    "source": "references/public-figures-wikidata-1000.json",
+    "history_labels": "references/public-figures-history-labels-v2.json",
+    "source_apis": [
+      "Wikidata wbgetentities",
+      "English Wikipedia Action API extracts"
+    ],
+    "label_dimensions": [
+      "core_achievements",
+      "recurring_themes",
+      "turning_points",
+      "relationship_patterns",
+      "public_expression",
+      "spiritual_or_value_themes",
+      "crisis_and_rebirth"
+    ],
+    "no_kin_leakage_rule": "The history-labeling script must not import mayan_kin or calculate Kin/seal/tone."
+  },
+  "candidate_seed": "mayan-kin-history-label-candidates-v2",
+  "metrics": {
+    "history_label_forced_choice": {
+      "description": "For each public figure, compute a birth-date-only weighted expression signature and choose the best matching detailed biography label set among one true case plus distractors.",
+      "candidate_count": 5,
+      "chance_accuracy": 0.2,
+      "top_weighted_tags": 18,
+      "primary_metric": "top1_correct_accuracy",
+      "alpha": 0.001,
+      "target_top1_accuracy": 0.5,
+      "target_score": 90,
+      "minimum_holdout_sample_size": 100
+    },
+    "time_split_prediction": {
+      "description": "Use only post-cutoff dated evidence as the target for evaluating forward-looking alignment.",
+      "cutoff_year": 2010,
+      "top_weighted_tags": 18,
+      "minimum_post_cutoff_tags": 1,
+      "minimum_sample_size": 20,
+      "primary_metric": "post_cutoff_tag_f1",
+      "target_score": 90
+    }
+  },
+  "anti_leakage_rules": [
+    "Biography labels are generated before any Kin calculation.",
+    "Do not edit holdout labels after inspecting Mayan prediction failures.",
+    "Use train/dev for interpretation tuning; holdout is final reporting only.",
+    "Time-split future evidence must come from sentences with explicit years after the cutoff.",
+    "Undated biography text may support general history labels but cannot count as future evidence."
+  ]
+}

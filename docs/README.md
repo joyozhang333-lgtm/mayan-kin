@@ -26,5 +26,7 @@
 - [Public Figure Benchmark Results](../references/public-figure-benchmark-results.json)
 - [Public Figure Wikidata Dataset](../references/public-figures-wikidata-1000.json)
 - [Validation Findings 2026-04-24](../references/validation-findings-2026-04-24.md)
+- [Public Figure History Labels v2](../references/public-figures-history-labels-v2.json)
+- [Validation Findings v2](../references/validation-findings-2026-04-24-v2.md)
 - [OpenClaw Runtime](../runtimes/openclaw/AGENTS.md)
 - [Hermes Runtime](../runtimes/hermes/SYSTEM_PROMPT.md)
