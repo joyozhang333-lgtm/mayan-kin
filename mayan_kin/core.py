@@ -320,6 +320,145 @@ TONE_PRECISION = {
     },
 }
 
+SEAL_PUBLIC_EXPRESSION = {
+    "红龙": {
+        "tags": ["founding", "nurturing", "institution_building", "life_creation", "public_support", "nation_building"],
+        "fields": ["开创型项目", "照护与教育", "组织与共同体建设"],
+        "expression": "适合把一个新生命、新组织、新事业从无到有托起来。",
+        "risk": "容易把滋养变成替别人承担，或把开创期混乱全部背在自己身上。",
+    },
+    "白风": {
+        "tags": ["communication", "voice", "teaching", "media", "message", "product_storytelling"],
+        "fields": ["表达传播", "教育演讲", "产品叙事", "精神与思想传递"],
+        "expression": "适合把看不见的精神、理念、信息翻译成能被听见的话。",
+        "risk": "容易说很多却不够落地，或为了维持沟通而牺牲真实。",
+    },
+    "蓝夜": {
+        "tags": ["imagination", "inner_world", "visionary_dream", "hidden_resources", "abundance", "invention"],
+        "fields": ["想象力产业", "愿景设计", "资源整合", "长期财富与梦想工程"],
+        "expression": "适合从内在愿景、想象力和隐藏资源中创造现实可能。",
+        "risk": "容易停在想象、匮乏或封闭的内在世界里。",
+    },
+    "黄种子": {
+        "tags": ["growth", "focus", "talent_development", "cultivation", "long_term_development", "brand_building"],
+        "fields": ["长期项目培育", "教育成长", "品牌与能力建设"],
+        "expression": "适合把潜能长期培育成可见成果，让一个方向持续开花。",
+        "risk": "容易把成长变成控制，或因标准过高而推迟开始。",
+    },
+    "红蛇": {
+        "tags": ["embodiment", "vitality", "survival", "instinct", "body", "sensuality"],
+        "fields": ["身体经验", "生命力表达", "危机生存", "强烈个人风格"],
+        "expression": "适合把身体、本能和生命力转化成直接而有冲击力的表达。",
+        "risk": "容易被生存焦虑、欲望或强烈身体反应牵引。",
+    },
+    "白世界桥": {
+        "tags": ["transition", "bridge", "cross_boundary", "negotiation", "death_rebirth", "system_change"],
+        "fields": ["跨界连接", "转型改革", "国际化与桥梁角色", "旧系统更新"],
+        "expression": "适合连接不同世界，完成旧阶段，并把关系或系统带向新机会。",
+        "risk": "容易把结束当逃避，或在关键转型中没有完成交接。",
+    },
+    "蓝手": {
+        "tags": ["healing", "craft", "service", "completion", "practical_skill", "applied_work"],
+        "fields": ["疗愈与服务", "工艺实践", "专业技能", "问题解决"],
+        "expression": "适合通过亲手实践、完成、疗愈和服务让价值落地。",
+        "risk": "容易过度修补，或把价值感绑在解决别人的问题上。",
+    },
+    "黄星星": {
+        "tags": ["art", "aesthetics", "performance", "public_style", "harmony", "symbolic_design"],
+        "fields": ["艺术创作", "审美表达", "舞台与视觉", "品牌风格"],
+        "expression": "适合把美感、秩序和品质变成作品、风格或公众形象。",
+        "risk": "容易被完美、形象或审美标准困住。",
+    },
+    "红月": {
+        "tags": ["purification", "emotion", "flow", "reform", "public_healing", "moral_clarity"],
+        "fields": ["情绪与疗愈", "改革净化", "公众议题清理", "水一样的流动表达"],
+        "expression": "适合感知失真、清理堵塞，并让系统重新恢复流动。",
+        "risk": "容易替人或环境吸收过多情绪，最后变成自我消耗。",
+    },
+    "白狗": {
+        "tags": ["loyalty", "love", "community", "relationship", "empathy", "devotion"],
+        "fields": ["关系经营", "社群凝聚", "情感连接", "忠诚与承诺"],
+        "expression": "适合用真心、忠诚和关系品质建立深层连接。",
+        "risk": "容易把爱变成代偿，或为了关系忽略自己的边界。",
+    },
+    "蓝猴": {
+        "tags": ["creativity", "play", "experimental_intelligence", "entertainment", "imagination", "computing"],
+        "fields": ["创意实验", "娱乐内容", "儿童与游戏", "聪明的跨界发明"],
+        "expression": "适合用游戏感、创造力和实验精神打破僵局。",
+        "risk": "容易用轻松逃避深度，或把不确定包装成聪明。",
+    },
+    "黄人": {
+        "tags": ["influence", "free_will", "leadership", "social_change", "public_choice", "human_rights"],
+        "fields": ["领导力", "公共影响", "社会运动", "价值观倡导"],
+        "expression": "适合以自由意志、判断力和人本影响力推动公共选择。",
+        "risk": "容易被外界标准牵引，或用影响别人证明自己正确。",
+    },
+    "红天行者": {
+        "tags": ["exploration", "frontier", "space", "expansion", "travel", "boundary_testing"],
+        "fields": ["空间探索", "跨地域拓展", "前沿技术", "新领域开路"],
+        "expression": "适合探索新空间、新地图和更大的生命边界。",
+        "risk": "容易把探索变成逃离，换环境却没有沉淀经验。",
+    },
+    "白巫师": {
+        "tags": ["presence", "psychology", "symbolism", "spiritual_depth", "identity", "archetype"],
+        "fields": ["心理与象征", "灵性与临在", "身份探索", "沉浸式艺术"],
+        "expression": "适合以临在、感受力和象征语言触碰人的深层经验。",
+        "risk": "容易把投射当真实，或沉浸在不落地的感受里。",
+    },
+    "蓝鹰": {
+        "tags": ["vision", "strategy", "systems_thinking", "future", "mind", "big_picture"],
+        "fields": ["战略规划", "系统设计", "未来想象", "宏观视野"],
+        "expression": "适合从高处看见系统、趋势和未来路线。",
+        "risk": "容易停在远景和脑内蓝图里，绕开眼前执行。",
+    },
+    "黄战士": {
+        "tags": ["inquiry", "courage", "truth_seeking", "challenge_authority", "strategy", "critical_thinking"],
+        "fields": ["质疑权威", "战略斗争", "科学追问", "公共辩论"],
+        "expression": "适合用勇气、提问和战略意识穿透虚假权威。",
+        "risk": "容易把质疑变成对抗，或为了赢而失去求真。",
+    },
+    "红地球": {
+        "tags": ["navigation", "timing", "synchronization", "movement", "ecology", "cultural_timing"],
+        "fields": ["节奏导航", "组织调度", "文化时机", "生态与土地议题"],
+        "expression": "适合顺着现实反馈、同步性和时机做导航。",
+        "risk": "容易过度看征兆，却没有把反馈变成行动。",
+    },
+    "白镜": {
+        "tags": ["truth", "precision", "order", "analysis", "reflection", "justice", "scientific_research"],
+        "fields": ["研究分析", "科学验证", "规则秩序", "真相与公正"],
+        "expression": "适合照见真相、建立秩序，并把模糊问题分析清楚。",
+        "risk": "容易把看见变成审判，或用正确感制造隔离。",
+    },
+    "蓝风暴": {
+        "tags": ["transformation", "disruption", "energy", "innovation", "crisis_catalyst", "reinvention"],
+        "fields": ["技术革新", "危机重组", "组织转型", "高能量突破"],
+        "expression": "适合催化旧结构重组，让系统进入新版本。",
+        "risk": "容易被变化吞没，或把混乱误认为升级。",
+    },
+    "黄太阳": {
+        "tags": ["illumination", "wisdom", "public_light", "humanitarian", "leadership", "clarity"],
+        "fields": ["公共启蒙", "智慧传播", "人道主义", "照亮型领导"],
+        "expression": "适合把清明、智慧和生命力照亮给更多人。",
+        "risk": "容易用正确感或救世感压过真实复杂性。",
+    },
+}
+
+TONE_PUBLIC_EXPRESSION = {
+    "磁性": ["purpose", "focus", "initiative", "attraction"],
+    "月亮": ["polarity", "stabilization", "challenge_awareness", "tension_mapping"],
+    "电力": ["activation", "service", "connection", "public_action"],
+    "自存": ["definition", "form", "measurement", "structure"],
+    "超频": ["empowerment", "command", "resource_gathering", "radiance"],
+    "韵律": ["organization", "balance", "sustainable_system", "rhythm"],
+    "共振": ["attunement", "channel", "inspiration", "frequency"],
+    "银河": ["integration", "integrity", "modeling", "alignment"],
+    "太阳": ["realization", "intention", "momentum", "manifesting_drive"],
+    "行星": ["manifestation", "result", "quality", "public_output"],
+    "光谱": ["release", "liberation", "deconstruction", "freedom"],
+    "水晶": ["cooperation", "community", "sharing", "collective_work"],
+    "宇宙": ["transcendence", "legacy", "endurance", "cycle_completion"],
+}
+
 STYLE_CONFIG = {
     "basic": {
         "label": "基础版",
@@ -842,6 +981,82 @@ def precision_profile_for(detail):
     }
 
 
+def public_expression_for(detail):
+    seal_profile = SEAL_PUBLIC_EXPRESSION.get(detail["seal_name"], {
+        "tags": ["self_expression"],
+        "fields": ["个人表达"],
+        "expression": f"适合把 {detail['keywords']} 转化成可被看见的现实表达。",
+        "risk": "容易停留在抽象感受，没有形成可验证的作品或行动。",
+    })
+    tone_tags = TONE_PUBLIC_EXPRESSION.get(detail["tone_name"], [])
+    tags = sorted(set(seal_profile["tags"] + tone_tags))
+    return {
+        "tags": tags,
+        "fields": seal_profile["fields"],
+        "expression": seal_profile["expression"],
+        "risk": seal_profile["risk"],
+    }
+
+
+def build_expression_profile(destiny):
+    role_labels = {
+        "main": "主印记",
+        "support": "支持位",
+        "guide": "引导位",
+        "challenge": "挑战位",
+        "occult": "隐藏推动",
+    }
+    roles = []
+    all_tags = set()
+    field_rank = []
+    for role in ("main", "support", "guide", "challenge", "occult"):
+        detail = destiny[role]
+        marker = public_expression_for(detail)
+        all_tags.update(marker["tags"])
+        field_rank.extend(marker["fields"])
+        roles.append({
+            "role": role,
+            "label": role_labels[role],
+            "sign": f"{detail['tone_name']}{detail['seal_name']}",
+            "tags": marker["tags"],
+            "fields": marker["fields"],
+            "expression": marker["expression"],
+            "risk": marker["risk"],
+        })
+
+    unique_fields = []
+    for field in field_rank:
+        if field not in unique_fields:
+            unique_fields.append(field)
+
+    main = destiny["main"]
+    support = destiny["support"]
+    challenge = destiny["challenge"]
+    occult = destiny["occult"]
+    main_marker = public_expression_for(main)
+    support_marker = public_expression_for(support)
+    challenge_marker = public_expression_for(challenge)
+    occult_marker = public_expression_for(occult)
+
+    return {
+        "tags": sorted(all_tags),
+        "fields": unique_fields[:8],
+        "roles": roles,
+        "summary": [
+            f"公开表达主轴更靠近 {main['tone_name']}{main['seal_name']}：{main_marker['expression']}",
+            f"可被放大的支持条件来自 {support['seal_name']}：优先建设 {', '.join(support_marker['fields'][:2])}。",
+            f"最容易被公众误读或卡住的地方在 {challenge['seal_name']}：{challenge_marker['risk']}",
+            f"长期影响力的暗线来自 {occult['seal_name']}：它会把个人经验推向更深层的选择和公共表达。",
+        ],
+        "public_questions": [
+            f"我现在的作品、事业或公开表达，是否真的承载了 {main_marker['fields'][0]}？",
+            f"我有没有先建设 {support_marker['fields'][0]}，再去放大影响力？",
+            f"当 {challenge['seal_name']} 的低频出现时，我是在升级表达，还是在重复 {challenge_marker['risk']}？",
+            f"我的长期影响力，是不是正在把 {occult_marker['fields'][0]} 这条暗线活出来？",
+        ],
+    }
+
+
 def build_precision_profile(destiny):
     main = destiny["main"]
     support = destiny["support"]
@@ -1080,6 +1295,7 @@ def build_professional_personal_analysis(destiny):
             f"引导位又回到 {guide['seal_name']}，说明你真正成熟后的样子，不是换成另一个人格，而是把原本这套天赋活得更稳定、更清楚，也更不容易被外界拖走。",
         ],
         "precision_profile": build_precision_profile(destiny),
+        "expression_profile": build_expression_profile(destiny),
         "risk_matrix": [
             {
                 "label": "高频优势",
@@ -1898,6 +2114,22 @@ def format_personal_report(report):
         for item in analysis["risk_matrix"]:
             lines.append(f"- {item['label']}: {item['detail']}")
         format_precision_section(lines, "解读校准", analysis["precision_profile"])
+        expression = analysis["expression_profile"]
+        lines.append(f"\n{'─' * 50}")
+        lines.append("  现实表达校准")
+        lines.append(f"{'─' * 50}")
+        lines.append(f"- 表达标签: {', '.join(expression['tags'])}")
+        lines.append(f"- 适配场域: {', '.join(expression['fields'])}")
+        lines.append("- 公开表达主线")
+        for item in expression["summary"]:
+            lines.append(f"  {item}")
+        lines.append("- 五大位置的现实表达")
+        for item in expression["roles"]:
+            lines.append(f"  {item['label']} · {item['sign']}: {item['expression']}")
+            lines.append(f"  风险: {item['risk']}")
+        lines.append("- 现实验证问题")
+        for item in expression["public_questions"]:
+            lines.append(f"  {item}")
 
     lines.append(f"\n{'─' * 50}")
     lines.append("  五大位置解释")

@@ -19,5 +19,7 @@
 
 - [Project README](../README.md)
 - [Validation Samples](../references/validation-samples.md)
+- [Public Figure Benchmark](../references/public-figure-benchmark.json)
+- [Public Figure Benchmark Results](../references/public-figure-benchmark-results.json)
 - [OpenClaw Runtime](../runtimes/openclaw/AGENTS.md)
 - [Hermes Runtime](../runtimes/hermes/SYSTEM_PROMPT.md)

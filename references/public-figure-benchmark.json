@@ -1,0 +1,115 @@
+{
+  "version": "v1",
+  "description": "Public figure benchmark for evaluating whether deep Mayan Kin interpretations cover publicly observable life themes. This is a product-quality benchmark, not a scientific proof of destiny.",
+  "scoring_note": "Scores measure overlap between generated expression tags and public biography themes. A score above 90 means the report is sufficiently specific for this benchmark.",
+  "cases": [
+    {
+      "name": "Albert Einstein",
+      "birth_date": "1879-03-14",
+      "public_role": "theoretical physicist; Nobel Prize laureate; public intellectual",
+      "source_url": "https://www.nobelprize.org/prizes/physics/1921/einstein/facts/",
+      "observed_notes": "Known for theoretical physics, relativity, public wisdom, and humanitarian public presence.",
+      "expected_tags": ["wisdom", "illumination", "innovation", "humanitarian", "transformation"],
+      "primary_tags": ["wisdom", "illumination", "innovation"]
+    },
+    {
+      "name": "Marie Curie",
+      "birth_date": "1867-11-07",
+      "public_role": "physicist and chemist; pioneer of radioactivity; two-time Nobel laureate",
+      "source_url": "https://www.nobelprize.org/prizes/chemistry/1911/marie-curie/facts/",
+      "observed_notes": "Known for scientific research, precision, discovery, persistence, and work on radioactivity.",
+      "expected_tags": ["scientific_research", "precision", "analysis", "truth", "invention"],
+      "primary_tags": ["scientific_research", "precision", "truth"]
+    },
+    {
+      "name": "Nelson Mandela",
+      "birth_date": "1918-07-18",
+      "public_role": "anti-apartheid leader; South African president; Nobel Peace Prize laureate",
+      "source_url": "https://www.nobelprize.org/prizes/peace/1993/mandela/facts/",
+      "observed_notes": "Known for leadership, human rights, reconciliation, nation-building, and public justice.",
+      "expected_tags": ["leadership", "humanitarian", "nation_building", "justice", "public_support"],
+      "primary_tags": ["leadership", "humanitarian", "nation_building"]
+    },
+    {
+      "name": "Steve Jobs",
+      "birth_date": "1955-02-24",
+      "public_role": "Apple cofounder; entrepreneur; product storyteller",
+      "source_url": "https://www.britannica.com/biography/Steve-Jobs",
+      "observed_notes": "Known for product storytelling, technology disruption, design-driven communication, and industry transformation.",
+      "expected_tags": ["communication", "product_storytelling", "innovation", "transformation", "navigation"],
+      "primary_tags": ["communication", "innovation", "product_storytelling"]
+    },
+    {
+      "name": "Mahatma Gandhi",
+      "birth_date": "1869-10-02",
+      "public_role": "Indian independence leader; social activist; writer",
+      "source_url": "https://www.britannica.com/biography/Mahatma-Gandhi",
+      "observed_notes": "Known for public influence, social change, moral clarity, service, and human rights.",
+      "expected_tags": ["influence", "human_rights", "social_change", "service", "moral_clarity"],
+      "primary_tags": ["influence", "human_rights", "social_change"]
+    },
+    {
+      "name": "Martin Luther King Jr.",
+      "birth_date": "1929-01-15",
+      "public_role": "civil rights leader; Baptist minister; Nobel Peace Prize laureate",
+      "source_url": "https://www.britannica.com/biography/Martin-Luther-King-Jr",
+      "observed_notes": "Known for civil rights leadership, public voice, nonviolent social change, and moral clarity.",
+      "expected_tags": ["voice", "human_rights", "social_change", "leadership", "moral_clarity"],
+      "primary_tags": ["voice", "human_rights", "social_change"]
+    },
+    {
+      "name": "Ada Lovelace",
+      "birth_date": "1815-12-10",
+      "public_role": "mathematician; early computing pioneer",
+      "source_url": "https://www.britannica.com/biography/Ada-Lovelace",
+      "observed_notes": "Known for imagination, symbolic design, mathematical creativity, and early computing insight.",
+      "expected_tags": ["creativity", "computing", "experimental_intelligence", "imagination", "symbolic_design"],
+      "primary_tags": ["computing", "creativity", "experimental_intelligence"]
+    },
+    {
+      "name": "Carl Jung",
+      "birth_date": "1875-07-26",
+      "public_role": "psychiatrist; founder of analytical psychology",
+      "source_url": "https://www.britannica.com/biography/Carl-Jung",
+      "observed_notes": "Known for analytical psychology, archetypes, symbolism, healing, and spiritual depth.",
+      "expected_tags": ["psychology", "symbolism", "archetype", "healing", "spiritual_depth"],
+      "primary_tags": ["psychology", "symbolism", "archetype"]
+    },
+    {
+      "name": "Frida Kahlo",
+      "birth_date": "1907-07-06",
+      "public_role": "Mexican painter; self-portrait artist",
+      "source_url": "https://www.britannica.com/biography/Frida-Kahlo",
+      "observed_notes": "Known for identity, body, pain, symbolism, self-portraiture, and transformative art.",
+      "expected_tags": ["identity", "body", "symbolism", "healing", "embodiment"],
+      "primary_tags": ["identity", "body", "symbolism"]
+    },
+    {
+      "name": "Oprah Winfrey",
+      "birth_date": "1954-01-29",
+      "public_role": "media executive; talk show host; producer",
+      "source_url": "https://www.britannica.com/biography/Oprah-Winfrey",
+      "observed_notes": "Known for entertainment, empathy, public conversation, community influence, and nurturing media presence.",
+      "expected_tags": ["entertainment", "empathy", "community", "nurturing", "performance"],
+      "primary_tags": ["entertainment", "empathy", "community"]
+    },
+    {
+      "name": "Beyoncé",
+      "birth_date": "1981-09-04",
+      "public_role": "singer-songwriter; actress; businesswoman",
+      "source_url": "https://www.britannica.com/biography/Beyonce",
+      "observed_notes": "Known for performance, long-term talent development, brand building, vision, and public style.",
+      "expected_tags": ["performance", "brand_building", "talent_development", "vision", "public_style"],
+      "primary_tags": ["performance", "brand_building", "vision"]
+    },
+    {
+      "name": "Nikola Tesla",
+      "birth_date": "1856-07-10",
+      "public_role": "inventor and engineer",
+      "source_url": "https://www.britannica.com/biography/Nikola-Tesla",
+      "observed_notes": "Known for invention, electricity, engineering, scientific research, precision, and frontier technology.",
+      "expected_tags": ["invention", "innovation", "scientific_research", "precision", "frontier"],
+      "primary_tags": ["invention", "innovation", "scientific_research"]
+    }
+  ]
+}

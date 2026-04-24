@@ -110,6 +110,9 @@ class MayanCalcTests(unittest.TestCase):
         self.assertEqual(len(deep["deep_analysis"]["precision_profile"]["trigger_map"]), 4)
         self.assertEqual(len(deep["deep_analysis"]["precision_profile"]["validation_checks"]), 5)
         self.assertIn("红月", deep["deep_analysis"]["precision_profile"]["axis_reading"][0])
+        self.assertIn("expression_profile", deep["deep_analysis"])
+        self.assertIn("public_healing", deep["deep_analysis"]["expression_profile"]["tags"])
+        self.assertEqual(len(deep["deep_analysis"]["expression_profile"]["roles"]), 5)
         self.assertEqual(len(deep["deep_analysis"]["risk_matrix"]), 4)
         self.assertEqual(len(deep["deep_analysis"]["situational_insight"]["current_block"]), 3)
         self.assertEqual(len(deep["deep_analysis"]["reflection_dialogue"]["resonance_points"]), 3)
@@ -141,6 +144,7 @@ class MayanCalcTests(unittest.TestCase):
         self.assertIn("解读校准", result.stdout)
         self.assertIn("验证问题", result.stdout)
         self.assertIn("最小实验", result.stdout)
+        self.assertIn("现实表达校准", result.stdout)
         self.assertIn("情境直读", result.stdout)
         self.assertIn("个人感悟对话入口", result.stdout)
         self.assertNotIn("行动建议：", result.stdout)
@@ -337,6 +341,16 @@ class MayanCalcTests(unittest.TestCase):
         self.assertEqual(len(insight["current_knot"]), 3)
         self.assertEqual(len(insight["relationship_drift"]), 3)
         self.assertEqual(len(insight["minimum_alignment"]), 3)
+
+    def test_public_figure_benchmark_exceeds_threshold(self):
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "scripts" / "evaluate_public_figures.py"), "--min-score", "90"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        self.assertIn("Public figure benchmark cases: 12", result.stdout)
+        self.assertIn("Average score:", result.stdout)
 
 
 if __name__ == "__main__":

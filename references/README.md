@@ -27,6 +27,8 @@
 ## Validation
 
 - [validation-samples.md](validation-samples.md) - 权威样本与公开锚点校验
+- [public-figure-benchmark.json](public-figure-benchmark.json) - 公开人物生日、生平主题与解读贴合度 benchmark
+- [public-figure-benchmark-results.json](public-figure-benchmark-results.json) - 最近一次公开人物 benchmark 结果
 
 ## How To Use This Layer
 

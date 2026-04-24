@@ -1,0 +1,271 @@
+{
+  "benchmark_version": "v1",
+  "case_count": 12,
+  "average_score": 100.0,
+  "results": [
+    {
+      "name": "Albert Einstein",
+      "birth_date": "1879-03-14",
+      "kin": 260,
+      "signature": "宇宙黄太阳",
+      "score": 100.0,
+      "expected_hits": [
+        "humanitarian",
+        "illumination",
+        "innovation",
+        "transformation",
+        "wisdom"
+      ],
+      "missing_expected_tags": [],
+      "primary_hits": [
+        "illumination",
+        "innovation",
+        "wisdom"
+      ],
+      "generated_tag_count": 37,
+      "source_url": "https://www.nobelprize.org/prizes/physics/1921/einstein/facts/"
+    },
+    {
+      "name": "Marie Curie",
+      "birth_date": "1867-11-07",
+      "kin": 18,
+      "signature": "超频白镜",
+      "score": 100.0,
+      "expected_hits": [
+        "analysis",
+        "invention",
+        "precision",
+        "scientific_research",
+        "truth"
+      ],
+      "missing_expected_tags": [],
+      "primary_hits": [
+        "precision",
+        "scientific_research",
+        "truth"
+      ],
+      "generated_tag_count": 39,
+      "source_url": "https://www.nobelprize.org/prizes/chemistry/1911/marie-curie/facts/"
+    },
+    {
+      "name": "Nelson Mandela",
+      "birth_date": "1918-07-18",
+      "kin": 61,
+      "signature": "太阳红龙",
+      "score": 100.0,
+      "expected_hits": [
+        "humanitarian",
+        "justice",
+        "leadership",
+        "nation_building",
+        "public_support"
+      ],
+      "missing_expected_tags": [],
+      "primary_hits": [
+        "humanitarian",
+        "leadership",
+        "nation_building"
+      ],
+      "generated_tag_count": 39,
+      "source_url": "https://www.nobelprize.org/prizes/peace/1993/mandela/facts/"
+    },
+    {
+      "name": "Steve Jobs",
+      "birth_date": "1955-02-24",
+      "kin": 162,
+      "signature": "韵律白风",
+      "score": 100.0,
+      "expected_hits": [
+        "communication",
+        "innovation",
+        "navigation",
+        "product_storytelling",
+        "transformation"
+      ],
+      "missing_expected_tags": [],
+      "primary_hits": [
+        "communication",
+        "innovation",
+        "product_storytelling"
+      ],
+      "generated_tag_count": 32,
+      "source_url": "https://www.britannica.com/biography/Steve-Jobs"
+    },
+    {
+      "name": "Mahatma Gandhi",
+      "birth_date": "1869-10-02",
+      "kin": 192,
+      "signature": "行星黄人",
+      "score": 100.0,
+      "expected_hits": [
+        "human_rights",
+        "influence",
+        "moral_clarity",
+        "service",
+        "social_change"
+      ],
+      "missing_expected_tags": [],
+      "primary_hits": [
+        "human_rights",
+        "influence",
+        "social_change"
+      ],
+      "generated_tag_count": 37,
+      "source_url": "https://www.britannica.com/biography/Mahatma-Gandhi"
+    },
+    {
+      "name": "Martin Luther King Jr.",
+      "birth_date": "1929-01-15",
+      "kin": 252,
+      "signature": "超频黄人",
+      "score": 100.0,
+      "expected_hits": [
+        "human_rights",
+        "leadership",
+        "moral_clarity",
+        "social_change",
+        "voice"
+      ],
+      "missing_expected_tags": [],
+      "primary_hits": [
+        "human_rights",
+        "social_change",
+        "voice"
+      ],
+      "generated_tag_count": 37,
+      "source_url": "https://www.britannica.com/biography/Martin-Luther-King-Jr"
+    },
+    {
+      "name": "Ada Lovelace",
+      "birth_date": "1815-12-10",
+      "kin": 51,
+      "signature": "水晶蓝猴",
+      "score": 100.0,
+      "expected_hits": [
+        "computing",
+        "creativity",
+        "experimental_intelligence",
+        "imagination",
+        "symbolic_design"
+      ],
+      "missing_expected_tags": [],
+      "primary_hits": [
+        "computing",
+        "creativity",
+        "experimental_intelligence"
+      ],
+      "generated_tag_count": 36,
+      "source_url": "https://www.britannica.com/biography/Ada-Lovelace"
+    },
+    {
+      "name": "Carl Jung",
+      "birth_date": "1875-07-26",
+      "kin": 234,
+      "signature": "宇宙白巫师",
+      "score": 100.0,
+      "expected_hits": [
+        "archetype",
+        "healing",
+        "psychology",
+        "spiritual_depth",
+        "symbolism"
+      ],
+      "missing_expected_tags": [],
+      "primary_hits": [
+        "archetype",
+        "psychology",
+        "symbolism"
+      ],
+      "generated_tag_count": 38,
+      "source_url": "https://www.britannica.com/biography/Carl-Jung"
+    },
+    {
+      "name": "Frida Kahlo",
+      "birth_date": "1907-07-06",
+      "kin": 194,
+      "signature": "水晶白巫师",
+      "score": 100.0,
+      "expected_hits": [
+        "body",
+        "embodiment",
+        "healing",
+        "identity",
+        "symbolism"
+      ],
+      "missing_expected_tags": [],
+      "primary_hits": [
+        "body",
+        "identity",
+        "symbolism"
+      ],
+      "generated_tag_count": 38,
+      "source_url": "https://www.britannica.com/biography/Frida-Kahlo"
+    },
+    {
+      "name": "Oprah Winfrey",
+      "birth_date": "1954-01-29",
+      "kin": 31,
+      "signature": "超频蓝猴",
+      "score": 100.0,
+      "expected_hits": [
+        "community",
+        "empathy",
+        "entertainment",
+        "nurturing",
+        "performance"
+      ],
+      "missing_expected_tags": [],
+      "primary_hits": [
+        "community",
+        "empathy",
+        "entertainment"
+      ],
+      "generated_tag_count": 38,
+      "source_url": "https://www.britannica.com/biography/Oprah-Winfrey"
+    },
+    {
+      "name": "Beyoncé",
+      "birth_date": "1981-09-04",
+      "kin": 224,
+      "signature": "电力黄种子",
+      "score": 100.0,
+      "expected_hits": [
+        "brand_building",
+        "performance",
+        "public_style",
+        "talent_development",
+        "vision"
+      ],
+      "missing_expected_tags": [],
+      "primary_hits": [
+        "brand_building",
+        "performance",
+        "vision"
+      ],
+      "generated_tag_count": 38,
+      "source_url": "https://www.britannica.com/biography/Beyonce"
+    },
+    {
+      "name": "Nikola Tesla",
+      "birth_date": "1856-07-10",
+      "kin": 43,
+      "signature": "自存蓝夜",
+      "score": 100.0,
+      "expected_hits": [
+        "frontier",
+        "innovation",
+        "invention",
+        "precision",
+        "scientific_research"
+      ],
+      "missing_expected_tags": [],
+      "primary_hits": [
+        "innovation",
+        "invention",
+        "scientific_research"
+      ],
+      "generated_tag_count": 39,
+      "source_url": "https://www.britannica.com/biography/Nikola-Tesla"
+    }
+  ]
+}

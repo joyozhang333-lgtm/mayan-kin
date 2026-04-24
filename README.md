@@ -86,6 +86,7 @@ The project is built around three principles:
 - `--contract` 接口契约
 - `--route-query` 知识卡路由
 - `--auto-answer` 自动判断知识卡、报告风格和报告模式
+- 公开人物 benchmark：用 12 位公开人物的生日与公开生平主题评测深度解读覆盖度
 - Codex / Claude 风格 skill
 - OpenClaw runtime 版本
 - Hermes runtime 版本
@@ -301,6 +302,14 @@ python3 scripts/mayan_calc.py 1990-03-15 --compatibility 1992-07-20
 python3 -m unittest discover -s tests -p 'test_*.py'
 ```
 
+### 10. 跑公开人物 benchmark
+
+```bash
+python3 scripts/evaluate_public_figures.py --min-score 90
+```
+
+这个 benchmark 使用 `references/public-figure-benchmark.json` 中的公开人物生日、资料来源和公开生平主题，评测深度报告的现实表达标签是否覆盖这些主题。它是产品质量评测，不是科学宿命论证明。
+
 如果你是要接进 AI 助手，而不是只在命令行里用：
 - Codex / Claude 风格：看 `SKILL.md`
 - OpenClaw：看 `runtimes/openclaw/AGENTS.md` 和 `runtimes/openclaw/DEMO.md`
@@ -334,6 +343,8 @@ python3 scripts/mayan_calc.py [birthday] [options]
 - [docs/v2-roadmap.md](docs/v2-roadmap.md) - v2 / v1.0 路线图
 - [references/README.md](references/README.md) - 知识卡导航页
 - [references/knowledge-index.json](references/knowledge-index.json) - 机读知识索引
+- [references/public-figure-benchmark.json](references/public-figure-benchmark.json) - 公开人物解读贴合度 benchmark
+- [references/public-figure-benchmark-results.json](references/public-figure-benchmark-results.json) - 最近一次 benchmark 结果
 
 ## Examples
 
