@@ -16,6 +16,7 @@
 - read the `solar seal`, `galactic tone`, and `five destiny positions`
 - check `yearly readings` and `compatibility readings`
 - generate guided `personal`, `yearly`, and `compatibility` reports with growth path and action advice
+- generate deep interpretation calibration for personal, yearly, and compatibility reports with triggers, misread risks, validation questions, and minimum experiments
 - auto-route user questions to the right knowledge cards, report style, and report mode
 - reuse the calculator in `AI agents`, `skills`, and `runtime toolkits`
 
@@ -24,6 +25,7 @@
 - Kin 号、图腾、调性怎么查
 - 五大天赋盘怎么排
 - 流年和合盘怎么做
+- 深度版如何把个人、流年和合盘盘面翻译成触发条件、误读风险、验证问题和最小实验
 - 怎么让系统自动判断该读哪些知识卡、该用什么解释风格、该出哪种报告
 - 怎么把这套能力接进 AI 助手或内容系统
 
@@ -442,6 +444,7 @@ python3 scripts/mayan_calc.py 1995-03-03 --report --style deep
 适合：
 - 咨询师、陪伴者、教练直接拿来追问和判断
 - 更快看见卡点、判断点和下一步动作
+- 用“解读校准”区分高频表达、低频代偿、触发条件和现实验证点
 - 把同一份盘切换成更偏对话与行动的输出
 
 ### 示例九：接口契约

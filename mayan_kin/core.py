@@ -109,6 +109,217 @@ DEEP_TONE_GUIDANCE = {
     "宇宙": "它会把你推向更长期的版本，不只是短期灵感或阶段性爆发，而是能不能持续活出来。",
 }
 
+SEAL_PRECISION = {
+    "红龙": {
+        "high": "把新的生命、项目或关系先稳稳滋养起来",
+        "low": "过度照顾、替别人承担诞生前的混乱",
+        "trigger": "事情刚开始、责任还没分清、别人需要被托住时",
+        "need": "清楚区分滋养与代养，先确认自己是否有余力",
+        "question": "我是在滋养一个真实会成长的东西，还是在替别人承担还没成形的混乱？",
+    },
+    "白风": {
+        "high": "把精神、信息和真实感受清楚表达出来",
+        "low": "话很多但没有落点，或为了维持气氛而失真表达",
+        "trigger": "信息不透明、误会增多、真实话语被压住时",
+        "need": "把感受翻译成清楚的话、边界和请求",
+        "question": "我现在说的话，是在传递真实，还是在替关系维持表面顺畅？",
+    },
+    "蓝夜": {
+        "high": "从内在愿景和直觉里看见丰盛方向",
+        "low": "沉进想象、匮乏感或封闭的内在剧场",
+        "trigger": "安全感不足、未来不清、外界催促你马上证明时",
+        "need": "把愿景落成资源地图和下一步现实动作",
+        "question": "这个愿景让我更有生命力，还是让我躲进一个不用行动的梦里？",
+    },
+    "黄种子": {
+        "high": "聚焦真正值得培育的方向，让潜能持续开花",
+        "low": "把成长变成过度控制、比较或迟迟不允许自己开始",
+        "trigger": "选择太多、方向发散、需要长期培育时",
+        "need": "确认种子、土壤、节奏和阶段目标是否匹配",
+        "question": "我现在是在培育生命力，还是在用完美标准压住它？",
+    },
+    "红蛇": {
+        "high": "顺着身体、本能和生命力做出快速而真实的反应",
+        "low": "被生存焦虑、欲望冲动或身体紧绷牵着走",
+        "trigger": "安全感受威胁、竞争加剧、身体已经明显反应时",
+        "need": "先回到身体调节，再做重大决定",
+        "question": "我的反应来自清醒的生命力，还是来自被威胁后的防御？",
+    },
+    "白世界桥": {
+        "high": "完成旧阶段、放下不再适合的身份，打开新机会",
+        "low": "用断开逃避投入，或迟迟不肯结束已经死亡的结构",
+        "trigger": "旧关系、旧工作、旧身份已经不能承载你时",
+        "need": "为结束设计仪式、边界和交接，而不是忽然消失",
+        "question": "我是在清醒完成一个阶段，还是在用切断逃开未处理的责任？",
+    },
+    "蓝手": {
+        "high": "通过亲自实践、疗愈和完成，让事情真正落地",
+        "low": "不停修补、过度介入，或把价值感绑在解决问题上",
+        "trigger": "别人求助、系统有漏洞、事情需要被收尾时",
+        "need": "判断哪些是你的手该完成的，哪些需要归还给对方",
+        "question": "我是在完成真正属于我的事，还是在用修补感证明自己有价值？",
+    },
+    "黄星星": {
+        "high": "把秩序、美感和品质带进表达与作品",
+        "low": "陷入挑剔、形象焦虑或只追求好看不追求真实",
+        "trigger": "作品要公开、关系要被看见、品质标准被拉高时",
+        "need": "让美服务真实表达，而不是替真实表达上妆",
+        "question": "这个表达更真实优雅了，还是只是更安全、更好看了？",
+    },
+    "红月": {
+        "high": "感知失真与堵塞，清理情绪并恢复生命流动",
+        "low": "把敏感活成长期吸收、代谢别人情绪和自我消耗",
+        "trigger": "环境失真、边界不清、情绪堆积或关系浑浊时",
+        "need": "先清理边界、节奏和情绪归属，再决定投入",
+        "question": "我是在恢复流动，还是在替别人排毒、替环境承担失真？",
+    },
+    "白狗": {
+        "high": "以真心、忠诚和关系质量建立深层连接",
+        "low": "把爱变成过度忠诚、关系代偿或害怕离开",
+        "trigger": "关系需要承诺、信任被测试、归属感被撼动时",
+        "need": "确认忠诚是否双向，真心是否被现实承接",
+        "question": "我守护的是有生命力的连接，还是在守护自己害怕失去的执着？",
+    },
+    "蓝猴": {
+        "high": "用游戏感、创意和灵活性打破僵局",
+        "low": "用玩笑逃避深度，或把不确定包装成聪明",
+        "trigger": "规则僵硬、气氛沉重、必须跳出原有框架时",
+        "need": "让轻盈服务真实，而不是用轻盈躲开真实",
+        "question": "我的轻松是在打开可能性，还是在回避需要认真面对的东西？",
+    },
+    "黄人": {
+        "high": "长出自由意志、判断力和对他人的成熟影响力",
+        "low": "被外界标准牵引，或用影响别人证明自己的选择正确",
+        "trigger": "需要独立判断、价值观冲突、他人期待很强时",
+        "need": "先确认这是自己的选择，再设计现实承载",
+        "question": "这个选择是我清醒的自由意志，还是我在赢过别人的标准？",
+    },
+    "红天行者": {
+        "high": "探索新空间、新经验和更大的生命边界",
+        "low": "把探索变成逃离、不断换环境却不沉淀经验",
+        "trigger": "空间受限、旧地图失效、需要走出舒适圈时",
+        "need": "为探索设置目标、回收和落地方式",
+        "question": "我是在扩展生命空间，还是在离开一个我不想面对的课题？",
+    },
+    "白巫师": {
+        "high": "以临在、感受力和内在吸引力进入真实经验",
+        "low": "沉浸在理想化、投射或不愿落地的感受里",
+        "trigger": "被某种人事物强烈吸引、现实判断被感受覆盖时",
+        "need": "让感受接受时间、事实和边界的校准",
+        "question": "我感受到的是当下真实，还是我把渴望投射成了真实？",
+    },
+    "蓝鹰": {
+        "high": "从高处看见系统、趋势和创造路线",
+        "low": "停留在脑内蓝图，或用远景绕开眼前执行",
+        "trigger": "局部混乱、路径不清、需要重新看整体时",
+        "need": "把视野拆成阶段策略、角色分工和下一步动作",
+        "question": "我的视野正在帮助落地，还是让我远离当下该做的选择？",
+    },
+    "黄战士": {
+        "high": "用勇气、提问和智慧穿透虚假的权威",
+        "low": "把质疑变成防御、对抗或永远不服输",
+        "trigger": "权威压迫、规则不合理、内在真相被挑战时",
+        "need": "把质疑导向求真，而不是导向证明自己赢",
+        "question": "我是在追问真相，还是在用对抗维护自我？",
+    },
+    "红地球": {
+        "high": "顺着同步性、节奏和现实反馈做导航",
+        "low": "过度看征兆却不行动，或被环境节奏带跑",
+        "trigger": "现实反馈密集、方向需要校准、节奏明显不顺时",
+        "need": "把直觉导航和现实反馈同时记录、复盘、修正",
+        "question": "我是在跟随真实同步，还是把外界变化都解释成命运安排？",
+    },
+    "白镜": {
+        "high": "照见真相、秩序和关系里的真实边界",
+        "low": "把看见变成审判、冷硬或不断挑错",
+        "trigger": "关系失序、真相被遮盖、规则边界需要重建时",
+        "need": "用清明服务修正，而不是用清明制造隔离",
+        "question": "我照见真相后，是为了让事情更清楚，还是为了证明别人不对？",
+    },
+    "蓝风暴": {
+        "high": "催化旧结构重组，让能量进入新版本",
+        "low": "被变化吞没，或把混乱误认为升级",
+        "trigger": "旧系统撑不住、压力突然放大、变化连续发生时",
+        "need": "先稳定中心，再判断哪些变化值得承接",
+        "question": "这场变化是在升级结构，还是只是把我卷进更大的消耗？",
+    },
+    "黄太阳": {
+        "high": "把清明、温暖和生命智慧照亮给更多人",
+        "low": "用正确感、光明感或救世感压过真实复杂性",
+        "trigger": "需要定方向、给信心、承担照亮角色时",
+        "need": "让光明保持谦卑，允许真实比理念更复杂",
+        "question": "我是在照亮生命，还是在用正确感回避更细腻的真实？",
+    },
+}
+
+TONE_PRECISION = {
+    "磁性": {
+        "task": "收束目的，把分散的生命力吸回一个核心",
+        "shadow": "什么都想要，或用强烈吸引替代清楚选择",
+        "check": "这件事是不是正在让我更聚焦，而不是更分散？",
+    },
+    "月亮": {
+        "task": "识别两极、挑战和真正需要稳定的矛盾点",
+        "shadow": "被对立拉扯，迟迟无法承认核心冲突",
+        "check": "我是否已经说清楚当前最大的矛盾是什么？",
+    },
+    "电力": {
+        "task": "激活连接，把觉察转化为服务和行动",
+        "shadow": "到处连接却没有稳定服务对象",
+        "check": "这个行动具体服务了谁，解决了什么现实问题？",
+    },
+    "自存": {
+        "task": "定义形式、边界和可衡量的结构",
+        "shadow": "概念很多，但边界、范围和标准不清",
+        "check": "我能否把这件事说成一个清楚的形式和边界？",
+    },
+    "超频": {
+        "task": "赋权、指挥和聚合资源，让能量放大",
+        "shadow": "急着掌控，或把资源当成自我证明",
+        "check": "我是在授权系统运转，还是在用控制维持安全感？",
+    },
+    "韵律": {
+        "task": "组织节奏、恢复平衡，让系统可持续",
+        "shadow": "为了平衡而压抑真实，或只整理不推进",
+        "check": "这个节奏是否同时照顾真实、效率和承接能力？",
+    },
+    "共振": {
+        "task": "调频、倾听和成为更清晰的通道",
+        "shadow": "过度受环境影响，把共振误当成自己的方向",
+        "check": "这是我的内在校准，还是我吸收了外界频率？",
+    },
+    "银河": {
+        "task": "整合价值、关系、现实和表达，活成一致",
+        "shadow": "只在理念上追求一致，却不愿处理现实冲突",
+        "check": "我的选择是否让内在价值和外在行为更一致？",
+    },
+    "太阳": {
+        "task": "把意图推向实现，让生命力持续脉动",
+        "shadow": "只靠意志硬推，忽略承载系统",
+        "check": "我是在健康推进，还是在用意志透支自己？",
+    },
+    "行星": {
+        "task": "显化成果、优化品质，让价值进入现实",
+        "shadow": "被结果绑架，或把不完美视为失败",
+        "check": "这个成果是否真实进入了使用、交换或反馈？",
+    },
+    "光谱": {
+        "task": "释放旧绑定，让能量重新流动",
+        "shadow": "把释放变成逃避承诺，或越放越散",
+        "check": "释放之后，我是否更自由也更清楚？",
+    },
+    "水晶": {
+        "task": "合作、共享和把个人经验普遍化",
+        "shadow": "为了团队而稀释自己，或把奉献变成委屈",
+        "check": "这次合作是否让个人边界和共同目标同时更清楚？",
+    },
+    "宇宙": {
+        "task": "完成一个周期，并把经验带入更高层次",
+        "shadow": "停在超越感里，不再处理具体落地",
+        "check": "这个完成是否让我更成熟，而不是只让我感觉已经看破？",
+    },
+}
+
 STYLE_CONFIG = {
     "basic": {
         "label": "基础版",
@@ -612,6 +823,247 @@ def build_action_guide(destiny):
     }
 
 
+def precision_profile_for(detail):
+    seal_profile = SEAL_PRECISION.get(detail["seal_name"], {
+        "high": f"成熟表达 {detail['keywords']}",
+        "low": f"把 {detail['keywords']} 活成失衡或代偿",
+        "trigger": "相关主题被现实反复触发时",
+        "need": "先确认现实条件、边界和承接方式",
+        "question": "这个表达是在增加生命力，还是在重复旧模式？",
+    })
+    tone_profile = TONE_PRECISION.get(detail["tone_name"], {
+        "task": f"以 {detail['tone_name']} 的方式推进主题",
+        "shadow": "行动节奏和内在主题没有对齐",
+        "check": "这个动作是否让主题更清楚、更可承接？",
+    })
+    return {
+        "seal": seal_profile,
+        "tone": tone_profile,
+    }
+
+
+def build_precision_profile(destiny):
+    main = destiny["main"]
+    support = destiny["support"]
+    guide = destiny["guide"]
+    challenge = destiny["challenge"]
+    occult = destiny["occult"]
+
+    main_profile = precision_profile_for(main)
+    support_profile = precision_profile_for(support)
+    guide_profile = precision_profile_for(guide)
+    challenge_profile = precision_profile_for(challenge)
+    occult_profile = precision_profile_for(occult)
+
+    return {
+        "axis_reading": [
+            f"主轴精度: {main['tone_name']}{main['seal_name']} 不是泛泛的“{main['keywords']}”，更准确地说，是用“{main_profile['tone']['task']}”的方式，把“{main_profile['seal']['high']}”活出来。",
+            f"资源精度: {support['tone_name']}{support['seal_name']} 不是辅助装饰，而是你的稳定条件。它要求你先做到：{support_profile['seal']['need']}。",
+            f"挑战精度: {challenge['tone_name']}{challenge['seal_name']} 通常在“{challenge_profile['seal']['trigger']}”被触发；真正要分辨的是它在训练升级，还是正在放大“{challenge_profile['seal']['low']}”。",
+            f"隐藏推动精度: {occult['tone_name']}{occult['seal_name']} 会在关键处把你从感受推向选择。它问的不是你懂不懂，而是：{occult_profile['seal']['question']}",
+            f"引导精度: {guide['tone_name']}{guide['seal_name']} 指向成熟版本的你：能更稳定地“{guide_profile['seal']['high']}”，并通过“{guide_profile['tone']['task']}”把它落地。",
+        ],
+        "trigger_map": [
+            {
+                "label": "主轴触发",
+                "detail": f"当{main_profile['seal']['trigger']}，你的第一反应通常不是马上行动，而是先感到哪里不对。精准用法是先命名堵点，再决定是否投入。",
+            },
+            {
+                "label": "资源触发",
+                "detail": f"当{support_profile['seal']['trigger']}，你需要主动建设支持系统。否则资源位会从支持滑向低频：{support_profile['seal']['low']}。",
+            },
+            {
+                "label": "挑战触发",
+                "detail": f"当{challenge_profile['seal']['trigger']}，不要只问能不能扛住，要问这次压力是在训练“{challenge_profile['tone']['task']}”，还是在重复旧消耗。",
+            },
+            {
+                "label": "隐藏推动触发",
+                "detail": f"当{occult_profile['seal']['trigger']}，潜意识会推你做选择。精准用法是把内在推动写成一句判断，而不是继续让它停在感受里。",
+            },
+        ],
+        "misread_risks": [
+            {
+                "label": "把天赋误读成性格",
+                "detail": f"{main['seal_name']} 的重点不是“我就是这样的人”，而是识别你何时处在“{main_profile['seal']['high']}”，何时掉进“{main_profile['seal']['low']}”。",
+            },
+            {
+                "label": "把挑战误读成失败",
+                "detail": f"{challenge['seal_name']} 出现时不一定说明你走错了，也可能说明系统正在要求升级。关键是看你是否能从“{challenge_profile['tone']['shadow']}”回到“{challenge_profile['tone']['task']}”。",
+            },
+            {
+                "label": "把支持误读成依赖",
+                "detail": f"{support['seal_name']} 不是让你依附外部环境，而是提醒你：你的发挥需要合适土壤。土壤不对时，先调整配置，不要直接否定能力。",
+            },
+            {
+                "label": "把引导误读成标准答案",
+                "detail": f"{guide['seal_name']} 不是逼你变成某种模板，而是作为校准方向：当你越来越能“{guide_profile['seal']['high']}”，说明天赋正在进入成熟表达。",
+            },
+        ],
+        "validation_checks": [
+            main_profile["seal"]["question"],
+            support_profile["seal"]["question"],
+            challenge_profile["seal"]["question"],
+            occult_profile["seal"]["question"],
+            guide_profile["tone"]["check"],
+        ],
+        "minimum_experiments": [
+            f"连续 7 天记录一次“{main['seal_name']} 信号”：今天哪里出现了 {main_profile['seal']['trigger']}？我命名了哪个真实堵点？",
+            f"遇到 {challenge['seal_name']} 型压力时，不急着下结论，先写三列：事实是什么、我感受到什么、我准备做的最小边界是什么。",
+            f"为 {support['seal_name']} 建一个现实承载动作：明确一个能支持你稳定发挥的人、环境、流程或固定练习。",
+            f"每周用 {occult['seal_name']} 做一次选择复盘：这周哪件事我其实已经知道答案，但还没有把感受推进成决定？",
+            f"把 {guide['seal_name']} 当成校准方向，选择一个小场景练习“{guide_profile['tone']['task']}”，并观察现实反馈。",
+        ],
+    }
+
+
+def build_yearly_precision_profile(natal_destiny, annual_destiny, interaction, year):
+    natal = natal_destiny["main"]
+    annual = annual_destiny["main"]
+    support = annual_destiny["support"]
+    challenge = annual_destiny["challenge"]
+    guide = annual_destiny["guide"]
+
+    natal_profile = precision_profile_for(natal)
+    annual_profile = precision_profile_for(annual)
+    support_profile = precision_profile_for(support)
+    challenge_profile = precision_profile_for(challenge)
+    guide_profile = precision_profile_for(guide)
+
+    return {
+        "axis_reading": [
+            f"{year} 年主轴精度: {annual['tone_name']}{annual['seal_name']} 不是简单的年度标签，而是用“{annual_profile['tone']['task']}”去承接“{annual_profile['seal']['high']}”。",
+            f"本命互动精度: 本命 {natal['tone_name']}{natal['seal_name']} 的惯性是“{natal_profile['seal']['high']}”；今年要看它与流年主轴是互相支持，还是需要先调频。",
+            f"资源精度: 年度支持位 {support['tone_name']}{support['seal_name']} 要求你先做到：{support_profile['seal']['need']}。资源没搭好时，不要把压力直接归因成自己不行。",
+            f"挑战精度: 年度挑战位 {challenge['tone_name']}{challenge['seal_name']} 会在“{challenge_profile['seal']['trigger']}”时放大；它最容易被误读成“{challenge_profile['seal']['low']}”。",
+            f"引导精度: 年度引导位 {guide['tone_name']}{guide['seal_name']} 指向“{guide_profile['seal']['high']}”，但必须通过“{guide_profile['tone']['task']}”进入现实节奏。",
+        ],
+        "trigger_map": [
+            {
+                "label": "年度主轴触发",
+                "detail": f"当{annual_profile['seal']['trigger']}，这一年会要求你回到年度主轴，而不是继续沿用旧惯性。",
+            },
+            {
+                "label": "本命惯性触发",
+                "detail": f"当压力变大时，本命 {natal['seal_name']} 可能会先按熟悉方式反应。精准用法是先问：{natal_profile['tone']['check']}",
+            },
+            {
+                "label": "资源条件触发",
+                "detail": f"当{support_profile['seal']['trigger']}，要优先补资源配置。否则年度推进会滑向：{support_profile['seal']['low']}。",
+            },
+            {
+                "label": "年度挑战触发",
+                "detail": f"当{challenge_profile['seal']['trigger']}，先做事实校验和节奏校验，再决定是否投入更多资源。",
+            },
+        ],
+        "misread_risks": [
+            {
+                "label": "把年度气候误读成命运定论",
+                "detail": f"{year} 年的 {annual['seal_name']} 是阶段气候，不是终身定义。它提醒你今年优先练“{annual_profile['seal']['high']}”。",
+            },
+            {
+                "label": "把摩擦误读成方向错误",
+                "detail": f"{interaction['tone_relation']} 带来的摩擦，很多时候先说明节奏需要调，不一定说明年度方向要推翻。",
+            },
+            {
+                "label": "把机会误读成必须抓住",
+                "detail": f"{annual['seal_name']} 年的机会要看是否能被“{support_profile['seal']['need']}”承载；不能承载的机会也会变成消耗。",
+            },
+            {
+                "label": "把挑战误读成个人失败",
+                "detail": f"{challenge['seal_name']} 的出现更像年度训练题。关键不是有没有压力，而是能否从“{challenge_profile['tone']['shadow']}”回到“{challenge_profile['tone']['task']}”。",
+            },
+        ],
+        "validation_checks": [
+            annual_profile["seal"]["question"],
+            annual_profile["tone"]["check"],
+            support_profile["seal"]["question"],
+            challenge_profile["seal"]["question"],
+            guide_profile["tone"]["check"],
+        ],
+        "minimum_experiments": [
+            f"为 {year} 年只选 1 到 3 个年度主轴目标，每个目标都写清它如何服务 {annual['seal_name']} 的高频表达。",
+            f"每月做一次本命与流年复盘：我是按本命 {natal['seal_name']} 的惯性在动，还是按年度 {annual['seal_name']} 的主轴在配置资源？",
+            f"遇到 {challenge['seal_name']} 型阻力时，先暂停加码，做一次事实、节奏、资源三项校验。",
+            f"给 {support['seal_name']} 建一个年度支持动作：固定复盘、固定合作人、固定环境，或固定资源池。",
+            f"用 {guide['seal_name']} 做季度校准：这三个月的选择，是否正在靠近“{guide_profile['seal']['high']}”？",
+        ],
+    }
+
+
+def build_compatibility_precision_profile(result):
+    person_a = result["person_a"]["main"]
+    person_b = result["person_b"]["main"]
+    combined = result["combined_destiny"]["main"]
+    combined_support = result["combined_destiny"]["support"]
+    combined_challenge = result["combined_destiny"]["challenge"]
+
+    a_profile = precision_profile_for(person_a)
+    b_profile = precision_profile_for(person_b)
+    combined_profile = precision_profile_for(combined)
+    support_profile = precision_profile_for(combined_support)
+    challenge_profile = precision_profile_for(combined_challenge)
+
+    return {
+        "axis_reading": [
+            f"A 的默认表达更接近 {person_a['tone_name']}{person_a['seal_name']}：用“{a_profile['tone']['task']}”去表达“{a_profile['seal']['high']}”。",
+            f"B 的默认表达更接近 {person_b['tone_name']}{person_b['seal_name']}：用“{b_profile['tone']['task']}”去表达“{b_profile['seal']['high']}”。",
+            f"合盘主轴 {combined['tone_name']}{combined['seal_name']} 不是两个人的平均值，而是这段关系真正要服务的共同主题：{combined_profile['seal']['high']}。",
+            f"合盘支持位 {combined_support['seal_name']} 决定这段关系能不能稳定承载，它要求：{support_profile['seal']['need']}。",
+            f"合盘挑战位 {combined_challenge['seal_name']} 会在“{challenge_profile['seal']['trigger']}”时暴露问题，不能只用感情浓度或合作热情盖过去。",
+        ],
+        "trigger_map": [
+            {
+                "label": "A 的触发点",
+                "detail": f"当{a_profile['seal']['trigger']}，A 容易先按自己的默认节奏反应。关系里需要把它翻译成明确请求，而不是让 B 猜。",
+            },
+            {
+                "label": "B 的触发点",
+                "detail": f"当{b_profile['seal']['trigger']}，B 容易先按自己的默认节奏反应。关系里需要说清这是需要支持、边界，还是需要空间。",
+            },
+            {
+                "label": "合盘主轴触发",
+                "detail": f"当关系要共同处理 {combined['keywords']} 时，真正要对齐的是目标、角色和节奏，不只是情绪感受。",
+            },
+            {
+                "label": "合盘挑战触发",
+                "detail": f"当{challenge_profile['seal']['trigger']}，这段关系要先重建边界和分工，再谈继续升温或继续投入。",
+            },
+        ],
+        "misread_risks": [
+            {
+                "label": "把差异误读成不合",
+                "detail": f"A 的 {person_a['seal_name']} 与 B 的 {person_b['seal_name']} 不同，不等于不合；关键是能否把差异翻译成分工。",
+            },
+            {
+                "label": "把合盘吸引误读成长期条件",
+                "detail": f"合盘 {combined['seal_name']} 有共同主题，但长期条件还要看 {combined_support['seal_name']} 的支持系统是否真实存在。",
+            },
+            {
+                "label": "把冲突误读成谁错了",
+                "detail": f"{result['tone_relation']} 的错位更像节奏模型不同。先翻译节奏，再讨论对错。",
+            },
+            {
+                "label": "把包容误读成无边界",
+                "detail": f"合盘挑战 {combined_challenge['seal_name']} 出现时，越想长期走下去，越要清楚边界、责任和最小对齐动作。",
+            },
+        ],
+        "validation_checks": [
+            a_profile["seal"]["question"],
+            b_profile["seal"]["question"],
+            combined_profile["seal"]["question"],
+            support_profile["seal"]["question"],
+            challenge_profile["seal"]["question"],
+        ],
+        "minimum_experiments": [
+            "做一次 30 分钟关系对齐：每个人只说事实、需要和下一步，不评价对方人格。",
+            f"把合盘 {combined['seal_name']} 写成一个共同目标：这段关系如果高频运作，现实中会产出什么？",
+            f"为合盘支持位 {combined_support['seal_name']} 设计一个固定支持动作，例如分工表、沟通节点或复盘机制。",
+            f"当 {combined_challenge['seal_name']} 型张力出现时，只处理一个最小边界，不一次性清算所有旧账。",
+            "连续两周记录一次冲突前兆：到底是目标没对齐、节奏没对齐、边界没对齐，还是责任没对齐？",
+        ],
+    }
+
+
 def build_professional_personal_analysis(destiny):
     main = destiny["main"]
     support = destiny["support"]
@@ -627,6 +1079,7 @@ def build_professional_personal_analysis(destiny):
             f"更深一层看，{occult['seal_name']} 一直在推着你长判断、长选择、长影响力，所以你的人生不会只停在“我感受很多”，最后一定会走向“那我到底怎么选”。",
             f"引导位又回到 {guide['seal_name']}，说明你真正成熟后的样子，不是换成另一个人格，而是把原本这套天赋活得更稳定、更清楚，也更不容易被外界拖走。",
         ],
+        "precision_profile": build_precision_profile(destiny),
         "risk_matrix": [
             {
                 "label": "高频优势",
@@ -730,6 +1183,7 @@ def build_professional_compatibility_analysis(result):
                 "detail": f"合盘 {combined['seal_name']} 的成长要求不是无限包容，而是先对齐目标、责任、边界和节奏，再谈情感浓度。",
             },
         ],
+        "precision_profile": build_compatibility_precision_profile(result),
         "collaboration_model": {
             "division": [
                 "先明确谁更适合发起、谁更适合承接、谁更适合校准，而不是默认两个人必须用同一种方式做事。",
@@ -800,6 +1254,7 @@ def build_professional_yearly_analysis(natal_destiny, annual_destiny, interactio
                 "detail": f"当 {annual['seal_name']} 的主题被高质量落地时，这一年很适合做聚焦、筛选、搭结构、养长期项目，而不是到处分散试错。",
             },
         ],
+        "precision_profile": build_yearly_precision_profile(natal_destiny, annual_destiny, interaction, year),
         "strategy_matrix": {
             "focus": [
                 f"年度配置上优先服务 {annual['keywords']}，先决定今年真正值得种下的 1 到 3 个主题，再分配资源。",
@@ -1018,6 +1473,27 @@ def format_delivery_layers(lines, layers):
                     lines.append(f"  {item}")
 
 
+def format_precision_section(lines, title, precision):
+    lines.append(f"\n{'─' * 50}")
+    lines.append(f"  {title}")
+    lines.append(f"{'─' * 50}")
+    lines.append("- 结构判读")
+    for item in precision["axis_reading"]:
+        lines.append(f"  {item}")
+    lines.append("- 触发条件")
+    for item in precision["trigger_map"]:
+        lines.append(f"  {item['label']}: {item['detail']}")
+    lines.append("- 误读风险")
+    for item in precision["misread_risks"]:
+        lines.append(f"  {item['label']}: {item['detail']}")
+    lines.append("- 验证问题")
+    for item in precision["validation_checks"]:
+        lines.append(f"  {item}")
+    lines.append("- 最小实验")
+    for item in precision["minimum_experiments"]:
+        lines.append(f"  {item}")
+
+
 def build_yearly_report(birth_date, year, style="basic"):
     normalized_style = normalize_report_style(style)
     style_info = style_meta(normalized_style)
@@ -1124,6 +1600,7 @@ def format_yearly_report(report):
         lines.append(f"{'─' * 50}")
         for item in analysis["risk_windows"]:
             lines.append(f"- {item['label']}: {item['detail']}")
+        format_precision_section(lines, "年度解读校准", analysis["precision_profile"])
         insight = analysis["situational_insight"]
         lines.append(f"\n{'─' * 50}")
         lines.append("  年度情境直读")
@@ -1275,6 +1752,7 @@ def format_compatibility_report(report):
         lines.append(f"{'─' * 50}")
         for item in analysis["tension_matrix"]:
             lines.append(f"- {item['label']}: {item['detail']}")
+        format_precision_section(lines, "关系解读校准", analysis["precision_profile"])
         insight = analysis["situational_insight"]
         lines.append(f"\n{'─' * 50}")
         lines.append("  关系情境直读")
@@ -1419,6 +1897,7 @@ def format_personal_report(report):
         lines.append(f"{'─' * 50}")
         for item in analysis["risk_matrix"]:
             lines.append(f"- {item['label']}: {item['detail']}")
+        format_precision_section(lines, "解读校准", analysis["precision_profile"])
 
     lines.append(f"\n{'─' * 50}")
     lines.append("  五大位置解释")
