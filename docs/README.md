@@ -19,6 +19,8 @@
 
 - [Project README](../README.md)
 - [Validation Samples](../references/validation-samples.md)
+- [Scientific Validation Protocol](../references/scientific-validation-protocol.md)
+- [Scientific Validation Readiness](../references/scientific-validation-readiness.json)
 - [Public Figure Benchmark](../references/public-figure-benchmark.json)
 - [Public Figure Benchmark Results](../references/public-figure-benchmark-results.json)
 - [OpenClaw Runtime](../runtimes/openclaw/AGENTS.md)

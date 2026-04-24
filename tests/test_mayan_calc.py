@@ -2,6 +2,7 @@ import json
 import pathlib
 import subprocess
 import sys
+import tempfile
 import unittest
 
 
@@ -351,6 +352,67 @@ class MayanCalcTests(unittest.TestCase):
         )
         self.assertIn("Public figure benchmark cases: 12", result.stdout)
         self.assertIn("Average score:", result.stdout)
+
+    def test_blind_trial_pipeline_scores_control_data(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp = pathlib.Path(tmpdir)
+            packets = tmp / "packets.json"
+            key = tmp / "key.json"
+            responses = tmp / "responses.json"
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "generate_blind_trial_packets.py"),
+                    "--participants",
+                    str(ROOT / "references" / "blind-participants-template.json"),
+                    "--candidate-count",
+                    "3",
+                    "--packets-out",
+                    str(packets),
+                    "--key-out",
+                    str(key),
+                ],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            key_payload = json.loads(key.read_text(encoding="utf-8"))
+            responses.write_text(
+                json.dumps(
+                    {
+                        "responses": [
+                            {"trial_id": item["trial_id"], "selected_label": item["correct_label"]}
+                            for item in key_payload["keys"]
+                        ]
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    str(ROOT / "scripts" / "evaluate_blind_trials.py"),
+                    "--responses",
+                    str(responses),
+                    "--key",
+                    str(key),
+                    "--packets",
+                    str(packets),
+                    "--min-sample-size",
+                    "5",
+                    "--alpha",
+                    "0.01",
+                    "--target-rate",
+                    "0.8",
+                    "--min-score",
+                    "90",
+                ],
+                capture_output=True,
+                text=True,
+                check=True,
+            )
+            self.assertIn("Scientific accuracy score: 100.0", result.stdout)
 
 
 if __name__ == "__main__":

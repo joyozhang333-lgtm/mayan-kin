@@ -87,6 +87,7 @@ The project is built around three principles:
 - `--route-query` 知识卡路由
 - `--auto-answer` 自动判断知识卡、报告风格和报告模式
 - 公开人物 benchmark：用 12 位公开人物的生日与公开生平主题评测深度解读覆盖度
+- 科学验证盲测工具：生成匿名候选报告、分离答案 key、按正确率/随机基线/p 值计算科学准确率分数
 - Codex / Claude 风格 skill
 - OpenClaw runtime 版本
 - Hermes runtime 版本
@@ -310,6 +311,31 @@ python3 scripts/evaluate_public_figures.py --min-score 90
 
 这个 benchmark 使用 `references/public-figure-benchmark.json` 中的公开人物生日、资料来源和公开生平主题，评测深度报告的现实表达标签是否覆盖这些主题。它是产品质量评测，不是科学宿命论证明。
 
+### 11. 生成科学盲测实验包
+
+```bash
+python3 scripts/generate_blind_trial_packets.py \
+  --participants references/blind-participants-template.json \
+  --candidate-count 5 \
+  --packets-out /tmp/mayan-blind-packets.json \
+  --key-out /tmp/mayan-blind-key.json
+```
+
+盲测包会隐藏生日、Kin 号、图腾、调性等直接识别信息。参与者只能在多份匿名报告中选择最像自己的报告。
+
+### 12. 评估盲测科学准确率
+
+```bash
+python3 scripts/evaluate_blind_trials.py \
+  --responses references/blind-responses-template.json \
+  --key /tmp/mayan-blind-key.json \
+  --packets /tmp/mayan-blind-packets.json \
+  --min-sample-size 30 \
+  --min-score 90
+```
+
+真实科学准确率必须由正式盲测 responses 计算。当前仓库已具备实验框架，不会在没有盲测数据时伪造“科学证明 90 分”。
+
 如果你是要接进 AI 助手，而不是只在命令行里用：
 - Codex / Claude 风格：看 `SKILL.md`
 - OpenClaw：看 `runtimes/openclaw/AGENTS.md` 和 `runtimes/openclaw/DEMO.md`
@@ -343,6 +369,8 @@ python3 scripts/mayan_calc.py [birthday] [options]
 - [docs/v2-roadmap.md](docs/v2-roadmap.md) - v2 / v1.0 路线图
 - [references/README.md](references/README.md) - 知识卡导航页
 - [references/knowledge-index.json](references/knowledge-index.json) - 机读知识索引
+- [references/scientific-validation-protocol.md](references/scientific-validation-protocol.md) - 科学盲测实验协议
+- [references/scientific-validation-readiness.json](references/scientific-validation-readiness.json) - 当前科学验证框架成熟度
 - [references/public-figure-benchmark.json](references/public-figure-benchmark.json) - 公开人物解读贴合度 benchmark
 - [references/public-figure-benchmark-results.json](references/public-figure-benchmark-results.json) - 最近一次 benchmark 结果
 
@@ -623,11 +651,18 @@ mayan-kin/
 │   ├── yearly-fortune.md         ← 流年运势分析方法
 │   ├── compatibility.md          ← 双人合盘方法
 │   ├── guidance.md               ← 天赋运用指导
+│   ├── scientific-validation-protocol.md ← 科学盲测实验协议
+│   ├── scientific-validation-readiness.json ← 实验框架成熟度
+│   ├── blind-participants-template.json ← 盲测参与者模板
+│   ├── blind-responses-template.json ← 盲测回答模板
 │   ├── validation-samples.md     ← 权威样本校验基线
 │   ├── colors-wavespell.md       ← 颜色与波符
 │   └── career-emotion.md         ← 事业与情感应用
 └── scripts/
-    └── mayan_calc.py             ← CLI 入口
+    ├── mayan_calc.py             ← CLI 入口
+    ├── evaluate_public_figures.py ← 公开人物 benchmark
+    ├── generate_blind_trial_packets.py ← 科学盲测包生成
+    └── evaluate_blind_trials.py  ← 科学盲测评分
 ```
 
 ## 开发验证

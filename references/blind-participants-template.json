@@ -1,0 +1,25 @@
+{
+  "study_id": "mayan-kin-blind-study-demo",
+  "participants": [
+    {
+      "participant_id": "P001",
+      "birth_date": "1995-03-03"
+    },
+    {
+      "participant_id": "P002",
+      "birth_date": "1990-03-15"
+    },
+    {
+      "participant_id": "P003",
+      "birth_date": "1988-06-20"
+    },
+    {
+      "participant_id": "P004",
+      "birth_date": "1992-07-20"
+    },
+    {
+      "participant_id": "P005",
+      "birth_date": "2000-02-29"
+    }
+  ]
+}

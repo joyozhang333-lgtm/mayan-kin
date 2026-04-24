@@ -51,6 +51,27 @@ python3 scripts/mayan_calc.py 1995-03-03 --compatibility 1992-07-20
 python3 scripts/mayan_calc.py --contract
 ```
 
+## Scientific Validation Helpers
+
+这些脚本不属于 `mayan_calc.py` 主入口，但属于仓库的科学验证工具链：
+
+```bash
+python3 scripts/generate_blind_trial_packets.py \
+  --participants references/blind-participants-template.json \
+  --candidate-count 5 \
+  --packets-out /tmp/mayan-blind-packets.json \
+  --key-out /tmp/mayan-blind-key.json
+
+python3 scripts/evaluate_blind_trials.py \
+  --responses references/blind-responses-template.json \
+  --key /tmp/mayan-blind-key.json \
+  --packets /tmp/mayan-blind-packets.json \
+  --min-sample-size 30 \
+  --min-score 90
+```
+
+盲测评分会同时输出正确率、随机基线、p 值和 `scientific_accuracy_score`。
+
 ## Exit Codes
 
 - `0` - 成功

@@ -27,6 +27,10 @@
 ## Validation
 
 - [validation-samples.md](validation-samples.md) - 权威样本与公开锚点校验
+- [scientific-validation-protocol.md](scientific-validation-protocol.md) - 科学盲测实验协议与 90 分定义
+- [scientific-validation-readiness.json](scientific-validation-readiness.json) - 当前实验框架成熟度与待收集数据说明
+- [blind-participants-template.json](blind-participants-template.json) - 盲测参与者输入模板
+- [blind-responses-template.json](blind-responses-template.json) - 盲测回答模板
 - [public-figure-benchmark.json](public-figure-benchmark.json) - 公开人物生日、生平主题与解读贴合度 benchmark
 - [public-figure-benchmark-results.json](public-figure-benchmark-results.json) - 最近一次公开人物 benchmark 结果
 

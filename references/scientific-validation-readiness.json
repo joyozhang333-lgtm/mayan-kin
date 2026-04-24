@@ -1,0 +1,64 @@
+{
+  "version": "v1",
+  "status": "ready_for_blind_validation",
+  "scientific_accuracy_score": null,
+  "scientific_accuracy_score_note": "真实科学准确率必须由正式盲测 responses + answer key 计算，不能由开发者手动填写。",
+  "validation_readiness_score": 94,
+  "readiness_items": [
+    {
+      "item": "pre_registered_protocol",
+      "score": 15,
+      "max_score": 15,
+      "file": "references/scientific-validation-protocol.md"
+    },
+    {
+      "item": "blind_packet_generator",
+      "score": 15,
+      "max_score": 15,
+      "file": "scripts/generate_blind_trial_packets.py"
+    },
+    {
+      "item": "answer_key_separation",
+      "score": 12,
+      "max_score": 12,
+      "file": "scripts/generate_blind_trial_packets.py"
+    },
+    {
+      "item": "objective_scoring_script",
+      "score": 15,
+      "max_score": 15,
+      "file": "scripts/evaluate_blind_trials.py"
+    },
+    {
+      "item": "chance_baseline_and_p_value",
+      "score": 14,
+      "max_score": 15,
+      "file": "scripts/evaluate_blind_trials.py"
+    },
+    {
+      "item": "sample_size_guardrail",
+      "score": 10,
+      "max_score": 10,
+      "file": "scripts/evaluate_blind_trials.py"
+    },
+    {
+      "item": "data_templates",
+      "score": 8,
+      "max_score": 8,
+      "file": "references/blind-participants-template.json"
+    },
+    {
+      "item": "automated_tests",
+      "score": 5,
+      "max_score": 10,
+      "file": "tests/test_mayan_calc.py"
+    }
+  ],
+  "next_to_reach_actual_scientific_90": [
+    "收集至少 30 人、推荐 100 人以上的真实盲测 responses",
+    "冻结代码版本后生成盲测包",
+    "参与者只看 blind packets，不看 answer key",
+    "用 scripts/evaluate_blind_trials.py 计算 scientific_accuracy_score",
+    "只有真实分数 >= 90 才能声称该实验达标"
+  ]
+}

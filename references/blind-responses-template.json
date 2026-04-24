@@ -1,0 +1,13 @@
+{
+  "study_id": "mayan-kin-blind-study-demo",
+  "responses": [
+    {
+      "trial_id": "T0001",
+      "selected_label": "A"
+    },
+    {
+      "trial_id": "T0002",
+      "selected_label": "B"
+    }
+  ]
+}
