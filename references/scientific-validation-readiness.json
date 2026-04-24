@@ -1,9 +1,11 @@
 {
   "version": "v1",
-  "status": "ready_for_blind_validation",
+  "status": "ready_for_blind_public_holdout_and_prospective_validation",
   "scientific_accuracy_score": null,
   "scientific_accuracy_score_note": "真实科学准确率必须由正式盲测 responses + answer key 计算，不能由开发者手动填写。",
-  "validation_readiness_score": 94,
+  "public_figure_holdout_score": 7.08,
+  "public_figure_holdout_score_note": "2026-04-24 的 1425 条 Wikidata 公开人物数据中，212 条 holdout 的 forced-choice 准确率为 7.08%，低于 20% 随机基线，因此不是 90 分验证结果。",
+  "validation_readiness_score": 98,
   "readiness_items": [
     {
       "item": "pre_registered_protocol",
@@ -52,6 +54,30 @@
       "score": 5,
       "max_score": 10,
       "file": "tests/test_mayan_calc.py"
+    },
+    {
+      "item": "public_figure_1000_dataset",
+      "score": 10,
+      "max_score": 10,
+      "file": "references/public-figures-wikidata-1000.json"
+    },
+    {
+      "item": "frozen_scoring_protocol",
+      "score": 10,
+      "max_score": 10,
+      "file": "references/frozen-scoring-protocol-v1.json"
+    },
+    {
+      "item": "holdout_evaluator",
+      "score": 10,
+      "max_score": 10,
+      "file": "scripts/evaluate_public_figure_holdout.py"
+    },
+    {
+      "item": "prospective_prediction_registry",
+      "score": 8,
+      "max_score": 8,
+      "file": "scripts/generate_prospective_predictions.py"
     }
   ],
   "next_to_reach_actual_scientific_90": [

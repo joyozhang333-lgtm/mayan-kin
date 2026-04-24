@@ -156,3 +156,61 @@ python3 scripts/evaluate_blind_trials.py \
 - 测试覆盖
 
 因此当前是“可开始科学验证”的状态，而不是“已经科学证明”的状态。
+
+## 公开人物 1000+ 样本 Holdout
+
+公开人物样本用于测试“出生日期生成的现实表达标签，是否能匹配公开职业 / 生平证据”。它是产品质量与可证伪能力测试，不等同于人格或命运的科学证明。
+
+数据集：
+
+- `references/public-figures-wikidata-1000.json`
+- 来源：Wikidata Query Service
+- 当前规模：`1425` 条公开人物记录
+- 划分：`1012` train / `201` dev / `212` holdout
+- 划分方式：`frozen-scoring-protocol-v1.json` 中的 hash seed
+
+冻结协议：
+
+- `references/frozen-scoring-protocol-v1.json`
+
+评估命令：
+
+```bash
+python3 scripts/evaluate_public_figure_holdout.py \
+  --dataset references/public-figures-wikidata-1000.json \
+  --protocol references/frozen-scoring-protocol-v1.json \
+  --split holdout \
+  --write references/public-figure-holdout-results.json
+```
+
+当前结果：
+
+- Holdout 样本量：`212`
+- 命中：`15`
+- 准确率：`7.08%`
+- 5 选 1 随机基线：`20.0%`
+- 结论：未通过，不显著，不能声称 90 分。
+
+## 前瞻预测
+
+前瞻预测必须先锁定预测，再等待未来证据出现后评分。
+
+生成预测登记表：
+
+```bash
+python3 scripts/generate_prospective_predictions.py \
+  --subjects references/prospective-subjects-template.json \
+  --target-year 2027 \
+  --output /tmp/mayan-prospective-registry.json
+```
+
+未来证据出现后评分：
+
+```bash
+python3 scripts/evaluate_prospective_predictions.py \
+  --registry /tmp/mayan-prospective-registry.json \
+  --outcomes references/prospective-outcomes-template.json \
+  --min-score 90
+```
+
+前瞻预测在目标年份结束前不能算成功。

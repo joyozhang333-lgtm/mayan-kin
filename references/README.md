@@ -29,10 +29,16 @@
 - [validation-samples.md](validation-samples.md) - 权威样本与公开锚点校验
 - [scientific-validation-protocol.md](scientific-validation-protocol.md) - 科学盲测实验协议与 90 分定义
 - [scientific-validation-readiness.json](scientific-validation-readiness.json) - 当前实验框架成熟度与待收集数据说明
+- [frozen-scoring-protocol-v1.json](frozen-scoring-protocol-v1.json) - 冻结评分协议、holdout 规则与前瞻预测边界
 - [blind-participants-template.json](blind-participants-template.json) - 盲测参与者输入模板
 - [blind-responses-template.json](blind-responses-template.json) - 盲测回答模板
 - [public-figure-benchmark.json](public-figure-benchmark.json) - 公开人物生日、生平主题与解读贴合度 benchmark
 - [public-figure-benchmark-results.json](public-figure-benchmark-results.json) - 最近一次公开人物 benchmark 结果
+- [public-figures-wikidata-1000.json](public-figures-wikidata-1000.json) - 1425 条 Wikidata 公开人物 train/dev/holdout 数据集
+- [public-figure-holdout-results.json](public-figure-holdout-results.json) - 公开人物 holdout forced-choice 评估结果
+- [validation-findings-2026-04-24.md](validation-findings-2026-04-24.md) - 本轮验证结论与失败分析
+- [prospective-subjects-template.json](prospective-subjects-template.json) - 前瞻预测对象模板
+- [prospective-outcomes-template.json](prospective-outcomes-template.json) - 前瞻预测结果编码模板
 
 ## How To Use This Layer
 

@@ -12,6 +12,11 @@ KNOWLEDGE_INDEX = ROOT / "references" / "knowledge-index.json"
 sys.path.insert(0, str(ROOT))
 
 from mayan_kin import core as mayan_calc
+from scripts.collect_public_figures_wikidata import normalize_bindings
+from scripts.evaluate_public_figure_holdout import evaluate as evaluate_public_figure_holdout
+from scripts.evaluate_public_figure_holdout import expression_weights_for_birth_date
+from scripts.evaluate_prospective_predictions import evaluate as evaluate_prospective_predictions
+from scripts.generate_prospective_predictions import build_registry
 
 
 class MayanCalcTests(unittest.TestCase):
@@ -113,6 +118,12 @@ class MayanCalcTests(unittest.TestCase):
         self.assertIn("红月", deep["deep_analysis"]["precision_profile"]["axis_reading"][0])
         self.assertIn("expression_profile", deep["deep_analysis"])
         self.assertIn("public_healing", deep["deep_analysis"]["expression_profile"]["tags"])
+        self.assertIn("evaluation_signature", deep["deep_analysis"]["expression_profile"])
+        signature = deep["deep_analysis"]["expression_profile"]["evaluation_signature"]
+        self.assertEqual(signature["protocol"], "expression_signature_v1")
+        self.assertGreaterEqual(len(signature["primary_tags"]), 10)
+        self.assertGreaterEqual(signature["weighted_tags"][0]["weight"], 1.0)
+        self.assertGreaterEqual(signature["weighted_tags"][0]["weight"], signature["weighted_tags"][1]["weight"])
         self.assertEqual(len(deep["deep_analysis"]["expression_profile"]["roles"]), 5)
         self.assertEqual(len(deep["deep_analysis"]["risk_matrix"]), 4)
         self.assertEqual(len(deep["deep_analysis"]["situational_insight"]["current_block"]), 3)
@@ -413,6 +424,98 @@ class MayanCalcTests(unittest.TestCase):
                 check=True,
             )
             self.assertIn("Scientific accuracy score: 100.0", result.stdout)
+
+    def test_wikidata_public_figure_normalizer_aggregates_and_splits(self):
+        bindings = [
+            {
+                "person": {"value": "http://www.wikidata.org/entity/Q100"},
+                "personLabel": {"value": "Sample Writer"},
+                "personDescription": {"value": "public novelist and journalist"},
+                "birth": {"value": "1970-01-02T00:00:00Z"},
+                "occupationLabel": {"value": "writer"},
+            },
+            {
+                "person": {"value": "http://www.wikidata.org/entity/Q100"},
+                "personLabel": {"value": "Sample Writer"},
+                "personDescription": {"value": "public novelist and journalist"},
+                "birth": {"value": "1970-01-02T00:00:00Z"},
+                "occupationLabel": {"value": "journalist"},
+            },
+        ]
+        records = normalize_bindings(bindings)
+        self.assertEqual(len(records), 1)
+        self.assertEqual(records[0]["id"], "Q100")
+        self.assertEqual(records[0]["birth_date"], "1970-01-02")
+        self.assertIn("communication", records[0]["observed_tags"])
+        self.assertIn(records[0]["split"], {"train", "dev", "holdout"})
+
+    def test_public_figure_holdout_evaluator_runs_on_control_dataset(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp = pathlib.Path(tmpdir)
+            records = []
+            for index, birth_date in enumerate([
+                "1995-03-03",
+                "1990-03-15",
+                "1981-09-04",
+                "1955-02-24",
+                "1879-03-14",
+                "1918-07-18",
+            ]):
+                tag_weights = expression_weights_for_birth_date(birth_date, top_n=18)
+                records.append({
+                    "id": f"Q{index + 1}",
+                    "name": f"Control {index + 1}",
+                    "birth_date": birth_date,
+                    "split": "holdout",
+                    "observed_tags": list(tag_weights)[:5],
+                })
+            dataset = {
+                "version": "test",
+                "record_count": len(records),
+                "records": records,
+            }
+            dataset_path = tmp / "dataset.json"
+            dataset_path.write_text(json.dumps(dataset, ensure_ascii=False), encoding="utf-8")
+            result = evaluate_public_figure_holdout(
+                dataset_path,
+                protocol_path=tmp / "missing-protocol.json",
+                split="holdout",
+                candidate_count=3,
+                top_n=18,
+                min_sample_size=1,
+            )
+            self.assertEqual(result["sample_size"], 6)
+            self.assertIn("public_figure_accuracy_score", result)
+            self.assertIn(result["status"], {"passed", "significant_but_below_target", "not_significant"})
+
+    def test_prospective_prediction_registry_and_evaluator(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp = pathlib.Path(tmpdir)
+            registry = build_registry(
+                [{"id": "subject_1", "name": "Subject", "birth_date": "1995-03-03"}],
+                target_year=2027,
+            )
+            prediction = registry["predictions"][0]
+            registry_path = tmp / "registry.json"
+            outcomes_path = tmp / "outcomes.json"
+            registry_path.write_text(json.dumps(registry, ensure_ascii=False), encoding="utf-8")
+            outcomes_path.write_text(
+                json.dumps(
+                    {
+                        "outcomes": [
+                            {
+                                "prediction_id": prediction["prediction_id"],
+                                "evidence_tags": prediction["prediction"]["top_expression_tags"],
+                            }
+                        ]
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+            result = evaluate_prospective_predictions(registry_path, outcomes_path, min_score=90)
+            self.assertEqual(result["average_prospective_score"], 100.0)
+            self.assertEqual(result["status"], "passed")
 
 
 if __name__ == "__main__":

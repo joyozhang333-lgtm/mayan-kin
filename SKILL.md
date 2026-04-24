@@ -30,6 +30,8 @@ description: "玛雅天赋 (Mayan Destiny / Dreamspell) 星系印记解读技能
 - 深度版解读校准：个人、流年、合盘报告的触发条件、误读风险、验证问题、最小实验
 - 现实表达校准：把五大位置翻译成公开表达标签、适配场域和现实验证问题
 - 科学验证实验工具：生成盲测包、分离答案 key、按正确率/随机基线/p 值计算科学准确率分数
+- 公开人物 holdout：1425 条 Wikidata 样本、冻结评分协议、train/dev/holdout 划分和失败结果记录
+- 前瞻预测登记：先锁定预测，再用未来证据回填评分
 
 ## 技能结构
 
@@ -48,9 +50,16 @@ description: "玛雅天赋 (Mayan Destiny / Dreamspell) 星系印记解读技能
 │   ├── compatibility.md          ← 双人合盘方法
 │   ├── guidance.md               ← 天赋运用指导
 │   ├── colors-wavespell.md       ← 颜色与波符
-│   └── career-emotion.md         ← 事业与情感应用
+│   ├── career-emotion.md         ← 事业与情感应用
+│   ├── frozen-scoring-protocol-v1.json
+│   ├── public-figures-wikidata-1000.json
+│   └── validation-findings-2026-04-24.md
 └── scripts/
-    └── mayan_calc.py             ← 玛雅历计算工具
+    ├── mayan_calc.py             ← 玛雅历计算工具
+    ├── collect_public_figures_wikidata.py
+    ├── evaluate_public_figure_holdout.py
+    ├── generate_prospective_predictions.py
+    └── evaluate_prospective_predictions.py
 ```
 
 ## 知识加载顺序

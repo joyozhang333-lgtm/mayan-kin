@@ -1,0 +1,17 @@
+{
+  "outcomes": [
+    {
+      "prediction_id": "copy_from_registry",
+      "evidence_window": "2027-01-01/2027-12-31",
+      "evidence_sources": [
+        "https://example.com/source-after-lock"
+      ],
+      "evidence_tags": [
+        "communication",
+        "leadership",
+        "public_output"
+      ],
+      "coder_notes": "Evidence must be coded after the prediction lock date."
+    }
+  ]
+}

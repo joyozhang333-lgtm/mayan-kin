@@ -72,6 +72,39 @@ python3 scripts/evaluate_blind_trials.py \
 
 盲测评分会同时输出正确率、随机基线、p 值和 `scientific_accuracy_score`。
 
+### Public Figure Holdout
+
+```bash
+python3 scripts/collect_public_figures_wikidata.py \
+  --limit 1600 \
+  --min-records 1000 \
+  --output references/public-figures-wikidata-1000.json
+
+python3 scripts/evaluate_public_figure_holdout.py \
+  --dataset references/public-figures-wikidata-1000.json \
+  --protocol references/frozen-scoring-protocol-v1.json \
+  --split holdout \
+  --write references/public-figure-holdout-results.json
+```
+
+该评估是公开人物职业 / 生平证据的 forced-choice benchmark，不等于命运系统科学证明。当前 holdout 结果低于随机基线，必须如实报告。
+
+### Prospective Predictions
+
+```bash
+python3 scripts/generate_prospective_predictions.py \
+  --subjects references/prospective-subjects-template.json \
+  --target-year 2027 \
+  --output /tmp/mayan-prospective-registry.json
+
+python3 scripts/evaluate_prospective_predictions.py \
+  --registry /tmp/mayan-prospective-registry.json \
+  --outcomes references/prospective-outcomes-template.json \
+  --min-score 90
+```
+
+前瞻预测必须先锁定，再等待未来证据出现后评估。
+
 ## Exit Codes
 
 - `0` - 成功

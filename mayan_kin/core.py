@@ -459,6 +459,14 @@ TONE_PUBLIC_EXPRESSION = {
     "宇宙": ["transcendence", "legacy", "endurance", "cycle_completion"],
 }
 
+EXPRESSION_ROLE_WEIGHTS = {
+    "main": 1.0,
+    "support": 0.75,
+    "guide": 0.65,
+    "occult": 0.6,
+    "challenge": 0.45,
+}
+
 STYLE_CONFIG = {
     "basic": {
         "label": "基础版",
@@ -998,6 +1006,35 @@ def public_expression_for(detail):
     }
 
 
+def weighted_expression_signature(roles):
+    tag_scores = {}
+    field_scores = {}
+    for item in roles:
+        weight = EXPRESSION_ROLE_WEIGHTS.get(item["role"], 0.5)
+        for tag in item["tags"]:
+            tag_scores[tag] = round(tag_scores.get(tag, 0.0) + weight, 4)
+        for field in item["fields"]:
+            field_scores[field] = round(field_scores.get(field, 0.0) + weight, 4)
+
+    weighted_tags = [
+        {"tag": tag, "weight": score}
+        for tag, score in sorted(tag_scores.items(), key=lambda pair: (-pair[1], pair[0]))
+    ]
+    weighted_fields = [
+        {"field": field, "weight": score}
+        for field, score in sorted(field_scores.items(), key=lambda pair: (-pair[1], pair[0]))
+    ]
+    return {
+        "protocol": "expression_signature_v1",
+        "role_weights": EXPRESSION_ROLE_WEIGHTS,
+        "primary_tags": [item["tag"] for item in weighted_tags[:18]],
+        "primary_fields": [item["field"] for item in weighted_fields[:8]],
+        "weighted_tags": weighted_tags,
+        "weighted_fields": weighted_fields,
+        "scoring_note": "Use weighted top tags for reproducible public-expression evaluation; do not treat this as proof of fate.",
+    }
+
+
 def build_expression_profile(destiny):
     role_labels = {
         "main": "主印记",
@@ -1042,6 +1079,7 @@ def build_expression_profile(destiny):
         "tags": sorted(all_tags),
         "fields": unique_fields[:8],
         "roles": roles,
+        "evaluation_signature": weighted_expression_signature(roles),
         "summary": [
             f"公开表达主轴更靠近 {main['tone_name']}{main['seal_name']}：{main_marker['expression']}",
             f"可被放大的支持条件来自 {support['seal_name']}：优先建设 {', '.join(support_marker['fields'][:2])}。",

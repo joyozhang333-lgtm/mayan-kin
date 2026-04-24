@@ -1,0 +1,10 @@
+{
+  "subjects": [
+    {
+      "id": "subject_001",
+      "name": "Optional public/person label",
+      "birth_date": "1995-03-03",
+      "source_url": "https://example.com/source-before-lock"
+    }
+  ]
+}

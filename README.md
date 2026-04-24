@@ -86,8 +86,9 @@ The project is built around three principles:
 - `--contract` 接口契约
 - `--route-query` 知识卡路由
 - `--auto-answer` 自动判断知识卡、报告风格和报告模式
-- 公开人物 benchmark：用 12 位公开人物的生日与公开生平主题评测深度解读覆盖度
+- 公开人物 benchmark：包含 12 位人工样本 benchmark 与 1425 条 Wikidata 公开人物 train/dev/holdout 数据集
 - 科学验证盲测工具：生成匿名候选报告、分离答案 key、按正确率/随机基线/p 值计算科学准确率分数
+- 冻结评分协议与前瞻预测登记：支持 holdout 评估、失败记录和未来证据回填
 - Codex / Claude 风格 skill
 - OpenClaw runtime 版本
 - Hermes runtime 版本
@@ -311,7 +312,24 @@ python3 scripts/evaluate_public_figures.py --min-score 90
 
 这个 benchmark 使用 `references/public-figure-benchmark.json` 中的公开人物生日、资料来源和公开生平主题，评测深度报告的现实表达标签是否覆盖这些主题。它是产品质量评测，不是科学宿命论证明。
 
-### 11. 生成科学盲测实验包
+### 11. 跑 1000+ 公开人物 holdout
+
+```bash
+python3 scripts/collect_public_figures_wikidata.py \
+  --limit 1600 \
+  --min-records 1000 \
+  --output references/public-figures-wikidata-1000.json
+
+python3 scripts/evaluate_public_figure_holdout.py \
+  --dataset references/public-figures-wikidata-1000.json \
+  --protocol references/frozen-scoring-protocol-v1.json \
+  --split holdout \
+  --write references/public-figure-holdout-results.json
+```
+
+当前 `1425` 条 Wikidata 公开人物数据的 holdout 结果是 `7.08%`，低于 `20%` 随机基线。这个结果必须如实报告：它说明当前版本不能声称“公开人物命运预测 90 分”。
+
+### 12. 生成科学盲测实验包
 
 ```bash
 python3 scripts/generate_blind_trial_packets.py \
@@ -323,7 +341,7 @@ python3 scripts/generate_blind_trial_packets.py \
 
 盲测包会隐藏生日、Kin 号、图腾、调性等直接识别信息。参与者只能在多份匿名报告中选择最像自己的报告。
 
-### 12. 评估盲测科学准确率
+### 13. 评估盲测科学准确率
 
 ```bash
 python3 scripts/evaluate_blind_trials.py \
@@ -335,6 +353,17 @@ python3 scripts/evaluate_blind_trials.py \
 ```
 
 真实科学准确率必须由正式盲测 responses 计算。当前仓库已具备实验框架，不会在没有盲测数据时伪造“科学证明 90 分”。
+
+### 14. 生成前瞻预测登记表
+
+```bash
+python3 scripts/generate_prospective_predictions.py \
+  --subjects references/prospective-subjects-template.json \
+  --target-year 2027 \
+  --output /tmp/mayan-prospective-registry.json
+```
+
+前瞻预测只有在目标年份结束、并且未来证据被独立编码后，才能用 `scripts/evaluate_prospective_predictions.py` 评分。
 
 如果你是要接进 AI 助手，而不是只在命令行里用：
 - Codex / Claude 风格：看 `SKILL.md`
@@ -371,7 +400,10 @@ python3 scripts/mayan_calc.py [birthday] [options]
 - [references/knowledge-index.json](references/knowledge-index.json) - 机读知识索引
 - [references/scientific-validation-protocol.md](references/scientific-validation-protocol.md) - 科学盲测实验协议
 - [references/scientific-validation-readiness.json](references/scientific-validation-readiness.json) - 当前科学验证框架成熟度
+- [references/frozen-scoring-protocol-v1.json](references/frozen-scoring-protocol-v1.json) - 冻结评分协议、holdout 与前瞻预测边界
 - [references/public-figure-benchmark.json](references/public-figure-benchmark.json) - 公开人物解读贴合度 benchmark
+- [references/public-figures-wikidata-1000.json](references/public-figures-wikidata-1000.json) - 1425 条公开人物数据集
+- [references/validation-findings-2026-04-24.md](references/validation-findings-2026-04-24.md) - 本轮 holdout 结果与失败分析
 - [references/public-figure-benchmark-results.json](references/public-figure-benchmark-results.json) - 最近一次 benchmark 结果
 
 ## Examples
@@ -653,16 +685,25 @@ mayan-kin/
 │   ├── guidance.md               ← 天赋运用指导
 │   ├── scientific-validation-protocol.md ← 科学盲测实验协议
 │   ├── scientific-validation-readiness.json ← 实验框架成熟度
+│   ├── frozen-scoring-protocol-v1.json ← 冻结评分协议
+│   ├── public-figures-wikidata-1000.json ← 公开人物 holdout 数据集
+│   ├── public-figure-holdout-results.json ← 公开人物 holdout 结果
 │   ├── blind-participants-template.json ← 盲测参与者模板
 │   ├── blind-responses-template.json ← 盲测回答模板
+│   ├── prospective-subjects-template.json ← 前瞻预测对象模板
+│   ├── prospective-outcomes-template.json ← 前瞻预测结果模板
 │   ├── validation-samples.md     ← 权威样本校验基线
 │   ├── colors-wavespell.md       ← 颜色与波符
 │   └── career-emotion.md         ← 事业与情感应用
 └── scripts/
     ├── mayan_calc.py             ← CLI 入口
     ├── evaluate_public_figures.py ← 公开人物 benchmark
+    ├── collect_public_figures_wikidata.py ← 公开人物数据采集
+    ├── evaluate_public_figure_holdout.py ← 公开人物 holdout 评分
     ├── generate_blind_trial_packets.py ← 科学盲测包生成
-    └── evaluate_blind_trials.py  ← 科学盲测评分
+    ├── evaluate_blind_trials.py  ← 科学盲测评分
+    ├── generate_prospective_predictions.py ← 前瞻预测登记
+    └── evaluate_prospective_predictions.py ← 前瞻预测评分
 ```
 
 ## 开发验证

@@ -1,0 +1,53 @@
+{
+  "version": "frozen_scoring_protocol_v1",
+  "frozen_at": "2026-04-24",
+  "claim_boundary": "This protocol evaluates public-expression matching and prospective self/third-party recognition tasks. It does not prove destiny or metaphysical causality.",
+  "dataset": {
+    "public_figures": "references/public-figures-wikidata-1000.json",
+    "source": "Wikidata Query Service",
+    "source_url": "https://query.wikidata.org/",
+    "total_min_records": 1000,
+    "split_seed": "mayan-kin-public-figure-holdout-v1",
+    "split_policy": {
+      "train": "hash bucket 0-69",
+      "dev": "hash bucket 70-84",
+      "holdout": "hash bucket 85-99"
+    }
+  },
+  "candidate_seed": "mayan-kin-public-figure-candidates-v1",
+  "metrics": {
+    "public_figure_forced_choice": {
+      "description": "For each public figure, generate a birth-date-only weighted expression signature, hide the true identity, and pick the best matching public evidence profile among one true case plus distractors.",
+      "candidate_count": 5,
+      "chance_accuracy": 0.2,
+      "top_weighted_tags": 18,
+      "primary_metric": "top1_correct_accuracy",
+      "alpha": 0.001,
+      "target_top1_accuracy": 0.5,
+      "target_score": 90,
+      "minimum_holdout_sample_size": 100
+    },
+    "human_blind_trial": {
+      "candidate_count": 5,
+      "chance_accuracy": 0.2,
+      "primary_metric": "participant_top1_correct_accuracy",
+      "alpha": 0.001,
+      "target_top1_accuracy": 0.6,
+      "target_score": 90,
+      "minimum_sample_size": 30,
+      "recommended_sample_size": 100
+    },
+    "prospective_prediction": {
+      "primary_metric": "future_evidence_tag_f1",
+      "target_score": 90,
+      "rule": "Predictions must be locked before the evaluated period, and outcomes must be coded from evidence produced after the lock date."
+    }
+  },
+  "anti_leakage_rules": [
+    "Do not use public figure name, occupation, biography, or source_url to generate the Mayan report.",
+    "Do not edit interpretation rules after inspecting holdout answers and then reuse the same holdout as proof.",
+    "Use train/dev for product tuning; holdout is for final reporting only.",
+    "Prospective predictions are not successes until future evidence is collected and scored after the lock date.",
+    "Report failed or below-target runs instead of deleting them."
+  ]
+}
