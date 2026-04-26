@@ -148,6 +148,18 @@ class MayanCalcTests(unittest.TestCase):
         self.assertNotIn("维持关系质量", rendered)
         self.assertNotIn("理解别人", rendered)
 
+    def test_wenyi_deep_report_uses_blue_hand_not_seed_template(self):
+        destiny = mayan_calc.calc_five_destiny(mayan_calc.date_to_kin("1999-11-16"))
+        report = mayan_calc.build_personal_report(destiny, birth_date="1999-11-16", style="deep")
+        rendered = mayan_calc.format_personal_report(report)
+        self.assertEqual(report["kin"], 107)
+        self.assertIn("电力蓝手", rendered)
+        self.assertIn("哪些事该由我的手完成，哪些要归还给对方", rendered)
+        self.assertIn("问题、求助或收尾任务", rendered)
+        self.assertNotIn("这颗种子到底要不要继续培育", rendered)
+        self.assertNotIn("先选种子", rendered)
+        self.assertNotIn("种子、土壤、节奏和目标", rendered)
+
     def test_cli_report_output_is_rendered(self):
         result = subprocess.run(
             [sys.executable, str(SCRIPT), "1995-03-03", "--report"],

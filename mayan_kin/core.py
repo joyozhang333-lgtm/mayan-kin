@@ -1024,6 +1024,72 @@ def public_expression_for(detail):
     }
 
 
+def build_main_discernment_line(main, main_profile):
+    if main["seal_name"] == "黄种子":
+        return (
+            f"{main['seal_name']} 的判断重点是“什么值得长期培育”。"
+            "所以他/她不适合什么都试一点，而是要先分辨种子、土壤、节奏和目标是否匹配。"
+        )
+    if main["seal_name"] == "蓝手":
+        return (
+            f"{main['seal_name']} 的判断重点是“哪些事该由我的手完成，哪些要归还给对方”。"
+            "所以他/她不适合把所有问题都接过来修，而是要先分辨责任、边界、节奏和可完成度。"
+        )
+    return (
+        f"{main['seal_name']} 的判断重点是“{main_profile['seal']['need']}”。"
+        "所以他/她不适合只凭惯性投入，而是要先分辨对象、边界、节奏和现实条件是否匹配。"
+    )
+
+
+def build_main_current_block_line(main, main_profile):
+    if main["seal_name"] == "黄种子":
+        return (
+            f"最可能卡住的点，是“{main_profile['seal']['trigger']}”："
+            "已经看见潜能或问题，却还没有决定这颗种子到底要不要继续培育。"
+        )
+    if main["seal_name"] == "蓝手":
+        return (
+            f"最可能卡住的点，是“{main_profile['seal']['trigger']}”："
+            "已经看见哪里需要被处理，却还没有确认这是不是自己的责任、该完成到什么程度。"
+        )
+    return (
+        f"最可能卡住的点，是“{main_profile['seal']['trigger']}”："
+        "已经感到主题被触发，却还没有把它翻译成清楚的判断、边界和下一步动作。"
+    )
+
+
+def build_main_resonance_line(main, main_profile):
+    if main["seal_name"] == "黄种子":
+        return f"如果他/她最近觉得方向很多但都不够笃定，通常是 {main['seal_name']} 在提醒：先选种子，不要什么都培育。"
+    if main["seal_name"] == "蓝手":
+        return f"如果他/她最近总被问题、求助或收尾任务拉住，通常是 {main['seal_name']} 在提醒：先分清哪一件事真的该由自己完成。"
+    return f"如果他/她最近反复遇到“{main_profile['seal']['trigger']}”，通常是 {main['seal_name']} 在提醒：{main_profile['seal']['need']}。"
+
+
+def build_content_angle_for_main(main, main_profile):
+    if main["seal_name"] == "黄种子":
+        return f"《如何判断一颗种子值不值得长期培育：{main['seal_name']}使用手册》"
+    if main["seal_name"] == "蓝手":
+        return f"《如何判断一件事该不该由我完成：{main['seal_name']}使用手册》"
+    return f"《如何把{main['seal_name']}天赋从感受变成行动：个人使用手册》"
+
+
+def build_ai_instruction_for_main(main, main_profile):
+    if main["seal_name"] == "黄种子":
+        return f"先判断这是不是{main['seal_name']}的选择问题：种子、土壤、节奏和目标是否匹配。"
+    if main["seal_name"] == "蓝手":
+        return f"先判断这是不是{main['seal_name']}的介入问题：哪些是我的手该完成的，哪些需要归还给对方。"
+    return f"先判断这是不是{main['seal_name']}的主轴问题：{main_profile['seal']['need']}。"
+
+
+def build_content_angle_for_challenge(challenge, challenge_profile):
+    if challenge["seal_name"] == "红地球":
+        return f"《{challenge['seal_name']}的误区：同步性、现实反馈和节奏校准》"
+    if challenge["seal_name"] == "白巫师":
+        return f"《{challenge['seal_name']}的误区：感受、投射和现实校准》"
+    return f"《{challenge['seal_name']}的误区：{challenge_profile['seal']['low']}》"
+
+
 def weighted_expression_signature(roles):
     tag_scores = {}
     field_scores = {}
@@ -1163,7 +1229,7 @@ def build_precision_profile(destiny):
             },
             {
                 "label": "把支持误读成依赖",
-                "detail": f"{support['seal_name']} 不是让你依附外部环境，而是提醒你：你的发挥需要合适土壤。土壤不对时，先调整配置，不要直接否定能力。",
+                "detail": f"{support['seal_name']} 不是让你依附外部环境，而是提醒你：你的发挥需要合适配置。配置不对时，先调整资源、边界和承接方式，不要直接否定能力。",
             },
             {
                 "label": "把引导误读成标准答案",
@@ -1351,7 +1417,7 @@ def build_personal_structural_analysis(destiny):
     guide_marker = public_expression_for(guide)
     return [
         f"这张盘的核心，是用 {main['tone_name']} 的方式把 {main['seal_name']} 活出来：不是泛泛追求“{main['keywords']}”，而是把“{main_profile['seal']['high']}”推进成可以服务现实的行动。",
-        f"{main['seal_name']} 的判断重点是“什么值得长期培育”。所以他/她不适合什么都试一点，而是要先分辨种子、土壤、节奏和目标是否匹配。",
+        build_main_discernment_line(main, main_profile),
         f"{support['seal_name']} 是稳定资源，适配场域更靠近 {', '.join(support_marker['fields'][:3])}。当他/她能做到“{support_profile['seal']['need']}”，主轴会明显更容易落地。",
         f"{challenge['seal_name']} 是最容易失真的功课，常在“{challenge_profile['seal']['trigger']}”被触发。低频不是没能力，而是容易滑向“{challenge_profile['seal']['low']}”。",
         f"成熟方向由 {guide['seal_name']} 引导，适合把成果做成 {', '.join(guide_marker['fields'][:2])} 这类更有品质、更可见的表达；隐藏推动 {occult['seal_name']} 则不断要求他/她回应现实反馈：{occult_profile['seal']['question']}",
@@ -1405,7 +1471,7 @@ def build_personal_application_matrix(destiny):
     guide_marker = public_expression_for(guide)
     return {
         "career": [
-            f"职业定位上，优先选择 {', '.join(main_marker['fields'][:3])} 这类能长期培育成果的场景，而不是只要求短期反应和机械执行的环境。",
+            f"职业定位上，优先选择 {', '.join(main_marker['fields'][:3])} 这类能把主轴转成稳定成果的场景，而不是只要求短期反应和机械执行的环境。",
             f"工作方法上，要把 {support['seal_name']} 的视角落成流程：{support_profile['seal']['need']}，避免只停在“我看见了问题”。",
             f"交付标准上，{guide['seal_name']} 要求他/她把结果做得更清楚、更有品质：{guide_profile['seal']['high']}。",
         ],
@@ -1415,9 +1481,9 @@ def build_personal_application_matrix(destiny):
             f"{occult['seal_name']} 的课题要求他/她尊重节奏和现实反馈；不顺的关系或合作，需要及时导航，而不是一直解释成缘分或考验。",
         ],
         "development": [
-            f"个人发展上，要把 {main['seal_name']} 训练成选择系统：先判断什么值得种，再决定投入多少。",
+            f"个人发展上，要把 {main['seal_name']} 训练成判断系统：先确认什么真实属于自己，再决定投入多少、做到哪里。",
             f"他/她的成长不是更用力，而是更会分辨：{main_profile['seal']['question']}",
-            f"当能稳定调用 {support['seal_name']} 的资源、校准 {challenge['seal_name']} 的投射，并兑现 {guide['seal_name']} 的品质感时，这张盘会进入高水平发挥。",
+            f"当能稳定调用 {support['seal_name']} 的资源、校准 {challenge['seal_name']} 的失真，并兑现 {guide['seal_name']} 的成熟表达时，这张盘会进入高水平发挥。",
         ],
     }
 
@@ -1435,25 +1501,25 @@ def build_personal_situational_insight(destiny):
     guide_profile = precision_profile_for(guide)
     return {
         "current_block": [
-            f"最可能卡住的点，是“{main_profile['seal']['trigger']}”：已经看见潜能或问题，却还没有决定这颗种子到底要不要继续培育。",
-            f"{support['seal_name']} 会让他/她先看全局，但低频时容易变成“{support_profile['seal']['low']}”，于是想得很远，下一步却不够小。",
-            f"{challenge['seal_name']} 会带来强烈感受或吸引力，真正要分辨的是：{challenge_profile['seal']['question']}",
+            build_main_current_block_line(main, main_profile),
+            f"{support['seal_name']} 会提供稳定资源，但低频时容易变成“{support_profile['seal']['low']}”，于是资源没有落成具体承接。",
+            f"{challenge['seal_name']} 会在“{challenge_profile['seal']['trigger']}”放大张力，真正要分辨的是：{challenge_profile['seal']['question']}",
         ],
         "low_frequency": [
             f"低频时，{main['seal_name']} 会表现成：{main_profile['seal']['low']}。",
-            f"{support['seal_name']} 低频时会让视野和策略停在脑中，现实动作跟不上。",
-            f"{challenge['seal_name']} 低频时容易让他/她把感受当答案，把投射当真实，把不落地的吸引当成方向。",
+            f"{support['seal_name']} 低频时会表现成：{support_profile['seal']['low']}。",
+            f"{challenge['seal_name']} 低频时会表现成：{challenge_profile['seal']['low']}。",
         ],
         "minimum_move": [
             f"最小动作不是继续分析所有可能性，而是先完成一步：{main_profile['seal']['need']}。",
-            f"把 {support['seal_name']} 的视野拆成一个现实动作：{support_profile['seal']['need']}。",
-            f"遇到 {challenge['seal_name']} 型吸引或混乱时，先暂停判断，把事实、感受、边界分开写清楚，再决定是否投入。",
+            f"把 {support['seal_name']} 的资源拆成一个现实动作：{support_profile['seal']['need']}。",
+            f"遇到 {challenge['seal_name']} 型压力时，先暂停判断，把事实、感受、边界分开写清楚，再决定是否投入。",
         ],
         "reflection_dialogue": {
             "resonance_points": [
-                f"如果他/她最近觉得方向很多但都不够笃定，通常是 {main['seal_name']} 在提醒：先选种子，不要什么都培育。",
-                f"如果他/她有大视野却迟迟没有推进，通常是 {support['seal_name']} 资源还没有被拆成阶段策略。",
-                f"如果某个人、机会或想象特别吸引他/她，{challenge['seal_name']} 会提醒：感受要接受事实、时间和边界的校准。",
+                build_main_resonance_line(main, main_profile),
+                f"如果他/她明明有资源却迟迟没有推进，通常是 {support['seal_name']} 还没有被拆成现实承载动作。",
+                f"如果“{challenge_profile['seal']['trigger']}”反复出现，{challenge['seal_name']} 会提醒：{challenge_profile['seal']['need']}。",
             ],
             "conversation_questions": [
                 f"{main_profile['seal']['question']}",
@@ -1461,9 +1527,9 @@ def build_personal_situational_insight(destiny):
                 f"{challenge_profile['seal']['question']}",
             ],
             "next_opening": [
-                "可以从一个具体场景开始：他/她最近最想培育的方向是什么？",
-                "然后看土壤：这个方向有没有现实资源、节奏和反馈？",
-                f"最后用 {guide['seal_name']} 校准品质：如果它真的要开花，最小但更优雅的下一步是什么？",
+                "可以从一个具体场景开始：他/她最近最想处理、完成或推进的是什么？",
+                "然后看现实配置：这件事有没有资源、边界、节奏和反馈？",
+                f"最后用 {guide['seal_name']} 校准品质：如果它真的要进入成熟表达，最小但更优雅的下一步是什么？",
             ],
         },
     }
@@ -1655,9 +1721,9 @@ def build_personal_delivery_layers(destiny, style="basic"):
         "content": {
             "focus": f"适合做成{main_marker['fields'][0]}、成长路线图、选择清单和落地实验。",
             "angles": [
-                f"《如何判断一颗种子值不值得长期培育：{main['seal_name']}使用手册》",
-                f"《把{support['seal_name']}的视野落成策略：从蓝图到下一步》",
-                f"《{challenge['seal_name']}的误区：感受、投射和现实校准》",
+                build_content_angle_for_main(main, main_profile),
+                f"《把{support['seal_name']}的资源落成现实承载：从看见到下一步》",
+                build_content_angle_for_challenge(challenge, challenge_profile),
                 f"《用{occult['seal_name']}做复盘：什么时候该跟随，什么时候该释放》",
             ],
             "formats": [
@@ -1670,13 +1736,13 @@ def build_personal_delivery_layers(destiny, style="basic"):
         "ai": {
             "focus": "给 AI 的问题要先交代场景、卡点和目标，然后要求它先结论、再解释、再行动。",
             "instructions": [
-                f"先判断这是不是{main['seal_name']}的选择问题：种子、土壤、节奏和目标是否匹配。",
+                build_ai_instruction_for_main(main, main_profile),
                 f"输出时优先围绕{main['seal_name']}的主轴、{challenge['seal_name']}的功课和{guide['seal_name']}的成长方向。",
                 "如果信息不足，先提出 1 到 3 个关键追问，不要直接泛泛而谈。",
             ],
             "prompts": [
                 f"请先判断我现在是在高频使用{main['seal_name']}，还是掉进了它的低频。",
-                f"请把{support['seal_name']}的视野拆成我接下来一周能执行的三个动作。",
+                f"请把{support['seal_name']}的资源拆成我接下来一周能执行的三个动作。",
                 f"请帮我区分：这是{challenge['seal_name']}带来的真实感受，还是投射和理想化。",
             ],
         },
