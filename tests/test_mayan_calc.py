@@ -135,6 +135,19 @@ class MayanCalcTests(unittest.TestCase):
         self.assertIn("放在你身上，它通常会表现成这样", deep["positions"]["main"]["explanation"])
         self.assertIn("它会把问题不断拉回一个核心追问", deep["positions"]["main"]["explanation"])
 
+    def test_xiaowu_deep_report_is_not_red_moon_template(self):
+        destiny = mayan_calc.calc_five_destiny(mayan_calc.date_to_kin("1991-08-25"))
+        report = mayan_calc.build_personal_report(destiny, birth_date="1991-08-25", style="deep")
+        rendered = mayan_calc.format_personal_report(report)
+        self.assertEqual(report["kin"], 224)
+        self.assertIn("电力黄种子", rendered)
+        self.assertIn("什么值得长期培育", rendered)
+        self.assertIn("把视野拆成阶段策略", rendered)
+        self.assertIn("感受、投射和现实校准", rendered)
+        self.assertNotIn("敏感活成长期承受", rendered)
+        self.assertNotIn("维持关系质量", rendered)
+        self.assertNotIn("理解别人", rendered)
+
     def test_cli_report_output_is_rendered(self):
         result = subprocess.run(
             [sys.executable, str(SCRIPT), "1995-03-03", "--report"],

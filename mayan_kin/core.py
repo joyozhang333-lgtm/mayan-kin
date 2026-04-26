@@ -894,13 +894,19 @@ def summarize_destiny(destiny):
     challenge = destiny["challenge"]
     occult = destiny["occult"]
     guide = destiny["guide"]
+    main_profile = precision_profile_for(main)
+    support_profile = precision_profile_for(support)
+    challenge_profile = precision_profile_for(challenge)
+    occult_profile = precision_profile_for(occult)
+    guide_profile = precision_profile_for(guide)
+    support_marker = public_expression_for(support)
 
     summary = {
-        "core_theme": f"{main['tone_name']}{main['seal_name']}的主轴是{main['keywords']}，人生会不断回到“我真正要如何使用自己的天赋”这个问题。",
-        "strength": f"你的天然资源更接近{support['seal_name']}：{support['keywords']}。环境、关系与支持系统是否合适，会直接影响发挥。",
-        "challenge": f"你的成长功课在{challenge['seal_name']}：{challenge['keywords']}。这不是缺点，而是你需要整合的力量。",
-        "hidden_driver": f"更深层推动力来自{occult['seal_name']}：{occult['keywords']}。这常常决定你后续真正会长成什么样的人。",
-        "guidance": f"引导位落在{guide['seal_name']}，说明你最终要活出的不是别人的版本，而是更成熟的自己。",
+        "core_theme": f"{main['tone_name']}{main['seal_name']}的主轴不是泛泛的“{main['keywords']}”，而是用“{main_profile['tone']['task']}”把“{main_profile['seal']['high']}”活出来。",
+        "strength": f"天然资源更接近{support['seal_name']}：适合借助{', '.join(support_marker['fields'][:2])}来放大主轴，关键是{support_profile['seal']['need']}。",
+        "challenge": f"成长功课在{challenge['seal_name']}：常被“{challenge_profile['seal']['trigger']}”触发，需要避免滑向“{challenge_profile['seal']['low']}”。",
+        "hidden_driver": f"更深层推动力来自{occult['seal_name']}：{occult_profile['seal']['high']}，并通过“{occult_profile['tone']['task']}”释放旧节奏。",
+        "guidance": f"引导位落在{guide['seal_name']}，成熟方向是更稳定地做到：{guide_profile['seal']['high']}。",
     }
     return summary
 
@@ -911,37 +917,42 @@ def build_growth_path(destiny):
     challenge = destiny["challenge"]
     occult = destiny["occult"]
     guide = destiny["guide"]
+    main_profile = precision_profile_for(main)
+    support_profile = precision_profile_for(support)
+    challenge_profile = precision_profile_for(challenge)
+    occult_profile = precision_profile_for(occult)
+    guide_profile = precision_profile_for(guide)
 
     return [
         {
             "stage": "隐藏推动",
             "sign": f"{occult['tone_name']}{occult['seal_name']}",
-            "focus": f"先认识你潜意识深处的力量：{occult['keywords']}。",
-            "action": "先问自己真正想要什么，不要总是让环境先替你做决定。",
+            "focus": f"先认识深层推动：{occult_profile['seal']['high']}。",
+            "action": occult_profile["seal"]["question"],
         },
         {
             "stage": "支持位",
             "sign": f"{support['tone_name']}{support['seal_name']}",
-            "focus": f"建立能支持你的资源系统：{support['keywords']}。",
-            "action": "筛选关系、环境与合作，把真心给对地方。",
+            "focus": f"建立支持资源：{support_profile['seal']['need']}。",
+            "action": support_profile["seal"]["question"],
         },
         {
             "stage": "主印记",
             "sign": f"{main['tone_name']}{main['seal_name']}",
-            "focus": f"扎根你的核心天赋：{main['keywords']}。",
-            "action": "让自己的生活和表达重新回到真实、流动和一致。",
+            "focus": f"扎根核心天赋：{main_profile['seal']['high']}。",
+            "action": main_profile["seal"]["question"],
         },
         {
             "stage": "挑战位",
             "sign": f"{challenge['tone_name']}{challenge['seal_name']}",
-            "focus": f"整合你的成长功课：{challenge['keywords']}。",
-            "action": "变化来了不要先自我否定，而是判断这次升级在教你什么。",
+            "focus": f"整合成长功课：{challenge_profile['seal']['need']}。",
+            "action": challenge_profile["seal"]["question"],
         },
         {
             "stage": "引导位",
             "sign": f"{guide['tone_name']}{guide['seal_name']}",
-            "focus": "活出更成熟、更有力量的自己。",
-            "action": "不是变成别人，而是让自己的天赋越来越清楚、稳定、可持续。",
+            "focus": f"活出成熟方向：{guide_profile['seal']['high']}。",
+            "action": guide_profile["seal"]["question"],
         },
     ]
 
@@ -951,21 +962,28 @@ def build_action_guide(destiny):
     support = destiny["support"]
     challenge = destiny["challenge"]
     occult = destiny["occult"]
+    guide = destiny["guide"]
+    main_profile = precision_profile_for(main)
+    support_profile = precision_profile_for(support)
+    challenge_profile = precision_profile_for(challenge)
+    occult_profile = precision_profile_for(occult)
+    guide_profile = precision_profile_for(guide)
+    main_marker = public_expression_for(main)
     return {
         "career": [
-            f"优先考虑能发挥{main['keywords']}的工作，而不是长期要求你压住天赋的环境。",
-            f"把{support['seal_name']}对应的资源系统建起来：关系、合作和支持氛围会直接影响你的表现。",
-            f"遇到{challenge['seal_name']}式压力时，先分辨它是在训练你升级，还是在单纯消耗你。",
+            f"优先考虑{', '.join(main_marker['fields'][:3])}这类能发挥{main['seal_name']}主轴的场景。",
+            f"把{support['seal_name']}对应的资源具体化：{support_profile['seal']['need']}。",
+            f"交付时用{guide['seal_name']}校准品质：{guide_profile['seal']['high']}。",
         ],
         "relationship": [
-            "不要只因为有感觉就长期留下来，也要看这段关系是否真的滋养你。",
-            f"当你开始反复感受到{challenge['seal_name']}式张力时，记得补边界，而不是只补耐心。",
-            f"更深层的成熟，来自把{occult['seal_name']}对应的判断力、选择权和方向感长出来。",
+            f"不要只因为有感觉就长期投入，也要看这段关系是否支持“{main_profile['seal']['high']}”。",
+            f"当{challenge['seal_name']}式张力出现时，先做现实校准：{challenge_profile['seal']['need']}。",
+            f"更深层的成熟，来自把{occult['seal_name']}的导航能力活出来：{occult_profile['seal']['question']}",
         ],
         "growth": [
-            f"先承认自己的核心频率是{main['seal_name']}，不要总逼自己活成别人的节奏。",
-            "每次卡住时，先问这是信息堵、情绪堵、边界堵、责任堵还是节奏堵。",
-            "把感受推进成选择，把觉察推进成行动，而不是长期停留在“我知道不对”。",
+            f"先承认核心频率是{main['seal_name']}：{main_profile['seal']['high']}，不要把它活成{main_profile['seal']['low']}。",
+            f"每次卡住时，先回到这句判断：{main_profile['seal']['question']}",
+            f"把{main['seal_name']}的觉察推进成{main_profile['tone']['task']}，而不是长期停在想法里。",
         ],
     }
 
@@ -1317,92 +1335,154 @@ def build_compatibility_precision_profile(result):
     }
 
 
-def build_professional_personal_analysis(destiny):
+def build_personal_structural_analysis(destiny):
     main = destiny["main"]
     support = destiny["support"]
     challenge = destiny["challenge"]
     occult = destiny["occult"]
     guide = destiny["guide"]
+    main_profile = precision_profile_for(main)
+    support_profile = precision_profile_for(support)
+    challenge_profile = precision_profile_for(challenge)
+    occult_profile = precision_profile_for(occult)
+    guide_profile = precision_profile_for(guide)
+    main_marker = public_expression_for(main)
+    support_marker = public_expression_for(support)
+    guide_marker = public_expression_for(guide)
+    return [
+        f"这张盘的核心，是用 {main['tone_name']} 的方式把 {main['seal_name']} 活出来：不是泛泛追求“{main['keywords']}”，而是把“{main_profile['seal']['high']}”推进成可以服务现实的行动。",
+        f"{main['seal_name']} 的判断重点是“什么值得长期培育”。所以他/她不适合什么都试一点，而是要先分辨种子、土壤、节奏和目标是否匹配。",
+        f"{support['seal_name']} 是稳定资源，适配场域更靠近 {', '.join(support_marker['fields'][:3])}。当他/她能做到“{support_profile['seal']['need']}”，主轴会明显更容易落地。",
+        f"{challenge['seal_name']} 是最容易失真的功课，常在“{challenge_profile['seal']['trigger']}”被触发。低频不是没能力，而是容易滑向“{challenge_profile['seal']['low']}”。",
+        f"成熟方向由 {guide['seal_name']} 引导，适合把成果做成 {', '.join(guide_marker['fields'][:2])} 这类更有品质、更可见的表达；隐藏推动 {occult['seal_name']} 则不断要求他/她回应现实反馈：{occult_profile['seal']['question']}",
+    ]
 
+
+def build_personal_risk_matrix(destiny):
+    main = destiny["main"]
+    support = destiny["support"]
+    challenge = destiny["challenge"]
+    occult = destiny["occult"]
+    guide = destiny["guide"]
+    main_profile = precision_profile_for(main)
+    support_profile = precision_profile_for(support)
+    challenge_profile = precision_profile_for(challenge)
+    occult_profile = precision_profile_for(occult)
+    guide_profile = precision_profile_for(guide)
+    return [
+        {
+            "label": "高频优势",
+            "detail": f"他/她最容易在需要“{main_profile['seal']['high']}”的场景中发挥价值，并通过“{main_profile['tone']['task']}”把觉察转成具体贡献。",
+        },
+        {
+            "label": "主要风险",
+            "detail": f"当 {main['seal_name']} 低频时，会从天赋滑向“{main_profile['seal']['low']}”；当 {challenge['seal_name']} 被触发时，又容易叠加“{challenge_profile['seal']['low']}”。",
+        },
+        {
+            "label": "资源条件",
+            "detail": f"{support['seal_name']} 提醒他/她：资源不是抽象支持，而是要具体做到“{support_profile['seal']['need']}”。否则支持位会变成“{support_profile['seal']['low']}”。",
+        },
+        {
+            "label": "升级方向",
+            "detail": f"{guide['seal_name']} 要求成果更有品质和形式感：{guide_profile['seal']['high']}。{occult['seal_name']} 则要求他/她根据现实同步不断释放旧节奏：{occult_profile['tone']['task']}。",
+        },
+    ]
+
+
+def build_personal_application_matrix(destiny):
+    main = destiny["main"]
+    support = destiny["support"]
+    challenge = destiny["challenge"]
+    occult = destiny["occult"]
+    guide = destiny["guide"]
+    main_profile = precision_profile_for(main)
+    support_profile = precision_profile_for(support)
+    challenge_profile = precision_profile_for(challenge)
+    occult_profile = precision_profile_for(occult)
+    guide_profile = precision_profile_for(guide)
+    main_marker = public_expression_for(main)
+    support_marker = public_expression_for(support)
+    guide_marker = public_expression_for(guide)
     return {
-        "structural_analysis": [
-            f"你这张盘的核心，不是靠外放征服世界，而是先用 {main['keywords']} 去感受到哪里失真、哪里堵住、哪里需要重新校准，然后再决定怎么动。",
-            f"你真正稳的时候，通常不是因为一个人硬撑住了，而是因为 {support['seal_name']} 这层资源到位了：关系质量、信任密度、合作氛围都在帮你稳住自己。",
-            f"你的人生压力点也不只是事情多，而是 {challenge['seal_name']} 一来，变化、重组和能量冲击会不会先把你的中心打散，让你一边感受到不对，一边又很难马上表态。",
-            f"更深一层看，{occult['seal_name']} 一直在推着你长判断、长选择、长影响力，所以你的人生不会只停在“我感受很多”，最后一定会走向“那我到底怎么选”。",
-            f"引导位又回到 {guide['seal_name']}，说明你真正成熟后的样子，不是换成另一个人格，而是把原本这套天赋活得更稳定、更清楚，也更不容易被外界拖走。",
+        "career": [
+            f"职业定位上，优先选择 {', '.join(main_marker['fields'][:3])} 这类能长期培育成果的场景，而不是只要求短期反应和机械执行的环境。",
+            f"工作方法上，要把 {support['seal_name']} 的视角落成流程：{support_profile['seal']['need']}，避免只停在“我看见了问题”。",
+            f"交付标准上，{guide['seal_name']} 要求他/她把结果做得更清楚、更有品质：{guide_profile['seal']['high']}。",
         ],
-        "precision_profile": build_precision_profile(destiny),
-        "expression_profile": build_expression_profile(destiny),
-        "risk_matrix": [
-            {
-                "label": "高频优势",
-                "detail": f"你最容易在需要 {main['keywords']}、关系理解与系统调频的场景中发挥价值。别人觉得乱的地方，你反而比较容易先感觉到真正的堵点。",
-            },
-            {
-                "label": "主要风险",
-                "detail": f"当 {challenge['seal_name']} 被低水平触发时，你很容易先失去节奏，再谈判断。外面看像你在犹豫，里面其实常常是变化已经压到你了。",
-            },
-            {
-                "label": "资源条件",
-                "detail": f"{support['seal_name']} 提醒你：你的发挥从来不只看能力，还看环境是不是允许真诚沟通、角色清晰和相互信任。土壤不对，你会明显耗掉。",
-            },
-            {
-                "label": "升级方向",
-                "detail": f"{occult['seal_name']} 对应的成长，不是把自己练得更能忍，而是把感受转换成边界，把直觉转换成选择，把经验转换成影响力。",
-            },
+        "relationship": [
+            f"关系里要看对方是否支持他/她“{main_profile['seal']['high']}”，而不是只看感觉强不强或吸引力大不大。",
+            f"当 {challenge['seal_name']} 被触发时，先做现实校准：{challenge_profile['seal']['need']}。不要只靠沉浸感、理想化或直觉维持关系。",
+            f"{occult['seal_name']} 的课题要求他/她尊重节奏和现实反馈；不顺的关系或合作，需要及时导航，而不是一直解释成缘分或考验。",
         ],
-        "application_matrix": {
-            "career": [
-                f"职业定位上，优先选择需要 {main['keywords']}、洞察、梳理、咨询、陪伴、内容转译或复杂关系协同的工作。",
-                f"管理与合作上，要先建 {support['seal_name']} 型支持系统，再谈高压推进；没有信任基础时，硬推只会放大 {challenge['seal_name']} 的成本。",
-                f"决策上要避免把所有变化都当成机会。先判断这次变化是在升级结构，还是只是在重复消耗。",
-            ],
-            "relationship": [
-                "关系层面不能只看感觉强不强，还要看这段关系是否真的提高了你的稳定度、清晰度和生命流动感。",
-                f"当 {challenge['seal_name']} 型冲击出现时，第一动作应该是重建边界和节奏，而不是继续用理解去覆盖问题。",
-                f"{occult['seal_name']} 的课题要求你在关系里长出选择权，不再让“我理解你”自动滑向“那我继续承担”。",
-            ],
-            "development": [
-                f"个人发展上，要把 {main['seal_name']} 的敏感度训练成方法，而不是停留在体验层。",
-                "建议长期保留一套自己的堵点诊断框架，用来区分信息堵、情绪堵、边界堵、责任堵和节奏堵。",
-                f"当你能稳定调用 {support['seal_name']} 的资源、承接 {challenge['seal_name']} 的波动，并兑现 {occult['seal_name']} 的判断力时，这张盘会进入高水平发挥。",
-            ],
-        },
-        "situational_insight": {
-            "current_block": [
-                f"你现在最可能反复卡住的，不是看不见问题，而是明明已经感受到 {main['seal_name']} 式失真，却还没有把它足够快地推进成决定。",
-                f"当 {support['seal_name']} 想维持关系质量、而 {challenge['seal_name']} 又把变化推到你面前时，你很容易卡在“我再看一下”而不是“我现在就表态”。",
-                f"{occult['seal_name']} 的课题说明，你真正难的不是理解别人，而是理解完之后，有没有及时站回自己的判断。",
-            ],
-            "low_frequency": [
-                "低频时，你会把敏感活成长期承受，把觉察活成迟疑，把理解活成代偿。",
-                "你可能会先处理气氛、照顾关系、维持流动，最后才轮到处理自己真正的边界和选择。",
-                "表面上看像是在忍，实质上是在延迟那一个早该做出的判断。",
-            ],
-            "minimum_move": [
-                "现在最小但最有效的动作，不是想清全部，而是把一个已经感受到的不对劲，翻译成一句明确的话或一个明确边界。",
-                "你要先从“我知道哪里不对”走到“所以我现在准备怎么处理”，这一步比继续分析更关键。",
-                "对你这张盘来说，真正的升级通常不是更努力，而是更早识别、更早表达、更早止损、更早投入对的地方。",
-            ],
-        },
+        "development": [
+            f"个人发展上，要把 {main['seal_name']} 训练成选择系统：先判断什么值得种，再决定投入多少。",
+            f"他/她的成长不是更用力，而是更会分辨：{main_profile['seal']['question']}",
+            f"当能稳定调用 {support['seal_name']} 的资源、校准 {challenge['seal_name']} 的投射，并兑现 {guide['seal_name']} 的品质感时，这张盘会进入高水平发挥。",
+        ],
+    }
+
+
+def build_personal_situational_insight(destiny):
+    main = destiny["main"]
+    support = destiny["support"]
+    challenge = destiny["challenge"]
+    occult = destiny["occult"]
+    guide = destiny["guide"]
+    main_profile = precision_profile_for(main)
+    support_profile = precision_profile_for(support)
+    challenge_profile = precision_profile_for(challenge)
+    occult_profile = precision_profile_for(occult)
+    guide_profile = precision_profile_for(guide)
+    return {
+        "current_block": [
+            f"最可能卡住的点，是“{main_profile['seal']['trigger']}”：已经看见潜能或问题，却还没有决定这颗种子到底要不要继续培育。",
+            f"{support['seal_name']} 会让他/她先看全局，但低频时容易变成“{support_profile['seal']['low']}”，于是想得很远，下一步却不够小。",
+            f"{challenge['seal_name']} 会带来强烈感受或吸引力，真正要分辨的是：{challenge_profile['seal']['question']}",
+        ],
+        "low_frequency": [
+            f"低频时，{main['seal_name']} 会表现成：{main_profile['seal']['low']}。",
+            f"{support['seal_name']} 低频时会让视野和策略停在脑中，现实动作跟不上。",
+            f"{challenge['seal_name']} 低频时容易让他/她把感受当答案，把投射当真实，把不落地的吸引当成方向。",
+        ],
+        "minimum_move": [
+            f"最小动作不是继续分析所有可能性，而是先完成一步：{main_profile['seal']['need']}。",
+            f"把 {support['seal_name']} 的视野拆成一个现实动作：{support_profile['seal']['need']}。",
+            f"遇到 {challenge['seal_name']} 型吸引或混乱时，先暂停判断，把事实、感受、边界分开写清楚，再决定是否投入。",
+        ],
         "reflection_dialogue": {
             "resonance_points": [
-                f"如果你最近一直觉得哪里不太对，却又说不清，那通常不是你想太多，而是 {main['seal_name']} 已经先感觉到了流动出了问题。",
-                f"如果你一边想维持关系，一边又越来越累，这往往是 {support['seal_name']} 想守住连接，而 {challenge['seal_name']} 又在不断把真实问题顶出来。",
-                f"如果你最近反复在想“我到底要不要为自己做一个更清楚的决定”，那不是偶然，通常是 {occult['seal_name']} 已经开始往前推你了。",
+                f"如果他/她最近觉得方向很多但都不够笃定，通常是 {main['seal_name']} 在提醒：先选种子，不要什么都培育。",
+                f"如果他/她有大视野却迟迟没有推进，通常是 {support['seal_name']} 资源还没有被拆成阶段策略。",
+                f"如果某个人、机会或想象特别吸引他/她，{challenge['seal_name']} 会提醒：感受要接受事实、时间和边界的校准。",
             ],
             "conversation_questions": [
-                "你最近最明显的一次委屈，背后其实在提醒你什么边界？",
-                "你现在最不想承认、但其实已经感觉到不对的地方，是哪一件事？",
-                "如果这次你不再只理解别人，而是站回自己，你最想先说出来的一句话会是什么？",
+                f"{main_profile['seal']['question']}",
+                f"{support_profile['seal']['question']}",
+                f"{challenge_profile['seal']['question']}",
             ],
             "next_opening": [
-                "如果你愿意继续聊，可以直接从最近最卡的一件事讲起，不用先讲大道理。",
-                "你也可以直接说：我现在最难受的是哪段关系、哪个环境、还是哪个决定，我会顺着这张盘继续帮你往下拆。",
-                "对你来说，真正有价值的不是把盘读完，而是把它放回你现在的生活里，看它到底在提醒你什么。",
+                "可以从一个具体场景开始：他/她最近最想培育的方向是什么？",
+                "然后看土壤：这个方向有没有现实资源、节奏和反馈？",
+                f"最后用 {guide['seal_name']} 校准品质：如果它真的要开花，最小但更优雅的下一步是什么？",
             ],
         },
+    }
+
+
+def build_professional_personal_analysis(destiny):
+    situational = build_personal_situational_insight(destiny)
+    return {
+        "structural_analysis": build_personal_structural_analysis(destiny),
+        "precision_profile": build_precision_profile(destiny),
+        "expression_profile": build_expression_profile(destiny),
+        "risk_matrix": build_personal_risk_matrix(destiny),
+        "application_matrix": build_personal_application_matrix(destiny),
+        "situational_insight": {
+            "current_block": situational["current_block"],
+            "low_frequency": situational["low_frequency"],
+            "minimum_move": situational["minimum_move"],
+        },
+        "reflection_dialogue": situational["reflection_dialogue"],
     }
 
 
@@ -1552,27 +1632,33 @@ def build_personal_delivery_layers(destiny, style="basic"):
     challenge = destiny["challenge"]
     occult = destiny["occult"]
     guide = destiny["guide"]
+    main_profile = precision_profile_for(main)
+    support_profile = precision_profile_for(support)
+    challenge_profile = precision_profile_for(challenge)
+    occult_profile = precision_profile_for(occult)
+    guide_profile = precision_profile_for(guide)
+    main_marker = public_expression_for(main)
     layers = {
         "consultation": {
-            "focus": "围绕天赋、卡点和边界来提问，先看清哪里堵，再决定怎么动。",
+            "focus": f"围绕{main['seal_name']}的主轴、{support['seal_name']}的资源和{challenge['seal_name']}的误读风险来提问。",
             "questions": [
-                f"我现在最反复卡住的地方，和{challenge['seal_name']}的成长功课有什么关系？",
-                f"我看到的堵点，是信息、情绪、边界、责任还是节奏的问题？",
-                f"这段关系或这个环境，真的值得我继续用{occult['seal_name']}式能量去推动吗？",
+                main_profile["seal"]["question"],
+                support_profile["seal"]["question"],
+                challenge_profile["seal"]["question"],
             ],
             "decision_checks": [
-                f"我有没有先调用{support['seal_name']}对应的支持资源，而不是一上来就硬扛？",
-                f"我是不是已经看见{guide['seal_name']}式的成长方向，但还没真正站过去？",
-                "如果我要保护自己的流动感，现在最小的动作应该是什么？",
+                f"我有没有先做到：{main_profile['seal']['need']}？",
+                f"我有没有把{support['seal_name']}的资源落成现实步骤：{support_profile['seal']['need']}？",
+                f"我现在是否正在靠近{guide['seal_name']}的成熟表达：{guide_profile['seal']['high']}？",
             ],
         },
         "content": {
-            "focus": "适合做成个人说明书、成长路线图、卡点清单和边界练习稿。",
+            "focus": f"适合做成{main_marker['fields'][0]}、成长路线图、选择清单和落地实验。",
             "angles": [
-                f"《为什么我会卡住，以及怎么把{main['seal_name']}的天赋用起来》",
-                f"《我的{support['seal_name']}资源怎么影响我的发挥》",
-                f"《我和{challenge['seal_name']}的关系：变化来了，我怎么不被卷走》",
-                f"《如何把{occult['seal_name']}的深层推动，变成更成熟的选择》",
+                f"《如何判断一颗种子值不值得长期培育：{main['seal_name']}使用手册》",
+                f"《把{support['seal_name']}的视野落成策略：从蓝图到下一步》",
+                f"《{challenge['seal_name']}的误区：感受、投射和现实校准》",
+                f"《用{occult['seal_name']}做复盘：什么时候该跟随，什么时候该释放》",
             ],
             "formats": [
                 "咨询记录",
@@ -1584,14 +1670,14 @@ def build_personal_delivery_layers(destiny, style="basic"):
         "ai": {
             "focus": "给 AI 的问题要先交代场景、卡点和目标，然后要求它先结论、再解释、再行动。",
             "instructions": [
-                "先判断这是个人天赋、关系消耗还是环境不适配。",
+                f"先判断这是不是{main['seal_name']}的选择问题：种子、土壤、节奏和目标是否匹配。",
                 f"输出时优先围绕{main['seal_name']}的主轴、{challenge['seal_name']}的功课和{guide['seal_name']}的成长方向。",
                 "如果信息不足，先提出 1 到 3 个关键追问，不要直接泛泛而谈。",
             ],
             "prompts": [
-                "请先判断我现在的卡点属于哪一类，再给我可执行的下一步。",
-                "请把这张盘翻译成适合普通用户理解的行动建议。",
-                "请用咨询顾问的方式，先指出问题，再给出边界和选择。",
+                f"请先判断我现在是在高频使用{main['seal_name']}，还是掉进了它的低频。",
+                f"请把{support['seal_name']}的视野拆成我接下来一周能执行的三个动作。",
+                f"请帮我区分：这是{challenge['seal_name']}带来的真实感受，还是投射和理想化。",
             ],
         },
     }
