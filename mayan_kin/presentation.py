@@ -153,6 +153,37 @@ def build_action_guide(destiny):
     }
 
 
+def build_personal_narrative(destiny):
+    """把五个位置织成一段整合的人物叙事（去重版）。
+
+    复用各位置已有的精准措辞，让核心句只说一次，不再逐段复述。
+    """
+    main = destiny["main"]
+    support = destiny["support"]
+    challenge = destiny["challenge"]
+    occult = destiny["occult"]
+    guide = destiny["guide"]
+    mp = precision_profile_for(main)
+    sp = precision_profile_for(support)
+    cp = precision_profile_for(challenge)
+    op = precision_profile_for(occult)
+    gp = precision_profile_for(guide)
+    return [
+        f"如果用一句话定位你这张盘：你是用“{mp['tone']['task']}”的方式，"
+        f"把“{mp['seal']['high']}”活出来的人。主轴是 {main['tone_name']}{main['seal_name']}，"
+        f"但重点从来不在泛泛的“{main['keywords']}”，而在你怎么把它落成现实。",
+        build_main_discernment_line(main, mp),
+        f"让这条主轴落得稳的，是 {support['seal_name']} 这条资源线：它要求你先做到"
+        f"“{sp['seal']['need']}”。这不是辅助装饰，而是你的发挥条件——配置对了，天赋才不会悬在半空。",
+        f"最容易卡住、也最该练的地方在 {challenge['seal_name']}：当“{cp['seal']['trigger']}”，"
+        f"你要分辨的是它在训练你升级，还是在把你拉向“{cp['seal']['low']}”。"
+        f"同样地，你的主轴一旦失衡，也会从天赋滑成“{mp['seal']['low']}”——这是你要为自己守的那条线。",
+        f"更深一层推着你走的是 {occult['seal_name']}，它会在关键处把你从感受推向选择，"
+        f"问的始终是：“{op['seal']['question']}”。而你成熟的方向由 {guide['seal_name']} 指引——"
+        f"越来越稳地“{gp['seal']['high']}”，并让它真正落进现实节奏，而不是停在道理上。",
+    ]
+
+
 
 
 def build_personal_delivery_layers(destiny, style="basic"):

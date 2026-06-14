@@ -197,7 +197,7 @@ class MayanCalcTests(unittest.TestCase):
             check=True,
         )
         self.assertIn("输出风格: 深度版", result.stdout)
-        self.assertIn("结构分析", result.stdout)
+        self.assertIn("整合解读", result.stdout)
         self.assertIn("风险矩阵", result.stdout)
         self.assertIn("解读校准", result.stdout)
         self.assertIn("深度应用", result.stdout)

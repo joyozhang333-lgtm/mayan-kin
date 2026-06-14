@@ -368,6 +368,7 @@ def build_personal_report(destiny, birth_date=None, style="basic"):
         "style_description": style_info["description"],
         "title": f"Kin {destiny['kin']} {destiny['main']['tone_name']}{destiny['main']['seal_name']}",
         "summary": summary,
+        "narrative": build_personal_narrative(destiny),
         "positions": positions,
         "growth_path": path,
         "action_guide": actions,
@@ -390,28 +391,37 @@ def format_personal_report(report):
     lines.append(f"  风格说明: {report.get('style_description', STYLE_CONFIG['basic']['description'])}")
 
     lines.append(f"\n{'─' * 50}")
-    lines.append("  核心摘要")
+    lines.append("  整合解读")
     lines.append(f"{'─' * 50}")
-    lines.append(f"- 主轴: {report['summary']['core_theme']}")
-    lines.append(f"- 资源: {report['summary']['strength']}")
-    lines.append(f"- 功课: {report['summary']['challenge']}")
-    lines.append(f"- 深层推动: {report['summary']['hidden_driver']}")
-    lines.append(f"- 引导方向: {report['summary']['guidance']}")
+    for para in report.get("narrative", []):
+        lines.append(para)
+        lines.append("")
+    if lines and lines[-1] == "":
+        lines.pop()
 
     if report.get("deep_analysis"):
         analysis = report["deep_analysis"]
-        lines.append(f"\n{'─' * 50}")
-        lines.append("  结构分析")
-        lines.append(f"{'─' * 50}")
-        for item in analysis["structural_analysis"]:
-            lines.append(f"- {item}")
-
         lines.append(f"\n{'─' * 50}")
         lines.append("  风险矩阵")
         lines.append(f"{'─' * 50}")
         for item in analysis["risk_matrix"]:
             lines.append(f"- {item['label']}: {item['detail']}")
-        format_precision_section(lines, "解读校准", analysis["precision_profile"])
+        _precision = analysis["precision_profile"]
+        lines.append(f"\n{'─' * 50}")
+        lines.append("  解读校准")
+        lines.append(f"{'─' * 50}")
+        lines.append("- 触发条件")
+        for item in _precision["trigger_map"]:
+            lines.append(f"  {item['label']}: {item['detail']}")
+        lines.append("- 误读风险")
+        for item in _precision["misread_risks"]:
+            lines.append(f"  {item['label']}: {item['detail']}")
+        lines.append("- 验证问题")
+        for item in _precision["validation_checks"]:
+            lines.append(f"  {item}")
+        lines.append("- 最小实验")
+        for item in _precision["minimum_experiments"]:
+            lines.append(f"  {item}")
         expression = analysis["expression_profile"]
         lines.append(f"\n{'─' * 50}")
         lines.append("  现实表达校准")
@@ -451,18 +461,19 @@ def format_personal_report(report):
         lines.append(f"- {item['stage']} · {item['sign']}: {item['focus']}")
         lines.append(f"  练习: {item['action']}")
 
-    lines.append(f"\n{'─' * 50}")
-    lines.append("  行动建议")
-    lines.append(f"{'─' * 50}")
-    lines.append("- 事业")
-    for item in report["action_guide"]["career"]:
-        lines.append(f"  {item}")
-    lines.append("- 关系")
-    for item in report["action_guide"]["relationship"]:
-        lines.append(f"  {item}")
-    lines.append("- 成长")
-    for item in report["action_guide"]["growth"]:
-        lines.append(f"  {item}")
+    if not report.get("deep_analysis"):
+        lines.append(f"\n{'─' * 50}")
+        lines.append("  行动建议")
+        lines.append(f"{'─' * 50}")
+        lines.append("- 事业")
+        for item in report["action_guide"]["career"]:
+            lines.append(f"  {item}")
+        lines.append("- 关系")
+        for item in report["action_guide"]["relationship"]:
+            lines.append(f"  {item}")
+        lines.append("- 成长")
+        for item in report["action_guide"]["growth"]:
+            lines.append(f"  {item}")
 
     if report.get("deep_analysis"):
         matrix = report["deep_analysis"]["application_matrix"]
@@ -485,9 +496,6 @@ def format_personal_report(report):
         lines.append("- 你现在最可能的卡点")
         for item in insight["current_block"]:
             lines.append(f"  {item}")
-        lines.append("- 低频表现")
-        for item in insight["low_frequency"]:
-            lines.append(f"  {item}")
         lines.append("- 最小动作")
         for item in insight["minimum_move"]:
             lines.append(f"  {item}")
@@ -497,9 +505,6 @@ def format_personal_report(report):
         lines.append(f"{'─' * 50}")
         lines.append("- 你最近可能会有共鸣的地方")
         for item in dialogue["resonance_points"]:
-            lines.append(f"  {item}")
-        lines.append("- 可以继续往下聊的问题")
-        for item in dialogue["conversation_questions"]:
             lines.append(f"  {item}")
         lines.append("- 如果现在就想继续聊，可以这样开口")
         for item in dialogue["next_opening"]:
